@@ -1,0 +1,83 @@
+body{
+background-color: #ffffff; /* Inlagd sen innan*/
+}
+#container{
+display: grid;
+grid-template-areas:
+"main side";
+grid-template-columns: 50% 50%;
+border: solid 1px black;
+width:80%;
+margin:auto;
+margin-top:20px;
+border-radius: 15px;
+margin-bottom:20px;
+box-shadow: 2px 2px #7e7e7e;
+}
+
+h2{
+text-align: center;
+}
+
+
+main{
+max-width: 80%;/* Inlagd sen innan*/
+margin: auto;/* Inlagd sen innan*/
+display: flex;/* Inlagd sen innan*/
+flex-direction: row;/* Inlagd sen innan*/
+flex-wrap: wrap;/* Inlagd sen innan*/
+grid-area: main;
+}
+side{
+  grid-area: side;
+}
+
+#nav_bar{
+width: 100%;/* Inlagd sen innan*/
+background-color: #a9eee6;/* Inlagd sen innan*/
+}
+
+.card{
+margin: 20px 50px;/* Inlagd sen innan*/
+}
+
+#search{
+margin-top: 20px;/* Inlagd sen innan*/
+background-color: #ffffff;/* Inlagd sen innan*/
+border-radius: 10px;/* Inlagd sen innan*/
+border: 1px black solid;/* Inlagd sen innan*/
+margin-top: 30px;/* Inlagd sen innan*/
+}
+
+#input_search{
+color: white;/* Inlagd sen innan*/
+background-color:#625772;/* Inlagd sen innan*/
+margin: 10px;/* Inlagd sen innan*/
+}
+
+#log_in{
+right: 50px;/* Inlagd sen innan*/
+position: absolute;/* Inlagd sen innan*/
+}
+
+.card{
+border-radius: 10px;/* Inlagd sen innan*/
+}
+
+.card img{
+box-shadow: 0px 0px;/* Inlagd sen innan*/
+}
+
+.image_carousel{
+  min-width:300px;
+  max-width:300px;
+  min-height:400px;
+  max-height:400px;
+}
+#images_loop{
+  margin: auto;
+}
+h2{
+  margin:auto
+  font-size:40px;
+}
