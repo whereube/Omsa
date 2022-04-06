@@ -82,6 +82,23 @@ def create_article_category_in_db(article_id, category):
     connection.commit()
     close_db_online_store(connection)
 
+def remove_article_from_db(article):
+    '''
+    Tar bort en artikel från databasen
+    '''
+    connection = open_db_online_store()
+
+    cursor = connection.cursor()
+    cursor.execute("""
+    delete from article 
+    where id = %s
+    """,(article,))
+
+    cursor.close()
+    connection.commit()
+    close_db_online_store(connection)
+
+
 
 def get_tier():
     '''
@@ -124,6 +141,26 @@ def get_main_category():
     cursor.execute("""
     select * from category
     where level = '1'
+    """)
+    records = cursor.fetchall()
+    cursor.close()
+    close_db_online_store(connection)
+    return records
+
+def get_articles():
+    '''
+    Hämtar alla artiklar
+    '''
+    connection = open_db_online_store()
+
+    cursor = connection.cursor()
+    cursor.execute("""
+    select * from article
+    left outer join profile on article.user_id = profile.id
+    left outer join city on article.city_id = city.id
+    left outer join tier on article.tier_id = tier.id
+    left outer join article_category on article.id = article_category.article_id
+    left outer join category on article_category.category_id = category.id
     """)
     records = cursor.fetchall()
     cursor.close()

@@ -1,5 +1,4 @@
-from tempfile import tempdir
-from flask import Flask, render_template, request
+from flask import Flask, redirect, render_template, request
 from article import *
 
 app = Flask(__name__)
@@ -23,7 +22,29 @@ def create_article():
     city = request.form.get("city")
     category = request.form.get("category")
     create_article_in_db(title, description, zip_code, tier, city, category)
-    return render_template("index.html")
+    return redirect("/")
+
+@app.route("/remove")
+def remove_article_form():
+    ''' 
+    Hämtar in formuläret för att ta bort en artikel och skickar vidare detta för att ta bort en post i databasen
+    '''
+    articles = get_articles()
+    return render_template("remove_article.html", articles = articles)
+
+@app.route("/article_removed", methods=['GET', 'POST'])
+def remove_article():
+    article = request.form.get("article")
+    remove_article_from_db(article)
+    return redirect("/")
+
+@app.route("/view_articles")
+def view_articles():
+    '''
+    Visar upp alla artiklar
+    '''
+    articles = get_articles()
+    return render_template("all_articles.html", articles = articles)
 
 @app.route("/")
 def start():
