@@ -1,1 +1,28 @@
-<h1>Testa</h1>
+<h2>Skapa en artikel</h2>
+
+
+<form action="/article_created" method="POST">
+    <label for="title">Titel</label>
+    <input type="text" id="title" name="title">
+    <label for="description">Beskrivning</label>
+    <textarea id="description" name="description"></textarea>
+    <label for="zip_code">Postnummer</label>
+    <input type="text" id="zip_code" name="zip_code">
+    <select id="city" name="city">
+        {%for row in citys%}:
+        <option value={{row[0]}}>{{row[1]}}</option>
+        {%endfor%}
+    </select>
+    <select id="tier" name="tier">
+        {%for row in tiers%}:
+        <option value={{row[0]}}>{{row[2]}}</option>
+        {%endfor%}
+    </select>
+    <select id="category" name="category">
+        {%for row in categories%}:
+            <option value={{row[0]}}>{{row[1]}}</option>
+        {%endfor%}
+    </select>
+    <input type="submit" value="Skapa">
+</form>
+
