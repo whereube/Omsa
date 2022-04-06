@@ -1,4 +1,3 @@
-from sqlite3 import Timestamp, connect
 import psycopg2
 import psycopg2.extras
 from datetime import date, datetime
