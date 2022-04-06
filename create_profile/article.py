@@ -87,8 +87,13 @@ def remove_article_from_db(article):
     Tar bort en artikel från databasen
     '''
     connection = open_db_online_store()
-
     cursor = connection.cursor()
+
+    cursor.execute("""
+    delete from article_category
+    where article_id = %s
+    """,(article,))
+
     cursor.execute("""
     delete from article 
     where id = %s
