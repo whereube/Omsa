@@ -1,0 +1,8 @@
+<form action="/article_removed" method="POST">
+    <select id="article" name="article">
+        {%for row in articles%}:
+        <option value={{row[0]}}>{{row[2]}}</option>
+        {%endfor%}
+    </select>
+    <input type="submit" value="Ta bort">
+</form>
