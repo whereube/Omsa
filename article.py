@@ -3,12 +3,7 @@ import psycopg2.extras
 from datetime import date, datetime
 import uuid
 
-
-user_id = ""
-admin = False
-current_date = date.today()
-
-def open_db_online_store():
+def open_db_omsa():
     try:
         connection = psycopg2.connect(
             user = 'am6110',
@@ -21,12 +16,12 @@ def open_db_online_store():
     except: 
         print("Databasen finns inte!")
 
-def close_db_online_store(connection):
+def close_db_omsa(connection):
     connection.close()
 
 def login(user_email, user_password):
     
-    connection = open_db_online_store()
+    connection = open_db_omsa()
 
     cursor = connection.cursor()
     cursor.execute("SELECT email, password FROM \"profile\" where email = %s and password = %s", (user_email, user_password))
@@ -40,7 +35,7 @@ def login(user_email, user_password):
     else:    
         return 1
 
-    close_db_online_store(connection)
+    close_db_omsa(connection)
                 
      
 def create_article_in_db(title, description, zip_code, tier, city, category):
@@ -48,7 +43,7 @@ def create_article_in_db(title, description, zip_code, tier, city, category):
     Skapar en post i databasen med artikelinformationen
     '''
     psycopg2.extras.register_uuid()
-    connection = open_db_online_store()
+    connection = open_db_omsa()
 
     article_id = uuid.uuid4()
 
@@ -60,7 +55,7 @@ def create_article_in_db(title, description, zip_code, tier, city, category):
 
     cursor.close()
     connection.commit()
-    close_db_online_store(connection)
+    close_db_omsa(connection)
 
     create_article_category_in_db(article_id, category)
 
@@ -69,7 +64,7 @@ def create_article_category_in_db(article_id, category):
     Skapar en post i databasen med artikelkategorin
     '''
     psycopg2.extras.register_uuid()
-    connection = open_db_online_store()
+    connection = open_db_omsa()
 
     cursor = connection.cursor()
     cursor.execute("""
@@ -79,13 +74,13 @@ def create_article_category_in_db(article_id, category):
 
     cursor.close()
     connection.commit()
-    close_db_online_store(connection)
+    close_db_omsa(connection)
 
 def remove_article_from_db(article):
     '''
     Tar bort en artikel från databasen
     '''
-    connection = open_db_online_store()
+    connection = open_db_omsa()
     cursor = connection.cursor()
 
     cursor.execute("""
@@ -100,7 +95,7 @@ def remove_article_from_db(article):
 
     cursor.close()
     connection.commit()
-    close_db_online_store(connection)
+    close_db_omsa(connection)
 
 
 
@@ -108,7 +103,7 @@ def get_tier():
     '''
     Hämtar alla tiers
     '''
-    connection = open_db_online_store()
+    connection = open_db_omsa()
 
     cursor = connection.cursor()
     cursor.execute("""
@@ -116,14 +111,14 @@ def get_tier():
     """)
     records = cursor.fetchall()
     cursor.close()
-    close_db_online_store(connection)
+    close_db_omsa(connection)
     return records
 
 def get_city():
     '''
     Hämtar alla städer
     '''
-    connection = open_db_online_store()
+    connection = open_db_omsa()
 
     cursor = connection.cursor()
     cursor.execute("""
@@ -131,7 +126,7 @@ def get_city():
     """)
     records = cursor.fetchall()
     cursor.close()
-    close_db_online_store(connection)
+    close_db_omsa(connection)
     return records
 
 
@@ -139,7 +134,7 @@ def get_main_category():
     '''
     Hämtar alla kategorier
     '''
-    connection = open_db_online_store()
+    connection = open_db_omsa()
 
     cursor = connection.cursor()
     cursor.execute("""
@@ -148,14 +143,14 @@ def get_main_category():
     """)
     records = cursor.fetchall()
     cursor.close()
-    close_db_online_store(connection)
+    close_db_omsa(connection)
     return records
 
 def get_articles():
     '''
     Hämtar alla artiklar
     '''
-    connection = open_db_online_store()
+    connection = open_db_omsa()
 
     cursor = connection.cursor()
     cursor.execute("""
@@ -168,5 +163,5 @@ def get_articles():
     """)
     records = cursor.fetchall()
     cursor.close()
-    close_db_online_store(connection)
+    close_db_omsa(connection)
     return records
