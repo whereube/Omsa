@@ -49,3 +49,25 @@ def view_articles():
 @app.route("/")
 def start():
     return render_template("index.html")
+
+'''Login function'''
+@app.route("/login")
+def login_template():
+    return render_template("login.html")
+
+@app.route("/user_login", methods=["GET", "POST"])
+def user_login():
+    user_email = request.form.get("user_email")
+    user_password = request.form.get("user_password")
+    print(user_email)
+    print(user_password)
+    a = login(user_email, user_password)
+
+    if a == 1:
+        redirect("/")
+    elif a == 0:
+        print("Fuck you")
+
+    return redirect("/")
+
+
