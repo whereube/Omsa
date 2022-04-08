@@ -1,5 +1,7 @@
-from flask import Flask, redirect, render_template, request
+import profile
+from flask import Flask, redirect, render_template, request, flash 
 from article import *
+from profile import *
 
 app = Flask(__name__)
 
@@ -50,6 +52,8 @@ def view_articles():
 def start():
     return render_template("index.html")
 
+    
+
 '''Login function'''
 @app.route("/login")
 def login_template():
@@ -59,15 +63,19 @@ def login_template():
 def user_login():
     user_email = request.form.get("user_email")
     user_password = request.form.get("user_password")
-    print(user_email)
-    print(user_password)
-    a = login(user_email, user_password)
+   
+    confirmation = profile.db_to_login(user_email, user_password)
 
-    if a == 1:
+    if confirmation == 1:
         redirect("/")
-    elif a == 0:
-        print("Fuck you")
+        print("hej")
+        #user_id/session
+    elif confirmation == 0:
+        print("då")
+        flash("Fel e-postadress eller lösenord")
+        redirect("/login")
 
-    return redirect("/")
+    
 
+    #return redirect("/")
 

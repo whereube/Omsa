@@ -1,6 +1,8 @@
 
 import psycopg2 
+import psycopg2.extras
 from datetime import date
+import uuid
 
 user_id = ""
 admin = False
@@ -22,7 +24,7 @@ def open_db_online_store():
 def close_db_online_store(connection):
     connection.close()
 
-def login(user_email, user_password):
+def db_to_login(user_email, user_password):
     
     connection = open_db_online_store()
 
@@ -41,3 +43,5 @@ def login(user_email, user_password):
     close_db_online_store(connection)
                 
                 
+def test_111():
+    print("hej")

@@ -7,5 +7,10 @@ För att starta flask:
 3. flask run
 
 eventuellt:
-1. export FLASK_APP=main
-2. flask run
+export FLASK_APP=main
+flask run
+
+alt 3:
+set FLASK_APP=main.py
+export FLASK_APP=main
+flask run
