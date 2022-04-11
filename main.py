@@ -1,10 +1,11 @@
 
-from flask import Flask, redirect, render_template, request, flash 
+from xmlrpc.client import boolean
+from flask import Flask, redirect, render_template, request, flash, session
 from article import *
 from user import *
 
 app = Flask(__name__)
-#app.config['SECTRET_KEY'] = 'Thisissecret'
+app.secret_key = 'Thisissecret'
 
 
 @app.route("/create")
@@ -57,14 +58,8 @@ def start():
     
 
 '''Login function'''
-@app.route("/login")
+@app.route("/login", methods=["GET", "POST"])
 def login_template():
-    return render_template("login.html")
-
-
-@app.route("/user_login", methods=["GET", "POST"])
-def user_login():
-    
     user_email = request.form.get("user_email")
     user_password = request.form.get("user_password")
    
@@ -72,12 +67,32 @@ def user_login():
 
     if confirmation == 1:
         print("hej")
-        return redirect("/")
+        session["user"] = user
+        return redirect(url_for("user"))
         #user_id/session
     elif confirmation == 0:
         print("då")
         flash('Fel e-postadress eller lösenord')
 
+    return render_template("login.html")
+
+app.route("/user")
+def user():
+    if user in session:
+        user = session["user"]
+    else:
+        return redirect(url_for("login"))
+    return f"<h1>{user}</h1>"
+'''
+@app.route("/user_login", methods=["GET", "POST"])
+def user_login():
+
+    
+
 
     #return redirect("/")
 
+'''
+
+if __name__ == "__main__":
+    app.run(debug=True)
