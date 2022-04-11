@@ -4,7 +4,7 @@ from article import *
 from user import *
 
 app = Flask(__name__)
-
+#app.config['SECTRET_KEY'] = 'Thisissecret'
 
 
 @app.route("/create")
@@ -61,6 +61,7 @@ def start():
 def login_template():
     return render_template("login.html")
 
+
 @app.route("/user_login", methods=["GET", "POST"])
 def user_login():
     
@@ -76,7 +77,7 @@ def user_login():
     elif confirmation == 0:
         print("då")
         flash('Fel e-postadress eller lösenord')
-        
+
 
     #return redirect("/")
 
