@@ -4,8 +4,6 @@ import psycopg2.extras
 from datetime import date
 import uuid
 
-user_id = ""
-admin = False
 current_date = date.today()
 
 def open_db_online_store():
@@ -32,15 +30,14 @@ def db_to_login(user_email, user_password):
     cursor.execute("SELECT email, password FROM \"profile\" where email = %s and password = %s", (user_email, user_password))
     records = cursor.fetchall()
     
-
     if records == []:
-        print(records)
-        print(user_email)
-        print(user_password)
-    else:    
+        close_db_online_store(connection)
+        return 0
+    else:   
+        close_db_online_store(connection) 
         return 1
 
-    close_db_online_store(connection)
+    
                 
                 
 def test_111():

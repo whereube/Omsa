@@ -1,9 +1,11 @@
-import profile
+
 from flask import Flask, redirect, render_template, request, flash 
 from article import *
-from profile import *
+from user import *
 
 app = Flask(__name__)
+
+
 
 @app.route("/create")
 def create_article_form():
@@ -61,21 +63,20 @@ def login_template():
 
 @app.route("/user_login", methods=["GET", "POST"])
 def user_login():
+    
     user_email = request.form.get("user_email")
     user_password = request.form.get("user_password")
    
-    confirmation = profile.db_to_login(user_email, user_password)
+    confirmation = db_to_login(user_email, user_password)
 
     if confirmation == 1:
-        redirect("/")
         print("hej")
+        return redirect("/")
         #user_id/session
     elif confirmation == 0:
         print("då")
-        flash("Fel e-postadress eller lösenord")
-        redirect("/login")
-
-    
+        flash('Fel e-postadress eller lösenord')
+        
 
     #return redirect("/")
 
