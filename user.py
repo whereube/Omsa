@@ -1,4 +1,5 @@
 
+from flask import redirect, render_template
 import psycopg2 
 import psycopg2.extras
 from datetime import date
@@ -27,22 +28,17 @@ def db_to_login(user_email, user_password):
     connection = open_db_online_store()
 
     cursor = connection.cursor()
-    cursor.execute("SELECT email, password, id FROM \"profile\" where email = %s and password = %s", (user_email, user_password))
+    cursor.execute("SELECT email, password, id, f_name FROM \"profile\" where email = %s and password = %s", (user_email, user_password))
     records = cursor.fetchall()
     
     
     if records == []:
+        print("Användaren finns ej")
         close_db_online_store(connection)
-        return 0
+        return render_template("login.html")
     else:   
-        print(records)
-        current_user = records[2]
-        print(current_user)
-        close_db_online_store(connection) 
-        return 1
-
+        print("Lyckades")
+        return records
+        
+    close_db_online_store(connection) 
     
-                
-                
-def test_111():
-    print("hej")

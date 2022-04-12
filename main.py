@@ -1,9 +1,10 @@
-from flask import Flask, redirect, render_template, request, flash, session, url_for
+from flask import Flask, redirect, render_template, request, flash, session
 from article import *
 from user import *
 
 app = Flask(__name__)
 
+app.config['SECRET_KEY'] = 'thisissecret'
 #if __name__ == '__main__':
     #app.run(debug=True)
 
@@ -59,10 +60,27 @@ def start():
 '''Login function'''
 @app.route("/login", methods=["GET", "POST"])
 def login_template():
-    user_email = request.form.get("user_email")
-    user_password = request.form.get("user_password")
-   
-    confirmation = db_to_login(user_email, user_password)
+    
+    if request.method == 'POST':
+        user_email = request.form.get("user_email")
+        user_password = request.form.get("user_password")
+
+        current_user = db_to_login(user_email, user_password)
+        for item in current_user:
+            user_id = item[2]
+            user_name = item[3]
+            session["USER_ID"] = user_id
+            session['USER_NAME'] = user_name
+            return redirect("/profile_page")
+    
+    return render_template("login.html")
+
+@app.route("/profile_page")
+def show_user_profile():
+    user_name = session.get('USER_NAME')
+    return render_template("profile_page.html", user_name=user_name)
+
+'''
 
     if confirmation == 1:
         print("hej") 
@@ -73,7 +91,8 @@ def login_template():
         print("då")
         #flash('Fel e-postadress eller lösenord')
 
-    return render_template("login.html")
+    
+'''
 '''
 app.route("/user")
 def user():
