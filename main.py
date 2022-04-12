@@ -1,12 +1,11 @@
-
-from xmlrpc.client import boolean
 from flask import Flask, redirect, render_template, request, flash, session
 from article import *
 from user import *
 
 app = Flask(__name__)
-app.secret_key = 'Thisissecret'
 
+if __name__ == '__main__':
+    app.run(debug=True)
 
 @app.route("/create")
 def create_article_form():
@@ -66,7 +65,7 @@ def login_template():
     confirmation = db_to_login(user_email, user_password)
 
     if confirmation == 1:
-        print("hej")
+        print("hej") 
         session["user"] = user
         return redirect(url_for("user"))
         #user_id/session
@@ -94,5 +93,3 @@ def user_login():
 
 '''
 
-if __name__ == "__main__":
-    app.run(debug=True)
