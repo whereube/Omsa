@@ -1,11 +1,11 @@
-from flask import Flask, redirect, render_template, request, flash, session
+from flask import Flask, redirect, render_template, request, flash, session, url_for
 from article import *
 from user import *
 
 app = Flask(__name__)
 
-if __name__ == '__main__':
-    app.run(debug=True)
+#if __name__ == '__main__':
+    #app.run(debug=True)
 
 @app.route("/create")
 def create_article_form():
@@ -66,15 +66,15 @@ def login_template():
 
     if confirmation == 1:
         print("hej") 
-        session["user"] = user
-        return redirect(url_for("user"))
+        #session["user_id"] = current_user
+        return redirect(url_for("/"))
         #user_id/session
     elif confirmation == 0:
         print("då")
-        flash('Fel e-postadress eller lösenord')
+        #flash('Fel e-postadress eller lösenord')
 
     return render_template("login.html")
-
+'''
 app.route("/user")
 def user():
     if user in session:
@@ -82,7 +82,7 @@ def user():
     else:
         return redirect(url_for("login"))
     return f"<h1>{user}</h1>"
-'''
+
 @app.route("/user_login", methods=["GET", "POST"])
 def user_login():
 

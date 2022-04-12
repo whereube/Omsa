@@ -27,13 +27,17 @@ def db_to_login(user_email, user_password):
     connection = open_db_online_store()
 
     cursor = connection.cursor()
-    cursor.execute("SELECT email, password FROM \"profile\" where email = %s and password = %s", (user_email, user_password))
+    cursor.execute("SELECT email, password, id FROM \"profile\" where email = %s and password = %s", (user_email, user_password))
     records = cursor.fetchall()
+    
     
     if records == []:
         close_db_online_store(connection)
         return 0
     else:   
+        print(records)
+        current_user = records[2]
+        print(current_user)
         close_db_online_store(connection) 
         return 1
 
