@@ -1,3 +1,5 @@
+{% extends "base.html" %} {% block title %}Alla artiklar{% endblock %} {% block content
+    %}
 <h2>Alla artiklar<h2>
 
 {%for row in articles%}
@@ -9,3 +11,4 @@
     <h3>Kategori: {{row[31]}}</h3>
     </br>
 {%endfor%}
+{% endblock %}

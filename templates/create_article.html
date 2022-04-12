@@ -1,5 +1,6 @@
+{% extends "base.html" %} {% block title %}Skapa artikel{% endblock %} {% block content
+    %}
 <h2>Skapa en artikel</h2>
-
 
 <form action="/article_created" method="POST">
     <label for="title">Titel</label>
@@ -25,4 +26,4 @@
     </select>
     <input type="submit" value="Skapa">
 </form>
-
+{% endblock %}

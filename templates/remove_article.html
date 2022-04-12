@@ -1,3 +1,5 @@
+{% extends "base.html" %} {% block title %}Remove{% endblock %} {% block content
+    %}
 <form action="/article_removed" method="POST">
     <select id="article" name="article">
         {%for row in articles%}:
@@ -6,3 +8,4 @@
     </select>
     <input type="submit" value="Ta bort">
 </form>
+{% endblock %}
