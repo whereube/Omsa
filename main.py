@@ -56,7 +56,6 @@ def start():
     return render_template("index.html")
 
     
-
 '''Login function'''
 @app.route("/login", methods=["GET", "POST"])
 def login_template():
