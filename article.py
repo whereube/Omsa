@@ -147,7 +147,6 @@ def get_articles():
     close_db_omsa(connection)
     return records
 
-
 def get_user_articles(user_id):
     '''
     Hämtar alla artiklar som har användarens user_id
@@ -166,6 +165,29 @@ def get_user_articles(user_id):
     left outer join category on article_category.category_id = category.id
     where article.user_id = %s
     """, (user_id,))
+    records = cursor.fetchall()
+    cursor.close()
+    close_db_omsa(connection)
+    return records
+
+def get_article_by_id(article_id):
+    '''
+    Hämtar artikel med specifikt id
+    args:
+        article_id: artikelns id
+    '''
+    connection = open_db_omsa()
+
+    cursor = connection.cursor()
+    cursor.execute("""
+    select * from article
+    left outer join profile on article.user_id = profile.id
+    left outer join city on article.city_id = city.id
+    left outer join tier on article.tier_id = tier.id
+    left outer join article_category on article.id = article_category.article_id
+    left outer join category on article_category.category_id = category.id
+    where article.id = %s
+    """, (article_id,))
     records = cursor.fetchall()
     cursor.close()
     close_db_omsa(connection)
