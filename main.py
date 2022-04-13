@@ -80,35 +80,3 @@ def show_user_profile():
     user_name = session.get('USER_NAME')
     return render_template("profile_page.html", user_name=user_name)
 
-'''
-
-    if confirmation == 1:
-        print("hej") 
-        #session["user_id"] = current_user
-        return redirect(url_for("/"))
-        #user_id/session
-    elif confirmation == 0:
-        print("då")
-        #flash('Fel e-postadress eller lösenord')
-
-    
-'''
-'''
-app.route("/user")
-def user():
-    if user in session:
-        user = session["user"]
-    else:
-        return redirect(url_for("login"))
-    return f"<h1>{user}</h1>"
-
-@app.route("/user_login", methods=["GET", "POST"])
-def user_login():
-
-    
-
-
-    #return redirect("/")
-
-'''
-
