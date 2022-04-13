@@ -78,6 +78,14 @@ def login_template():
     else:                
         return render_template("login.html")
 
+'''Logout function'''
+@app.route("/logout_user")
+def logout():
+    session.pop("USER_ID")
+    session.pop("USER_NAME")
+    return render_template("logged_out.html")
+
+
 @app.route("/show_profile_page")
 def show_user_profile():
     user_name = session.get('USER_NAME')
