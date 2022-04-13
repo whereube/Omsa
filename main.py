@@ -1,7 +1,12 @@
-from flask import Flask, redirect, render_template, request
+from flask import Flask, redirect, render_template, request, flash, session
 from article import *
+from user import *
 
 app = Flask(__name__)
+
+app.config['SECRET_KEY'] = 'thisissecret'
+#if __name__ == '__main__':
+    #app.run(debug=True)
 
 @app.route("/create")
 def create_article_form():
@@ -50,24 +55,59 @@ def view_articles():
 def start():
     return render_template("index.html")
 
+    
 '''Login function'''
-@app.route("/login")
+@app.route("/login", methods=["GET", "POST"])
 def login_template():
+    
+    if request.method == 'POST':
+        user_email = request.form.get("user_email")
+        user_password = request.form.get("user_password")
+
+        current_user = db_to_login(user_email, user_password)
+        for item in current_user:
+            user_id = item[2]
+            user_name = item[3]
+            session["USER_ID"] = user_id
+            session['USER_NAME'] = user_name
+            return redirect("/profile_page")
+    
     return render_template("login.html")
+
+@app.route("/profile_page")
+def show_user_profile():
+    user_name = session.get('USER_NAME')
+    return render_template("profile_page.html", user_name=user_name)
+
+'''
+
+    if confirmation == 1:
+        print("hej") 
+        #session["user_id"] = current_user
+        return redirect(url_for("/"))
+        #user_id/session
+    elif confirmation == 0:
+        print("då")
+        #flash('Fel e-postadress eller lösenord')
+
+    
+'''
+'''
+app.route("/user")
+def user():
+    if user in session:
+        user = session["user"]
+    else:
+        return redirect(url_for("login"))
+    return f"<h1>{user}</h1>"
 
 @app.route("/user_login", methods=["GET", "POST"])
 def user_login():
-    user_email = request.form.get("user_email")
-    user_password = request.form.get("user_password")
-    print(user_email)
-    print(user_password)
-    a = login(user_email, user_password)
 
-    if a == 1:
-        redirect("/")
-    elif a == 0:
-        print("Fuck you")
+    
 
-    return redirect("/")
 
+    #return redirect("/")
+
+'''
 
