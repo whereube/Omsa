@@ -1,12 +1,21 @@
 from flask import Flask, redirect, render_template, request, flash, session
 from article import *
 from user import *
+from werkzeug.utils import secure_filename
+import os
+
+UPLOAD_FOLDER = 'static/article_images'
 
 app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
 
 app.config['SECRET_KEY'] = 'thisissecret'
 #if __name__ == '__main__':
     #app.run(debug=True)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+
+
 
 @app.route("/create")
 def create_article_form():
@@ -27,7 +36,13 @@ def create_article():
     city = request.form.get("city")
     category = request.form.get("category")
     user_id = session["USER_ID"]
-    create_article_in_db(title, description, zip_code, tier, city, category, user_id)
+
+    file = request.files['file']
+    if file.filename != '':
+        filename = secure_filename(file.filename)
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+    create_article_in_db(title, description, zip_code, tier, city, category, user_id, file.filename)
     return redirect("/")
 
 @app.route("/remove")
@@ -51,7 +66,8 @@ def view_articles():
     Visar upp alla artiklar
     '''
     articles = get_articles()
-    return render_template("all_articles.html", articles = articles)
+    images = get_article_images()
+    return render_template("all_articles.html", articles = articles, images = images)
 
 @app.route("/")
 def start():

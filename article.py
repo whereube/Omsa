@@ -19,7 +19,7 @@ def open_db_omsa():
 def close_db_omsa(connection):
     connection.close()
 
-def create_article_in_db(title, description, zip_code, tier, city, category, user_id):
+def create_article_in_db(title, description, zip_code, tier, city, category, user_id, filename):
     '''
     Skapar en post i databasen med artikelinformationen
     '''
@@ -39,6 +39,8 @@ def create_article_in_db(title, description, zip_code, tier, city, category, use
     close_db_omsa(connection)
 
     create_article_category_in_db(article_id, category)
+    if filename != '':
+        create_file_path_in_db(article_id, filename)
 
 def create_article_category_in_db(article_id, category):
     '''
@@ -73,6 +75,25 @@ def remove_article_from_db(article):
     delete from article 
     where id = %s
     """,(article,))
+
+    cursor.close()
+    connection.commit()
+    close_db_omsa(connection)
+
+def create_file_path_in_db(article_id, filename):
+    '''
+    Skapar en post i databasen med artikelinformationen
+    '''
+    psycopg2.extras.register_uuid()
+    connection = open_db_omsa()
+
+    id = uuid.uuid4()
+
+    cursor = connection.cursor()
+    cursor.execute("""
+    insert into article_image (id, article_id, file_name)
+    values(%s, %s, %s)
+    """,(id, article_id, filename,))
 
     cursor.close()
     connection.commit()
@@ -147,6 +168,22 @@ def get_articles():
     close_db_omsa(connection)
     return records
 
+def get_article_images():
+    '''
+    Hämtar alla artikel bilder
+    '''
+    connection = open_db_omsa()
+
+    cursor = connection.cursor()
+    cursor.execute("""
+    select * from article_image
+    """)
+    records = cursor.fetchall()
+    cursor.close()
+    close_db_omsa(connection)
+    return records
+
+
 
 def get_user_articles(user_id):
     '''
@@ -170,3 +207,5 @@ def get_user_articles(user_id):
     cursor.close()
     close_db_omsa(connection)
     return records
+
+

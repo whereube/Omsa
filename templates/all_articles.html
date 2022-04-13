@@ -9,6 +9,11 @@
     <h3>Prisnivå: {{row[26]}}</h3>
     <h3>Skapad: {{row[6]}}</h3>
     <h3>Kategori: {{row[31]}}</h3>
+    {%for image in images%}
+        {%if row[0] == image[1]%}
+        <img src="/static/article_images/{{image[2]}}">
+        {%endif%}
+    {%endfor%}
     </br>
 {%endfor%}
 {% endblock %}

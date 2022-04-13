@@ -2,7 +2,7 @@
     %}
 <h2>Skapa en artikel</h2>
 
-<form action="/article_created" method="POST">
+<form action="/article_created" method="POST" enctype=multipart/form-data>
     <label for="title">Titel</label>
     <input type="text" id="title" name="title">
     <label for="description">Beskrivning</label>
@@ -24,6 +24,7 @@
             <option value={{row[0]}}>{{row[1]}}</option>
         {%endfor%}
     </select>
+    <input type=file name=file>
     <input type="submit" value="Skapa">
 </form>
 {% endblock %}
