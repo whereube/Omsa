@@ -98,6 +98,8 @@ def create_profil():
     city = get_city()
     return render_template("create_profil.html", city = city)
 
+
+
 @app.route("/create_user", methods=["GET", "POST"])
 def create_user():
     user_name = request.form.get("user_name")
@@ -115,3 +117,12 @@ def create_user():
         return redirect("/")
     else:
         return redirect("/create_profil")
+
+
+'''Visa eget förråd'''
+@app.route("/show_own_storage")
+def show_current_user_storage():
+    user_id = session.get("USER_ID")
+    articles = get_user_articles(user_id)
+    
+    return render_template("/user_storage.html", articles=articles)

@@ -1,0 +1,13 @@
+{% extends "base.html" %} {% block title %}Alla artiklar{% endblock %} {% block content
+    %}
+{%for row in articles%}
+<div class="card" style="width: 18rem;">
+    <img src="..." class="card-img-top" alt="Artikelbild">
+    <div class="card-body">
+        <h5 class="card-title">{{row[2]}}</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="#" class="btn btn-primary">Se artikel</a>
+    </div>
+{%endfor%}
+</div>
+{% endblock %}
