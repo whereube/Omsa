@@ -21,7 +21,6 @@ def open_db_omsa():
 def close_db_omsa(connection):
     connection.close()
 
-
 def db_to_login(user_email, user_password):
     
     connection = open_db_omsa()
@@ -33,7 +32,7 @@ def db_to_login(user_email, user_password):
     if records == []:
         print("Användaren finns ej")
         close_db_omsa(connection)
-        return redirect("/login") 
+        return False
     else:   
         print("Lyckades")
         close_db_omsa(connection) 

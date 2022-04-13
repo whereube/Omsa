@@ -61,26 +61,28 @@ def start():
 '''Login function'''
 @app.route("/login", methods=["GET", "POST"])
 def login_template():
-    
+
     if request.method == 'POST':
         user_email = request.form.get("user_email")
         user_password = request.form.get("user_password")
-
         current_user = db_to_login(user_email, user_password)
-        for item in current_user:
-            user_id = item[2]
-            user_name = item[3]
-            session["USER_ID"] = user_id
-            session['USER_NAME'] = user_name
-            return redirect("/show_profile_page")
-    
-    
-    return render_template("login.html")
+        if current_user == False:
+            return render_template("login.html")
+        else:
+            for item in current_user:
+                user_id = item[2]
+                user_name = item[3]
+                session["USER_ID"] = user_id
+                session['USER_NAME'] = user_name
+                return redirect("/show_profile_page")
+    else:                
+        return render_template("login.html")
 
 @app.route("/show_profile_page")
 def show_user_profile():
     user_name = session.get('USER_NAME')
     return render_template("profile_page.html", user_name=user_name)
+
 
 '''Create user function'''
 @app.route("/create_profil", methods=["GET", "POST"])
