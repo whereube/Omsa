@@ -80,3 +80,26 @@ def show_user_profile():
     user_name = session.get('USER_NAME')
     return render_template("profile_page.html", user_name=user_name)
 
+'''Create user function'''
+@app.route("/create_profil", methods=["GET", "POST"])
+def create_profil():
+    city = get_city()
+    return render_template("create_profil.html", city = city)
+
+@app.route("/create_user", methods=["GET", "POST"])
+def create_user():
+    user_name = request.form.get("user_name")
+    user_password = request.form.get("user_password")
+    user_email = request.form.get("user_email")
+    user_f_name = request.form.get("user_f_name")
+    user_l_name = request.form.get("user_l_name")
+    user_adress = request.form.get("user_adress")
+    user_zip_code = request.form.get("user_zip_code")
+    city = request.form.get("city")
+    user_phone_number = request.form.get("user_phone_number")
+    
+    if user_zip_code.isdigit() == True:
+        create_user_in_db(user_name, user_password, user_email, user_f_name, user_l_name, user_adress, user_zip_code, city, user_phone_number)
+        return redirect("/")
+    else:
+        return redirect("/create_profil")
