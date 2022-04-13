@@ -70,11 +70,12 @@ def login_template():
             user_name = item[3]
             session["USER_ID"] = user_id
             session['USER_NAME'] = user_name
-            return redirect("/profile_page")
+            return redirect("/show_profile_page")
+    
     
     return render_template("login.html")
 
-@app.route("/profile_page")
+@app.route("/show_profile_page")
 def show_user_profile():
     user_name = session.get('USER_NAME')
     return render_template("profile_page.html", user_name=user_name)
