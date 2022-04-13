@@ -19,7 +19,7 @@ def open_db_omsa():
 def close_db_omsa(connection):
     connection.close()
 
-def create_article_in_db(title, description, zip_code, tier, city, category):
+def create_article_in_db(title, description, zip_code, tier, city, category, user_id):
     '''
     Skapar en post i databasen med artikelinformationen
     '''
@@ -30,9 +30,9 @@ def create_article_in_db(title, description, zip_code, tier, city, category):
 
     cursor = connection.cursor()
     cursor.execute("""
-    insert into article (id, title, description, zip_code, create_date, tier_id, city_id)
-    values(%s, %s, %s, %s, %s, %s, %s)
-    """,(article_id,title, description, zip_code, datetime.now(), tier, city,))
+    insert into article (id, title, description, zip_code, create_date, tier_id, city_id, user_id)
+    values(%s, %s, %s, %s, %s, %s, %s, %s)
+    """,(article_id,title, description, zip_code, datetime.now(), tier, city, user_id,))
 
     cursor.close()
     connection.commit()
@@ -142,6 +142,30 @@ def get_articles():
     left outer join article_category on article.id = article_category.article_id
     left outer join category on article_category.category_id = category.id
     """)
+    records = cursor.fetchall()
+    cursor.close()
+    close_db_omsa(connection)
+    return records
+
+
+def get_user_articles(user_id):
+    '''
+    Hämtar alla artiklar som har användarens user_id
+    args:
+        user_id: Användarens id
+    '''
+    connection = open_db_omsa()
+
+    cursor = connection.cursor()
+    cursor.execute("""
+    select * from article
+    left outer join profile on article.user_id = profile.id
+    left outer join city on article.city_id = city.id
+    left outer join tier on article.tier_id = tier.id
+    left outer join article_category on article.id = article_category.article_id
+    left outer join category on article_category.category_id = category.id
+    where article.user_id = %s
+    """, (user_id,))
     records = cursor.fetchall()
     cursor.close()
     close_db_omsa(connection)

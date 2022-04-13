@@ -26,7 +26,8 @@ def create_article():
     tier = request.form.get("tier")
     city = request.form.get("city")
     category = request.form.get("category")
-    create_article_in_db(title, description, zip_code, tier, city, category)
+    user_id = session["USER_ID"]
+    create_article_in_db(title, description, zip_code, tier, city, category, user_id)
     return redirect("/")
 
 @app.route("/remove")
@@ -34,7 +35,8 @@ def remove_article_form():
     ''' 
     Hämtar in formuläret för att ta bort en artikel och skickar vidare detta för att ta bort en post i databasen
     '''
-    articles = get_articles()
+    user_id = session["USER_ID"]
+    articles = get_user_articles(user_id)
     return render_template("remove_article.html", articles = articles)
 
 @app.route("/article_removed", methods=['GET', 'POST'])
