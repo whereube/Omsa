@@ -51,3 +51,41 @@ def trade_proposals (user_id):
     cursor.close()
     close_db_omsa(connection)
     return records
+
+
+def save_interest_to_db(transaction_id):
+    '''
+    Uppdaterar transactions.denied med värdet false
+    args:
+        transaction_id: ID till transactionsposten
+    '''
+
+    connection = open_db_omsa()
+
+    cursor = connection.cursor()
+    cursor.execute("""
+    update transaction
+    set denied = False
+    where transaction.id = %s
+    """,(transaction_id,))
+
+    cursor.close()
+    connection.commit()
+    close_db_omsa(connection)
+
+
+def remove_interest_from_db(transaction_id):
+    '''
+    Tar bort en artikel från databasen
+    '''
+    connection = open_db_omsa()
+    cursor = connection.cursor()
+
+    cursor.execute("""
+    delete from transaction
+    where transaction.id = %s
+    """,(transaction_id,))
+
+    cursor.close()
+    connection.commit()
+    close_db_omsa(connection)

@@ -5,25 +5,40 @@
 <h2>Föreslagna byten</h2>
     <h3>Förslagna till dig:</h3>
     {% for trade in trades: %}
-        {% if trade[11] == user_id %} 
+        {% if trade[11] == user_id %}
             <div>
-                <h4>Din artikel: {{trade[12]}}</h4>
-                {%for image in images%}
-                    {%if trade[10] == image[1]%}
-                    <img id="temp_pic" src="/static/article_images/{{image[2]}}">
-                    {%endif%}
-                {%endfor%}
-                <p>Stad: {{trade[67]}}</p>
-            </div>
-            <div>
-                <h4>Föreslaget byte: {{trade[22]}}</h4>
-                {%for image in images%}
-                    {%if trade[20] == image[1]%}
+                <div>
+                    <h4>Din artikel: {{trade[12]}}</h4>
+                    {%for image in images%}
+                        {%if trade[10] == image[1]%}
                         <img id="temp_pic" src="/static/article_images/{{image[2]}}">
-                    {%endif%}
-                {%endfor%}
-                <p>Stad: {{trade[69]}}</p>
-                <p>Datum föreslaget: {{trade[6]}}</p>
+                        {%endif%}
+                    {%endfor%}
+                    <p>Stad: {{trade[67]}}</p>
+                </div>
+                <div>
+                    <h4>Föreslaget byte: {{trade[22]}}</h4>
+                    {%for image in images%}
+                        {%if trade[20] == image[1]%}
+                            <img id="temp_pic" src="/static/article_images/{{image[2]}}">
+                        {%endif%}
+                    {%endfor%}
+                    <p>Stad: {{trade[69]}}</p>
+                    <p>Datum föreslaget: {{trade[6]}}</p>
+                </div>
+                {% if trade[8] == None %}
+                    <p>Intresserad?</p>
+                    <form action="/submit_interest" method="POST">
+                        <input type="radio" id="Yes" name="interest" value=1>
+                        <label for="Yes">Jag är intresserad</label><br>
+                        <input type="radio" id="No" name="interest" value="0">
+                        <label for="No">Jag är inte intresserad</label><br>
+                        <input type="hidden" id="transaction_id" name="transaction_id" value={{trade[0]}}>
+                        <input type="submit" value="Skicka">
+                    </form>
+                {% elif trade[8] == False %}
+                    <p>Redo för byte, du kan nu kontakta den andra personen</p>
+                {% endif %}
             </div>
         {% endif %}
     {% endfor %}
@@ -31,23 +46,30 @@
     {% for trade in trades: %}
         {% if trade[21] == user_id %}
             <div>
-                <h4>Din artikel: {{trade[22]}}</h4>
-                {%for image in images%}
-                    {%if trade[20] == image[1]%}
+                <div>
+                    <h4>Din artikel: {{trade[22]}}</h4>
+                    {%for image in images%}
+                        {%if trade[20] == image[1]%}
+                            <img id="temp_pic" src="/static/article_images/{{image[2]}}">
+                        {%endif%}
+                    {%endfor%}
+                    <p>Stad: {{trade[69]}}</p>
+                    <p>Datum föreslaget: {{trade[6]}}</p>
+                </div>
+                <div>
+                    <h4>Föreslaget byte: {{trade[12]}}</h4>
+                    {%for image in images%}
+                        {%if trade[10] == image[1]%}
                         <img id="temp_pic" src="/static/article_images/{{image[2]}}">
-                    {%endif%}
-                {%endfor%}
-                <p>Stad: {{trade[69]}}</p>
-                <p>Datum föreslaget: {{trade[6]}}</p>
-            </div>
-            <div>
-                <h4>Föreslaget byte: {{trade[12]}}</h4>
-                {%for image in images%}
-                    {%if trade[10] == image[1]%}
-                    <img id="temp_pic" src="/static/article_images/{{image[2]}}">
-                    {%endif%}
-                {%endfor%}
-                <p>Stad: {{trade[67]}}</p>
+                        {%endif%}
+                    {%endfor%}
+                    <p>Stad: {{trade[67]}}</p>
+                </div>
+                {% if trade[8] == False %}
+                    <p>Redo för byte, du kan nu kontakta den andra personen</p>
+                {% elif trade[8] == None %} 
+                    <p>Status: Väntar på svar</p>
+                {% endif %}
             </div>
         {% endif %}
     {% endfor %}
