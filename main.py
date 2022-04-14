@@ -1,6 +1,7 @@
 from flask import Flask, redirect, render_template, request, flash, session
 from article import *
 from user import *
+from ima import *
 from werkzeug.utils import secure_filename
 import os
 
@@ -106,7 +107,11 @@ def logout():
 @app.route("/show_profile_page")
 def show_user_profile():
     user_name = session.get('USER_NAME')
-    return render_template("profile_page.html", user_name=user_name)
+    user_id = session.get('USER_ID')
+    trades = trade_proposals(user_id)
+    images = get_article_images()
+
+    return render_template("profile_page.html", user_name=user_name, trades=trades, user_id=user_id, images=images)
 
 
 '''Create user function'''

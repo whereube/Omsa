@@ -2,5 +2,53 @@
     %}
 <h1>Hej {{ user_name }}</h1>
 <a href="/show_own_storage">Förråd</a>
-<a href="/logout_user">Logga ut</a>
+<h2>Föreslagna byten</h2>
+    <h3>Förslagna till dig:</h3>
+    {% for trade in trades: %}
+        {% if trade[11] == user_id %} 
+            <div>
+                <h4>Din artikel: {{trade[12]}}</h4>
+                {%for image in images%}
+                    {%if trade[10] == image[1]%}
+                    <img id="temp_pic" src="/static/article_images/{{image[2]}}">
+                    {%endif%}
+                {%endfor%}
+                <p>Stad: {{trade[67]}}</p>
+            </div>
+            <div>
+                <h4>Föreslaget byte: {{trade[22]}}</h4>
+                {%for image in images%}
+                    {%if trade[20] == image[1]%}
+                        <img id="temp_pic" src="/static/article_images/{{image[2]}}">
+                    {%endif%}
+                {%endfor%}
+                <p>Stad: {{trade[69]}}</p>
+                <p>Datum föreslaget: {{trade[6]}}</p>
+            </div>
+        {% endif %}
+    {% endfor %}
+    <h3>Förslagna av dig:</h3>
+    {% for trade in trades: %}
+        {% if trade[21] == user_id %}
+            <div>
+                <h4>Din artikel: {{trade[22]}}</h4>
+                {%for image in images%}
+                    {%if trade[20] == image[1]%}
+                        <img id="temp_pic" src="/static/article_images/{{image[2]}}">
+                    {%endif%}
+                {%endfor%}
+                <p>Stad: {{trade[69]}}</p>
+                <p>Datum föreslaget: {{trade[6]}}</p>
+            </div>
+            <div>
+                <h4>Föreslaget byte: {{trade[12]}}</h4>
+                {%for image in images%}
+                    {%if trade[10] == image[1]%}
+                    <img id="temp_pic" src="/static/article_images/{{image[2]}}">
+                    {%endif%}
+                {%endfor%}
+                <p>Stad: {{trade[67]}}</p>
+            </div>
+        {% endif %}
+    {% endfor %}
 {% endblock %}
