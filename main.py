@@ -7,16 +7,16 @@ import os
 
 UPLOAD_FOLDER = 'static/article_images'
 
-app = Flask(__name__)
+
 app = Flask(__name__, static_url_path='/static')
 
 app.run(debug=True)
 app.config['SECRET_KEY'] = 'thisissecret'
-#if __name__ == '__main__':
-    #app.run(debug=True)
+
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-
+#if __name__ == '__main__':
+    #app.run(debug=True)
 
 
 @app.route("/create")
@@ -73,7 +73,8 @@ def view_articles():
 
 @app.route("/")
 def start():
-    return render_template("index.html")
+    user_id = session.get('USER_NAME')
+    return render_template("index.html", user_id=user_id)
 
     
 '''Login function'''
@@ -102,6 +103,7 @@ def logout():
     session.pop("USER_ID")
     session.pop("USER_NAME")
     return render_template("logged_out.html")
+
 
 
 @app.route("/show_profile_page")
