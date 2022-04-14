@@ -128,7 +128,9 @@ def show_current_user_storage():
     return render_template("/user_storage.html", articles=articles)
 
 '''Visa vald artikel'''
+'''
 @app.route("/show_article/<article_id>")
 def show_selected_article():
     records = get_article_by_id(article_id)
     return render_template("/show_article", article=article)
+'''
