@@ -158,3 +158,16 @@ def show_selected_article():
     records = get_article_by_id(article_id)
     return render_template("/show_article", article=article)
 '''
+
+
+'''Anmäl intresse för en produkt'''
+@app.route("/submit_interest", methods=["GET", "POST"])
+def submit_interest():
+    transaction_id = request.form.get("transaction_id")
+    interest = int(request.form.get("interest"))
+    if interest == 1:
+        save_interest_to_db(transaction_id)
+    elif interest == 0:
+        remove_interest_from_db(transaction_id)
+
+    return redirect("/show_profile_page")
