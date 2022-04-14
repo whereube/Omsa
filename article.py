@@ -72,6 +72,11 @@ def remove_article_from_db(article):
     """,(article,))
 
     cursor.execute("""
+    delete from transaction
+    where (wife_article_id = %s or husband_article_id = %s)
+    """,(article, article))
+
+    cursor.execute("""
     delete from article 
     where id = %s
     """,(article,))
