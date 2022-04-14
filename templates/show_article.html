@@ -1,0 +1,12 @@
+{% extends "base.html" %} {% block title %}Skapa artikel{% endblock %} {% block content
+    %}
+    {%for row in articles%}
+    <div class="card" style="width: 18rem;">
+        <img src="..." class="card-img-top" alt="Artikelbild">
+        <div class="card-body">
+            <h5 class="card-title">{{row[2]}}</h5>
+            <a href="#" class="btn btn-primary">Se artikel</a>
+        </div>
+    </div>
+    {%endfor%}
+{% endblock %}

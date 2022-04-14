@@ -9,6 +9,7 @@ UPLOAD_FOLDER = 'static/article_images'
 app = Flask(__name__)
 app = Flask(__name__, static_url_path='/static')
 
+app.run(debug=True)
 app.config['SECRET_KEY'] = 'thisissecret'
 #if __name__ == '__main__':
     #app.run(debug=True)
@@ -142,3 +143,11 @@ def show_current_user_storage():
     articles = get_user_articles(user_id)
     
     return render_template("/user_storage.html", articles=articles)
+
+'''Visa vald artikel'''
+'''
+@app.route("/show_article/<article_id>")
+def show_selected_article():
+    records = get_article_by_id(article_id)
+    return render_template("/show_article", article=article)
+'''
