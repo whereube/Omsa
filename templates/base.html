@@ -28,9 +28,22 @@
                 <a class="nav-link disabled">Disabled</a>
                 </li>
             </ul>
-            <form class="d-flex">
-                <button class="btn btn-outline-success" type="submit">(Profil)</button>
-            </form>
+            </div>
+            <div class="btn-group dropstart">
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" id="profile-btn">
+                  Profil
+                </button>
+                <ul class="dropdown-menu">
+                  {% if user_id == None %}
+                  <li><a class="dropdown-item" href="/login">Logga in</a></li>
+                  <li><a class="dropdown-item" href="/create_profil">Bli medlem</a></li>
+                  {% else %}
+                  <li><a class="dropdown-item" href="/show_profile_page">Min profil</a></li>
+                  <li><a class="dropdown-item" href="/show_own_storage">Mitt förråd</a></li>
+                  <li><a class="dropdown-item" href="/create">Skapa artikel</a></li>
+                  <li><a class="dropdown-item" href="/logout_user">Logga ut</a></li>
+                  {% endif %}
+                </ul>
             </div>
         </div>
         </nav>

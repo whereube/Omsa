@@ -1,26 +1,37 @@
+:root{
+    --primary: #F6D55C;
+    --light: #FEFAEC;
+    --dark: #625772;
+    --background: #ed553b;
+}
+
 #box{
     width: 500px;
     height: 320px;
     margin: auto;
     margin-top: 100px;
-    border: 1px solid black;
+    border: 1px solid var(--dark);
     border-radius: 5px;
     padding: 20px;
-    background-color: #F6D55C;
+    background-color: var(--primary);
 }
 
 body{
-    background-color: #F6D55C;
+    background-color: var(--primary);
 }
 .container {
     margin-top: 50px;
     padding: 20px;
     display: flex;
     flex-direction: column;
-    background-color: #fff;
+    background-color: var(--light);
 }
 
 .card{
     margin: 10px;
     padding: 20px;
+}
+
+#profile-btn{
+    background-color: var(--background);
 }
