@@ -3,31 +3,31 @@
   <form action="/create_user", method="POST" id="box" novalidate>
     <div class="mb-3">
       <label for="exampleInputUsername1" class="form-label">Username</label>
-      <input type="namn" class="form-control" id="us" name="user_name" aria-describedby="emailHelp">
+      <input type="namn" class="form-control" id="us" name="user_name" aria-describedby="emailHelp" onchange='saveValue(this);'>
     </div>
     <div class="mb-3">
       <label for="exampleInputPassword1" class="form-label">Password</label>
-      <input type="password" class="form-control" id="ps" name="user_password">
+      <input type="password" class="form-control" id="ps" name="user_password" onchange='saveValue(this);'>
     </div>
     <div class="mb-3">
       <label for="exampleInputEmail1" class="form-label">Email</label>
-      <input type="email" class="form-control" id="el" name="user_email" aria-describedby="emailHelp">
+      <input type="email" class="form-control" id="el" name="user_email" aria-describedby="emailHelp" onchange='saveValue(this);'>
     </div>
     <div class="mb-3">
       <label for="exampleInputFirstname1" class="form-label">Firstnamn</label>
-      <input type="f_name" class="form-control" id="fn" name="user_f_name" aria-describedby="emailHelp">
+      <input type="f_name" class="form-control" id="fn" name="user_f_name" aria-describedby="emailHelp" onchange='saveValue(this);'>
     </div>
     <div class="mb-3">
       <label for="exampleInputLastname1" class="form-label">Lastname</label>
-      <input type="l_name" class="form-control" id="ln" name="user_l_name">
+      <input type="l_name" class="form-control" id="ln" name="user_l_name" onchange='saveValue(this);'>
     </div>
     <div class="mb-3">
       <label for="exampleInputAdress1" class="form-label">Address</label>
-      <input type="adress" class="form-control" id="as" name="user_adress" aria-describedby="emailHelp">
+      <input type="adress" class="form-control" id="as" name="user_adress" aria-describedby="emailHelp" onchange='saveValue(this);'>
     </div>
     <div class="mb-3">
       <label for="exampleInputZip_code1" class="form-label">Zip_code</label>
-      <input type="zip_code" class="form-control" id="zp" name="user_zip_code" >
+      <input type="zip_code" class="form-control" id="zp" name="user_zip_code"onchange='saveValue(this);'>
     </div>
     <div class="mb-3">
       <select id="city" name="city">
@@ -38,9 +38,9 @@
     </div>
     <div class="mb-3" >
       <label for="user_phone_number">Phone number</label>
-      <input type="user_phone_number" class="user_phone_number" id="pn" name="user_phone_number">
+      <input type="user_phone_number" class="user_phone_number" id="pn" name="user_phone_number" onchange='saveValue(this);'>
     </div>
-    <input type="submit" value="check"></input>
+    <input type="submit"></input>
       
       
   </form>
