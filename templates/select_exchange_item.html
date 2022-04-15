@@ -1,5 +1,17 @@
-{% extends "base.html" %} {% block title %}Välj vilken av dina annonser du vill byta med!{% endblock %} {% block content
+{% extends "base.html" %} {% block title %}Exchange{% endblock %} {% block content
     %}
 
-<h1>Varor...</h1>
-<a href="/show_own_storage">Förråd</a>
+<h1>Välj vilken annons du vill byta med!</h1>
+{%for row in articles%}
+    <h3>Rubrik: {{row[2]}}</h3>
+    <h3>Bild</h3>
+    <h3>Stad: {{row[23]}}</h3>
+    <h3>Prisnivå: {{row[26]}}</h3>
+    <h3>Skapad: {{row[6]}}</h3>
+    <h3>Kategori: {{row[31]}}</h3>
+    {%for image in images%}
+        {%if row[0] == image[1]%}
+        <img src="/static/article_images/{{image[2]}}">
+        {%endif%}
+    {%endfor%}
+{% endblock %}
