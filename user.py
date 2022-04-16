@@ -1,5 +1,5 @@
 
-from flask import redirect, render_template
+from flask import redirect, render_template, flash
 import psycopg2 
 import psycopg2.extras
 from datetime import date
@@ -30,11 +30,9 @@ def db_to_login(user_email, user_password):
     records = cursor.fetchall()
     
     if records == []:
-        print("Användaren finns ej")
         close_db_omsa(connection)
         return False
     else:   
-        print("Lyckades")
         close_db_omsa(connection) 
         return records
 

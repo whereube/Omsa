@@ -86,6 +86,7 @@ def login_template():
         user_password = request.form.get("user_password")
         current_user = db_to_login(user_email, user_password)
         if current_user == False:
+            flash("Felaktigt e-postadress eller lösenord.")
             return render_template("login.html")
         else:
             for item in current_user:

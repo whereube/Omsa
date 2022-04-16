@@ -7,7 +7,6 @@
 
 #box{
     width: 500px;
-    height: 320px;
     margin: auto;
     margin-top: 100px;
     border: 1px solid var(--dark);
@@ -38,4 +37,8 @@ max-width: 200px;
 
 #profile-btn{
     background-color: var(--background);
+}
+
+#danger-alert{
+    margin: auto;
 }

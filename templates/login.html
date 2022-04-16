@@ -1,7 +1,18 @@
 {% extends "base.html" %} {% block title %}Login{% endblock %} {% block content
   %}
+
 <form action="/login", method="POST" id="box">
   <div class="mb-3">
+    {% with messages = get_flashed_messages() %}
+    {% for message in messages %}
+    <div class="alert alert-danger d-flex align-items-center" role="alert">
+      <svg class="bi flex-shrink-0 me-2" width="14" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+      <div id="danger-alert">
+        {{ message }}
+      </div>
+    </div>
+    {% endfor %}
+    {% endwith %}
     <label for="exampleInputEmail1" class="form-label">E-postadress</label>
     <input type="email" class="form-control" id="ccc" name="user_email" aria-describedby="emailHelp">
     <div id="emailHelp" class="form-text">Dina uppgifter är säkra hos oss!</div>
