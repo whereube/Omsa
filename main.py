@@ -171,3 +171,8 @@ def submit_interest():
         remove_interest_from_db(transaction_id)
 
     return redirect("/show_profile_page")
+
+
+@app.route("/choose")
+def choose_exchange():
+    return render_template("choose_exchange.html")
