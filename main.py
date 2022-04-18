@@ -175,4 +175,7 @@ def submit_interest():
 
 @app.route("/choose")
 def choose_exchange():
-    return render_template("choose_exchange.html")
+    user_id = session.get("USER_ID")
+    articles = get_user_articles(user_id)
+    
+    return render_template("/choose_exchange.html", articles=articles)

@@ -1,11 +1,13 @@
 {% extends "base.html" %} {% block title %}Välj bytesprodukt{% endblock %} {% block content
     %}
+
+<h1>Välj vilken dina produkter du vill byta med</h1>
 {%for row in articles%}
 <div class="card" style="width: 48rem;">
     <img src="..." class="card-img-top" alt="Artikelbild">
     <div class="card-body">
         <h5 class="card-title">{{row[2]}}</h5>
-        <a href="" class="btn btn-primary">Se artikel</a>
+        <a href="#" class="btn btn-primary">Välj</a>
     </div>
 </div>
 {%endfor%}

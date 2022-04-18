@@ -53,6 +53,24 @@ def trade_proposals (user_id):
     return records
 
 
+def show_interest(wife_article_id, husband_article_id, date_proposed, husband_id):
+    '''
+    Updaterar wife_article_id, husband_article_id, date_proposed och husband_id när intresse är visat
+    '''
+    connection = open_db_omsa()
+
+    cursor = connection.cursor()
+    cursor.execute("""
+    update transaction
+    set denied = False
+    where transaction.id = %s
+    """,(transaction_id,))
+
+    cursor.close()
+    connection.commit()
+    close_db_omsa(connection)
+
+
 def save_interest_to_db(transaction_id):
     '''
     Uppdaterar transactions.denied med värdet false
