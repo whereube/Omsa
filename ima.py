@@ -55,16 +55,15 @@ def trade_proposals (user_id):
 
 def show_interest(wife_article_id, husband_article_id, date_proposed, husband_id):
     '''
-    Updaterar wife_article_id, husband_article_id, date_proposed och husband_id när intresse är visat
+    lägger till wife_article_id, husband_article_id, date_proposed och husband_id i database vid visat intresse
     '''
     connection = open_db_omsa()
-
     cursor = connection.cursor()
+
     cursor.execute("""
-    update transaction
-    set denied = False
-    where transaction.id = %s
-    """,(transaction_id,))
+    insert into transaction (wife_article_id, husband_article_id, date_proposed, husband_id)
+    values(%s, %s, %s, %s)
+    """,(wife_article_id, husband_article_id, date_proposed, husband_id))
 
     cursor.close()
     connection.commit()

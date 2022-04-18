@@ -4,6 +4,7 @@ from user import *
 from ima import *
 from werkzeug.utils import secure_filename
 import os
+from datetime import datetime
 
 UPLOAD_FOLDER = 'static/article_images'
 
@@ -172,10 +173,20 @@ def submit_interest():
 
     return redirect("/show_profile_page")
 
-
 @app.route("/choose")
-def choose_exchange():
-    user_id = session.get("USER_ID")
+def show_interest_form():
+    ''' 
+    Hämtar in formuläret och skickar vidare detta för att lägga till ett intresse i databasen
+    '''
+    user_id = session["USER_ID"]
     articles = get_user_articles(user_id)
-    
-    return render_template("/choose_exchange.html", articles=articles)
+    return render_template("choose_exchange.html", articles = articles)
+
+@app.route("/show_interest", methods=['GET', 'POST'])
+def register_interest():
+    wife_article_id = request.form.get("wife_article")
+    husband_article_id = request.form.get("husband_article")
+    date_proposed = datetime.now()
+    husband_id = session.get("USER_ID")
+    show_interest(wife_article_id, husband_article_id, date_proposed, husband_id)
+    return redirect("/")

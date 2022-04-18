@@ -1,14 +1,23 @@
-{% extends "base.html" %} {% block title %}Välj bytesprodukt{% endblock %} {% block content
+{% extends "base.html" %} {% block title %}Remove{% endblock %} {% block content
     %}
+<form action="/show_interest" method="POST">
+   
+    <label for="wife_article">Välj vilken produkt du är intresserad av:</label>
+    <select id="wife_article" name="wife_article">
+        <h2>Välj vilken produkt du är intreeserad av:</h2>
+        {%for row in articles%}:
+        <option value={{row[0]}}>{{row[2]}}</option>
+        {%endfor%}
+    </select>
 
-<h1>Välj vilken dina produkter du vill byta med</h1>
-{%for row in articles%}
-<div class="card" style="width: 48rem;">
-    <img src="..." class="card-img-top" alt="Artikelbild">
-    <div class="card-body">
-        <h5 class="card-title">{{row[2]}}</h5>
-        <a href="#" class="btn btn-primary">Välj</a>
-    </div>
-</div>
-{%endfor%}
+    <label for="husband_article">Välj vilken av dina produkter du vill byta:</label>
+    <select id="husband_article" name="husband_article">
+        <h2>Välj vilken av dina produkter du vill byta med:</h2>
+        {%for row in articles%}:
+        <option value={{row[0]}}>{{row[2]}}</option>
+        {%endfor%}
+    </select>
+
+    <input type="submit" value="Registrera intresse">
+</form>
 {% endblock %}
