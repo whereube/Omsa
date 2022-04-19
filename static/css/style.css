@@ -42,3 +42,22 @@ max-width: 200px;
 #danger-alert{
     margin: auto;
 }
+
+.was-validated{
+    padding: 40px;
+}
+
+.was-validated > div{
+    padding-top: 10px;
+    margin-top: 20px;
+}
+
+.form-region{
+    border: 1px solid var(--primary);
+    padding: 20px 10px;
+    border-radius: 5px;
+}
+
+.art-headers{
+    font-size: 20px;
+}
