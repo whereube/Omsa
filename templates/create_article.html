@@ -2,6 +2,69 @@
     %}
 <h2>Skapa en artikel</h2>
 
+<form class="was-validated" method="POST" action="/article_created" enctype=multipart/form-data id="create-art-form">
+    
+    <div class="form-region">
+        <h2 class="art-headers">Generell information</h2>
+        <div class="col-md-4">
+            <label for="validationServer01" class="form-label">Titel</label>
+            <input type="text" class="form-control is-valid" id="validationServer01" name="title" required>
+        </div>
+
+        <div class="mb-3">
+        <label for="validationTextarea" class="form-label">Beskrivning</label>
+        <textarea class="form-control is-invalid" id="validationTextarea" name="description" placeholder="Ju mer detaljer desto bättre!" required></textarea>
+        </div>
+
+        <div class="mb-3">
+            <select class="form-select" required aria-label="select example" name="category">
+            <option value="">Kategori</option>
+            {%for row in categories%}:
+            <option value="{{row[0]}}">{{row[1]}}</option>
+            {%endfor%}
+            </select>
+        </div>
+    </div>
+    <div class="form-region">
+        <h2 class="art-headers">Plats</h2>
+        <div class="mb-3">
+            <select class="form-select" required aria-label="select example" name="city">
+            <option value="">Var finns varan?</option>
+            {%for row in citys%}:
+            <option value="{{row[0]}}">{{row[1]}}</option>
+            {%endfor%}
+            </select>
+        </div>
+        <div class="col-md-3 position-relative">
+            <label for="validationTooltip05" class="form-label">Postnummer</label>
+            <input type="number" class="form-control" id="validationTooltip05" name="zip_code" min="0" maxlength="5" required>
+        </div>
+    </div>
+    
+    
+    <div class="form-region">
+        <h2 class="art-headers">Bild</h2>
+        <div class="mb-3">
+        <input type="file" class="form-control" aria-label="file example" name=file required>
+        </div>
+    </div>
+
+    <div class="form-region">
+        <h2 class="art-headers">Pris-tier</h2>
+        {%for row in tiers%}
+        <div class="form-check"> 
+            <input type="radio" class="form-check-input" id="validationFormCheck2" name="tier" value="{{row[0]}}" required>
+            <label class="form-check-label" for="validationFormCheck2">{{row[1]}}</label>
+        </div>
+        {%endfor%}
+    </div>
+
+    <div class="mb-3">
+    <button class="btn btn-primary" type="submit">Lägg upp</button>
+    </div>
+</form>
+
+<!--
 <form action="/article_created" method="POST" enctype=multipart/form-data>
     <label for="title">Titel</label>
     <input type="text" id="title" name="title">
@@ -28,3 +91,4 @@
     <input type="submit" value="Skapa">
 </form>
 {% endblock %}
+-->
