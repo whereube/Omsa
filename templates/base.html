@@ -34,7 +34,7 @@
                   Profil
                 </button>
                 <ul class="dropdown-menu">
-                  {% if user_id == None %}
+                  {% if current_user_id == None %}
                   <li><a class="dropdown-item" href="/login">Logga in</a></li>
                   <li><a class="dropdown-item" href="/create_profil">Bli medlem</a></li>
                   {% else %}
