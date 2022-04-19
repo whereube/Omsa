@@ -149,8 +149,9 @@ def create_user():
 def show_current_user_storage():
     user_id = session.get("USER_ID")
     articles = get_user_articles(user_id)
+    images = get_article_images()
     
-    return render_template("/user_storage.html", articles=articles)
+    return render_template("/user_storage.html", articles=articles, images=images)
 
 '''Visa vald artikel'''
 '''

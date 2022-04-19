@@ -8,7 +8,8 @@
         {% if trade[11] == user_id %}
             <div>
                 <div>
-                    <h4>Din artikel: {{trade[12]}}</h4>
+                    <h4>Din artikel:</h4>
+                    <p> {{trade[12]}}</p>
                     {%for image in images%}
                         {%if trade[10] == image[1]%}
                         <img id="temp_pic" src="/static/article_images/{{image[2]}}">
@@ -17,7 +18,8 @@
                     <p>Stad: {{trade[67]}}</p>
                 </div>
                 <div>
-                    <h4>Föreslaget byte: {{trade[22]}}</h4>
+                    <h4>Föreslaget byte:</h4>
+                    <p>{{trade[22]}}</p>
                     {%for image in images%}
                         {%if trade[20] == image[1]%}
                             <img id="temp_pic" src="/static/article_images/{{image[2]}}">
@@ -26,19 +28,24 @@
                     <p>Stad: {{trade[69]}}</p>
                     <p>Datum föreslaget: {{trade[6]}}</p>
                 </div>
-                {% if trade[8] == None %}
-                    <p>Intresserad?</p>
-                    <form action="/submit_interest" method="POST">
-                        <input type="radio" id="Yes" name="interest" value=1>
-                        <label for="Yes">Jag är intresserad</label><br>
-                        <input type="radio" id="No" name="interest" value="0">
-                        <label for="No">Jag är inte intresserad</label><br>
-                        <input type="hidden" id="transaction_id" name="transaction_id" value={{trade[0]}}>
-                        <input type="submit" value="Skicka">
-                    </form>
-                {% elif trade[8] == False %}
-                    <p>Redo för byte, du kan nu kontakta den andra personen</p>
-                {% endif %}
+                <div>
+                    {% if trade[8] == None %}
+                        <p>Intresserad?</p>
+                        <form action="/submit_interest" method="POST">
+                            <input type="radio" id="Yes" name="interest" value=1>
+                            <label for="Yes">Jag är intresserad</label><br>
+                            <input type="radio" id="No" name="interest" value="0">
+                            <label for="No">Jag är inte intresserad</label><br>
+                            <input type="hidden" id="transaction_id" name="transaction_id" value={{trade[0]}}>
+                            <input type="submit" value="Skicka">
+                        </form>
+                    {% elif trade[8] == False %}
+                        <p>Redo för byte, du kan nu kontakta den andra personen</p>
+                        <p>Namn: {{trade[58]}}</p>
+                        <p>Telefon: {{trade[63]}}</p>
+                        <p>Email: {{trade[57]}}</p>
+                    {% endif %}
+                </div>
             </div>
         {% endif %}
     {% endfor %}
@@ -67,6 +74,9 @@
                 </div>
                 {% if trade[8] == False %}
                     <p>Redo för byte, du kan nu kontakta den andra personen</p>
+                    <p>Namn: {{trade[46]}}</p>
+                    <p>Telefon: {{trade[51]}}</p>
+                    <p>Email: {{trade[45]}}</p>
                 {% elif trade[8] == None %} 
                     <p>Status: Väntar på svar</p>
                 {% endif %}

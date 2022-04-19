@@ -1,12 +1,17 @@
 {% extends "base.html" %} {% block title %}Förråd{% endblock %} {% block content
     %}
 {%for row in articles%}
-<div class="card" style="width: 48rem;">
-    <img src="..." class="card-img-top" alt="Artikelbild">
-    <div class="card-body">
-        <h5 class="card-title">{{row[2]}}</h5>
-        <a href="" class="btn btn-primary">Se artikel</a>
+    <div class="card" style="width: 48rem;">
+        {%for image in images%}
+            {%if row[0] == image[1]%}
+            <img src="/static/article_images/{{image[2]}}" class="card-img-top" alt="Artikelbild">
+            {%endif%}
+        {%endfor%}
+        <div class="card-body">
+            <h5 class="card-title">{{row[2]}}</h5>
+            <a href="" class="btn btn-primary">Se artikel</a>
+        </div>
     </div>
-</div>
 {%endfor%}
 {% endblock %}
+
