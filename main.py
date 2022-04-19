@@ -173,6 +173,7 @@ def submit_interest():
 
     return redirect("/show_profile_page")
 
+'''Formuläret för att visa intresse för en produkt'''
 @app.route("/choose")
 def show_interest_form():
     ''' 
@@ -182,11 +183,10 @@ def show_interest_form():
     articles = get_user_articles(user_id)
     return render_template("choose_exchange.html", articles = articles)
 
+'''Funktionen för att registrera intresse i databasen'''
 @app.route("/show_interest", methods=['GET', 'POST'])
 def register_interest():
     wife_article_id = request.form.get("wife_article")
     husband_article_id = request.form.get("husband_article")
-    date_proposed = datetime.now()
-    husband_id = session.get("USER_ID")
-    show_interest(wife_article_id, husband_article_id, date_proposed, husband_id)
+    show_interest(wife_article_id, husband_article_id)
     return redirect("/")
