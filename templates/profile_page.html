@@ -7,43 +7,53 @@
     {% for trade in trades: %}
         {% if trade[11] == user_id %}
             <div>
-                <div>
-                    <h4>Din artikel:</h4>
-                    <p> {{trade[12]}}</p>
+                <h4>Din artikel:</h4>
+                <div class="card" style="width: 48rem;">
                     {%for image in images%}
                         {%if trade[10] == image[1]%}
-                        <img id="temp_pic" src="/static/article_images/{{image[2]}}">
+                        <img id="temp_pic" src="/static/article_images/{{image[2]}}" class="card-img-top" alt="Artikelbild">
                         {%endif%}
                     {%endfor%}
-                    <p>Stad: {{trade[67]}}</p>
+                    <div class="card-body">
+                        <h4 class="card-title">{{trade[12]}}</h4>
+                        <p>Stad: {{trade[67]}}</p>
+                    </div>
                 </div>
-                <div>
-                    <h4>Föreslaget byte:</h4>
-                    <p>{{trade[22]}}</p>
+                <h4>Föreslaget byte:</h4>
+                <div class="card" style="width: 48rem;">
                     {%for image in images%}
                         {%if trade[20] == image[1]%}
-                            <img id="temp_pic" src="/static/article_images/{{image[2]}}">
+                            <img id="temp_pic" src="/static/article_images/{{image[2]}}" class="card-img-top" alt="Artikelbild">
                         {%endif%}
                     {%endfor%}
-                    <p>Stad: {{trade[69]}}</p>
-                    <p>Datum föreslaget: {{trade[6]}}</p>
+                    <div class="card-body">
+                        <h4 class="card-title">{{trade[22]}}</h4>
+                        <p>Stad: {{trade[69]}}</p>
+                        <p>Datum föreslaget: {{trade[6]}}</p>
+                    </div>
                 </div>
-                <div>
-                    {% if trade[8] == None %}
-                        <p>Intresserad?</p>
-                        <form action="/submit_interest" method="POST">
-                            <input type="radio" id="Yes" name="interest" value=1>
-                            <label for="Yes">Jag är intresserad</label><br>
-                            <input type="radio" id="No" name="interest" value="0">
-                            <label for="No">Jag är inte intresserad</label><br>
-                            <input type="hidden" id="transaction_id" name="transaction_id" value={{trade[0]}}>
-                            <input type="submit" value="Skicka">
-                        </form>
+                    <div>
+                        {% if trade[8] == None %}
+                            <h4>Intresserad?</h4>
+                            <form action="/submit_interest" method="POST">
+                                <input type="radio" id="Yes" name="interest" value=1>
+                                <label for="Yes">Jag är intresserad</label><br>
+                                <input type="radio" id="No" name="interest" value="0">
+                                <label for="No">Jag är inte intresserad</label><br>
+                                <input type="hidden" id="transaction_id" name="transaction_id" value={{trade[0]}}>
+                                <input type="submit" value="Skicka">
+                            </form>
+                    </div>
                     {% elif trade[8] == False %}
-                        <p>Redo för byte, du kan nu kontakta den andra personen</p>
-                        <p>Namn: {{trade[58]}}</p>
-                        <p>Telefon: {{trade[63]}}</p>
-                        <p>Email: {{trade[57]}}</p>
+                        <h4>Kontakt:</h4>
+                        <div class="card" style="width: 48rem;">
+                            <div class="card-body">
+                                <p>Redo för byte, du kan nu kontakta den andra personen</p>
+                                <p>Namn: {{trade[58]}}</p>
+                                <p>Telefon: {{trade[63]}}</p>
+                                <p>Email: {{trade[57]}}</p>
+                            </div>
+                        </div>
                     {% endif %}
                 </div>
             </div>
@@ -53,32 +63,47 @@
     {% for trade in trades: %}
         {% if trade[21] == user_id %}
             <div>
-                <div>
-                    <h4>Din artikel: {{trade[22]}}</h4>
+                <h4>Din artikel:</h4>
+                <div class="card" style="width: 48rem;">
                     {%for image in images%}
                         {%if trade[20] == image[1]%}
-                            <img id="temp_pic" src="/static/article_images/{{image[2]}}">
+                            <img id="temp_pic" src="/static/article_images/{{image[2]}}" class="card-img-top" alt="Artikelbild">
                         {%endif%}
                     {%endfor%}
-                    <p>Stad: {{trade[69]}}</p>
-                    <p>Datum föreslaget: {{trade[6]}}</p>
+                    <div class="card-body">
+                        <h4 class="card-title">{{trade[22]}}</h4>
+                        <p>Stad: {{trade[69]}}</p>
+                        <p>Datum föreslaget: {{trade[6]}}</p>
+                    </div>
                 </div>
-                <div>
-                    <h4>Föreslaget byte: {{trade[12]}}</h4>
+                <h4>Föreslaget byte: </h4>
+                <div class="card" style="width: 48rem;">
                     {%for image in images%}
                         {%if trade[10] == image[1]%}
-                        <img id="temp_pic" src="/static/article_images/{{image[2]}}">
+                        <img id="temp_pic" src="/static/article_images/{{image[2]}}" class="card-img-top" alt="Artikelbild">
                         {%endif%}
                     {%endfor%}
-                    <p>Stad: {{trade[67]}}</p>
+                    <div class="card-body">
+                        <h4 class="card-title">{{trade[12]}}</h4>
+                        <p>Stad: {{trade[67]}}</p>
+                    </div>
                 </div>
                 {% if trade[8] == False %}
-                    <p>Redo för byte, du kan nu kontakta den andra personen</p>
-                    <p>Namn: {{trade[46]}}</p>
-                    <p>Telefon: {{trade[51]}}</p>
-                    <p>Email: {{trade[45]}}</p>
-                {% elif trade[8] == None %} 
-                    <p>Status: Väntar på svar</p>
+                    <h4>Kontakt:</h4>
+                    <div class="card" style="width: 48rem;">
+                        <div class="card-body">
+                            <p>Redo för byte, du kan nu kontakta den andra personen</p>
+                            <p>Namn: {{trade[46]}}</p>
+                            <p>Telefon: {{trade[51]}}</p>
+                            <p>Email: {{trade[45]}}</p>
+                        </div>
+                    </div>
+                {% elif trade[8] == None %}
+                    <div class="card" style="width: 48rem;">
+                        <div class="card-body">
+                            <p>Status: Väntar på svar</p>
+                        </div>
+                    </div>
                 {% endif %}
             </div>
         {% endif %}
