@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template, request, flash, session
+from flask import Flask, redirect, render_template, request, flash, session, g
 from article import *
 from user import *
 from ima import *
@@ -73,10 +73,13 @@ def view_articles():
 
 @app.route("/")
 def start():
-    user_id = session.get('USER_NAME')
-    return render_template("index.html", user_id=user_id)
+    return render_template("index.html")
 
-    
+@app.context_processor
+def context_processor():
+    current_user_id = session.get('USER_ID')
+    return dict(current_user_id=current_user_id)
+
 '''Login function'''
 @app.route("/login", methods=["GET", "POST"])
 def login_template():
@@ -101,11 +104,8 @@ def login_template():
 '''Logout function'''
 @app.route("/logout_user")
 def logout():
-    session.pop("USER_ID")
-    session.pop("USER_NAME")
+    session.clear()
     return render_template("logged_out.html")
-
-
 
 @app.route("/show_profile_page")
 def show_user_profile():
@@ -116,14 +116,11 @@ def show_user_profile():
 
     return render_template("profile_page.html", user_name=user_name, trades=trades, user_id=user_id, images=images)
 
-
 '''Create user function'''
 @app.route("/create_profil", methods=["GET", "POST"])
 def create_profil():
     city = get_city()
     return render_template("create_profil.html", city = city)
-
-
 
 @app.route("/create_user", methods=["GET", "POST"])
 def create_user():
@@ -159,7 +156,6 @@ def show_selected_article():
     records = get_article_by_id(article_id)
     return render_template("/show_article", article=article)
 '''
-
 
 '''Anmäl intresse för en produkt'''
 @app.route("/submit_interest", methods=["GET", "POST"])
