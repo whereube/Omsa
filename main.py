@@ -18,6 +18,23 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 #if __name__ == '__main__':
     #app.run(debug=True)
 
+@app.route("/")
+def start():
+    return render_template("index.html")
+
+@app.context_processor
+def context_processor():
+    current_user_id = session.get('USER_ID')
+    return dict(current_user_id=current_user_id)
+
+'''Error pages'''
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
+@app.errorhandler(500)
+def page_not_found(e):
+    return render_template('500.html'), 500
 
 @app.route("/create")
 def create_article_form():
@@ -71,19 +88,10 @@ def view_articles():
     images = get_article_images()
     return render_template("all_articles.html", articles = articles, images = images)
 
-@app.route("/")
-def start():
-    return render_template("index.html")
-
-@app.context_processor
-def context_processor():
-    current_user_id = session.get('USER_ID')
-    return dict(current_user_id=current_user_id)
 
 '''Login function'''
 @app.route("/login", methods=["GET", "POST"])
 def login_template():
-
     if request.method == 'POST':
         user_email = request.form.get("user_email")
         user_password = request.form.get("user_password")

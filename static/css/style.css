@@ -61,3 +61,25 @@ max-width: 200px;
 .art-headers{
     font-size: 20px;
 }
+
+.error-field{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    background-color: rgba(255, 50, 50, 0.589);
+    height: 200px;
+    width: 500px;
+    border-radius: 5px;
+    border: 1px solid var(--dark);
+}
+
+.error-field > p{
+    font-size: 20px;
+    margin: auto;
+    color: var(--light);
+}
+
+.error-field > h1{
+    margin: auto;
+    color: var(--light);
+}
