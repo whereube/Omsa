@@ -98,7 +98,7 @@ def create_user():
     city = request.form.get("city")
     user_phone_number = request.form.get("user_phone_number")
     
-    if user_zip_code.isdigit() == True:
+    if user_zip_code.isdigit() and user_phone_number.isdigit() == True:
         create_user_in_db(user_name, user_password, user_email, user_f_name, user_l_name, user_adress, user_zip_code, city, user_phone_number)
         return redirect("/")
     else:
