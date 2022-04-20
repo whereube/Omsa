@@ -1,11 +1,11 @@
-document.getElementById("us").value = getSavedValue("us");    // set the value to this input
-document.getElementById("ps").value = getSavedValue("ps"); 
-document.getElementById("el").value = getSavedValue("el");
-document.getElementById("fn").value = getSavedValue("fn");
-document.getElementById("ln").value = getSavedValue("ln");
-document.getElementById("as").value = getSavedValue("as");
-document.getElementById("zp").value = getSavedValue("zp");
-document.getElementById("pn").value = getSavedValue("pn"); // set the value to this input
+document.getElementById("validationTooltipUsername").value = getSavedValue("validationTooltipUsername");    // set the value to this input
+document.getElementById("exampleInputPassword1").value = getSavedValue("exampleInputPassword1"); 
+document.getElementById("exampleInputEmail1").value = getSavedValue("exampleInputEmail1");
+document.getElementById("validationTooltip01").value = getSavedValue("validationTooltip01");
+document.getElementById("validationTooltip02").value = getSavedValue("validationTooltip02");
+document.getElementById("validationTooltip03").value = getSavedValue("validationTooltip03");
+document.getElementById("validationTooltip04").value = getSavedValue("validationTooltip04");
+document.getElementById("validationTooltip05").value = getSavedValue("validationTooltip05"); // set the value to this input
         /* Here you can add more inputs to set value. if it's saved */
 
         //Save the value function - save it to localStorage as (ID, VALUE)

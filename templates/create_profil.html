@@ -1,47 +1,48 @@
 {% extends "base.html" %} {% block title %}Skapa artikel{% endblock %} {% block content
   %}
-  <form action="/create_user", method="POST" id="box" novalidate>
-    <div class="mb-3">
-      <label for="exampleInputUsername1" class="form-label">Username</label>
-      <input type="namn" class="form-control" id="us" name="user_name" aria-describedby="emailHelp" onchange='saveValue(this);'>
-    </div>
-    <div class="mb-3">
-      <label for="exampleInputPassword1" class="form-label">Password</label>
-      <input type="password" class="form-control" id="ps" name="user_password" onchange='saveValue(this);'>
-    </div>
-    <div class="mb-3">
-      <label for="exampleInputEmail1" class="form-label">Email</label>
-      <input type="email" class="form-control" id="el" name="user_email" aria-describedby="emailHelp" onchange='saveValue(this);'>
-    </div>
-    <div class="mb-3">
-      <label for="exampleInputFirstname1" class="form-label">Firstnamn</label>
-      <input type="f_name" class="form-control" id="fn" name="user_f_name" aria-describedby="emailHelp" onchange='saveValue(this);'>
-    </div>
-    <div class="mb-3">
-      <label for="exampleInputLastname1" class="form-label">Lastname</label>
-      <input type="l_name" class="form-control" id="ln" name="user_l_name" onchange='saveValue(this);'>
-    </div>
-    <div class="mb-3">
-      <label for="exampleInputAdress1" class="form-label">Address</label>
-      <input type="adress" class="form-control" id="as" name="user_adress" aria-describedby="emailHelp" onchange='saveValue(this);'>
-    </div>
-    <div class="mb-3">
-      <label for="exampleInputZip_code1" class="form-label">Zip_code</label>
-      <input type="zip_code" class="form-control" id="zp" name="user_zip_code"onchange='saveValue(this);'>
-    </div>
-    <div class="mb-3">
-      <select id="city" name="city">
-        {%for row in city%}:
-        <option value={{row[0]}}>{{row[1]}}</option>
-        {%endfor%}
-      </select>
-    </div>
-    <div class="mb-3" >
-      <label for="user_phone_number">Phone number</label>
-      <input type="user_phone_number" class="user_phone_number" id="pn" name="user_phone_number" onchange='saveValue(this);'>
-    </div>
-    <input type="submit"></input>
-      
+  <form action="/create_user" class="was-validated" method="POST">
+    <div class="form-row">       
+      <div class="col-md-4 mb-3">
+        <label for="validationTooltipUsername" class="form-label">Username</label>
+        <input type="text" class="form-control" id="validationTooltipUsername" name="user_name" onchange='saveValue(this);' required>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1" name="user_password" onchange='saveValue(this);' required>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" name="user_email" aria-describedby="emailHelp" onchange='saveValue(this);' required>
+      </div>
+      <div class="mb-3">
+        <label for="validationTooltip01" class="form-label">Firstnamn</label>
+        <input type="f_name" class="form-control" id="validationTooltip01" name="user_f_name" aria-describedby="emailHelp" onchange='saveValue(this);' required>
+      </div>
+      <div class="mb-3">
+        <label for="validationTooltip02" class="form-label">Lastname</label>
+        <input type="l_name" class="form-control" id="validationTooltip02" name="user_l_name" onchange='saveValue(this);'required>
+      </div>
+      <div class="mb-3">
+        <label for="validationTooltip03" class="form-label">Address</label>
+        <input type="adress" class="form-control" id="validationTooltip03" name="user_adress" aria-describedby="emailHelp" onchange='saveValue(this);' required >
+      </div>
+      <div class="mb-3">
+        <label for="validationTooltip04" class="form-label">Zip_code</label>
+        <input type="text" class="form-control" id="validationTooltip04" name="user_zip_code"onchange='saveValue(this);' pattern="[0-9]{5}" required>
+      </div>
+      <div class="mb-3">
+        <select id="city" name="city" >
+          {%for row in city%}:
+            <option value={{row[0]}}>{{row[1]}} </option>
+          {%endfor%}
+        </select>
+      </div>
+      <div class="mb-3" >
+        <label for="validationTooltip05" class="form-label">Phone number</label>
+        <input type="user_phone_number" class="form-control" id="validationTooltip05" name="user_phone_number" onchange='saveValue(this);'pattern="[0-9]{10}"  required>
+      </div> 
+      <input type="submit"></input>
+    </div> 
       
   </form>
   <script src="/static/js/javascript.js"></script>
