@@ -1,3 +1,4 @@
+from re import template
 from flask import Flask, redirect, render_template, request, flash, session
 from article import *
 from user import *
@@ -173,20 +174,20 @@ def submit_interest():
 
     return redirect("/show_profile_page")
 
-'''Formuläret för att visa intresse för en produkt'''
-@app.route("/choose")
-def show_interest_form():
-    ''' 
-    Hämtar in formuläret och skickar vidare detta för att lägga till ett intresse i databasen
-    '''
+'''Visar intresse för en produkt och hämtar in wife_article_id beroende på vilken artikel man trycker på, returnar sedan /choose_exchange.html tillsammans med artikel id samt den inloggaes artiklar'''
+@app.route("/wife_article_id", methods=['GET', 'POST'])
+def get_wife_article_id():
+
     user_id = session["USER_ID"]
-    articles = get_user_articles(user_id)
-    return render_template("choose_exchange.html", articles = articles)
+    articles = get_user_articles(user_id)  
+
+    wife_article_id = request.form.get("wife_article_id")
+    return render_template("/choose_exchange.html", articles = articles, wife_article_id = wife_article_id)
 
 '''Funktionen för att registrera intresse i databasen'''
 @app.route("/show_interest", methods=['GET', 'POST'])
 def register_interest():
-    wife_article_id = request.form.get("wife_article")
-    husband_article_id = request.form.get("husband_article")
+    wife_article_id = request.form.get("wife_article")    
+    husband_article_id = request.form.get("husband_article_id")
     show_interest(wife_article_id, husband_article_id)
     return redirect("/")
