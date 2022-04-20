@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 document.getElementById("us").value = getSavedValue("us");    // set the value to this input
 document.getElementById("ps").value = getSavedValue("ps"); 
 document.getElementById("el").value = getSavedValue("el");
@@ -7,16 +6,6 @@ document.getElementById("ln").value = getSavedValue("ln");
 document.getElementById("as").value = getSavedValue("as");
 document.getElementById("zp").value = getSavedValue("zp");
 document.getElementById("pn").value = getSavedValue("pn"); // set the value to this input
-=======
-        document.getElementById("us").value = getSavedValue("us");    // set the value to this input
-        document.getElementById("ps").value = getSavedValue("ps"); 
-        document.getElementById("el").value = getSavedValue("el");
-        document.getElementById("fn").value = getSavedValue("fn");
-        document.getElementById("ln").value = getSavedValue("ln");
-        document.getElementById("as").value = getSavedValue("as");
-        document.getElementById("zp").value = getSavedValue("zp");
-        document.getElementById("pn").value = getSavedValue("pn"); // set the value to this input
->>>>>>> Stashed changes
         /* Here you can add more inputs to set value. if it's saved */
 
         //Save the value function - save it to localStorage as (ID, VALUE)
@@ -27,19 +16,11 @@ function saveValue(e){
 }
 
         //get the saved value function - return the value of "v" from localStorage. 
-<<<<<<< Updated upstream
 function getSavedValue  (v){
     if (!localStorage.getItem(v)) {
         return "";// You can change this to your defualt value. 
     }
     return localStorage.getItem(v);
     }
-=======
-        function getSavedValue  (v){
-            if (!localStorage.getItem(v)) {
-                return "";// You can change this to your defualt value. 
-            }
-            return localStorage.getItem(v);
-        }
-        
->>>>>>> Stashed changes
+
+
