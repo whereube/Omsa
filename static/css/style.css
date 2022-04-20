@@ -5,6 +5,15 @@
     --background: #ed553b;
 }
 
+#nav-logo{
+    text-decoration: none;
+    font-family: 'Devonshire', cursive;
+    color: var(--primary);
+    text-shadow: 2px 2px 1px var(--dark);
+    font-size: 30px;
+    margin-left: 20px;
+}
+
 #box{
     width: 500px;
     margin: auto;
@@ -36,7 +45,7 @@ max-width: 200px;
 }
 
 #profile-btn{
-    background-color: var(--background);
+    background-color: var(--primary);
 }
 
 #danger-alert{

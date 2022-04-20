@@ -88,6 +88,9 @@ def view_articles():
     images = get_article_images()
     return render_template("all_articles.html", articles = articles, images = images)
 
+@app.route("/about")
+def about_page():
+    return render_template("/about.html")
 
 '''Login function'''
 @app.route("/login", methods=["GET", "POST"])
