@@ -2,7 +2,7 @@
   %}
 
 <form action="/login", method="POST" id="box">
-  <div class="mb-3">
+  <div class="mb-3" >
     {% with messages = get_flashed_messages() %}
     {% for message in messages %}
     <div class="alert alert-danger d-flex align-items-center" role="alert">
