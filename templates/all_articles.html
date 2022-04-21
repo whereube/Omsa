@@ -14,6 +14,10 @@
         <img src="/static/article_images/{{image[2]}}">
         {%endif%}
     {%endfor%}
+    <form action="/wife_article_id" method="POST">
+        <input type="hidden" id="wife_article_id" name="wife_article_id" value={{row[0]}}>
+        <button  class="btn btn-primary" type="submit">Visa intresse</button>
+    </form>
     </br>
 {%endfor%}
 {% endblock %}

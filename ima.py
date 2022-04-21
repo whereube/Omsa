@@ -2,6 +2,7 @@ import psycopg2
 import psycopg2.extras
 from datetime import date, datetime
 import uuid
+from flask import session
 
 def open_db_omsa():
     try:
@@ -51,6 +52,26 @@ def trade_proposals (user_id):
     cursor.close()
     close_db_omsa(connection)
     return records
+
+
+def show_interest(wife_article_id, husband_article_id):
+    '''
+    lägger till wife_article_id, husband_article_id, date_proposed och husband_id i database vid visat intresse
+    '''
+    psycopg2.extras.register_uuid()
+    connection = open_db_omsa()
+    cursor = connection.cursor()
+    date_proposed = datetime.now()
+    husband_id = session.get("USER_ID")
+
+    cursor.execute("""
+    insert into transaction (id, wife_article_id, husband_article_id, date_proposed, husband_id)
+    values(%s, %s, %s, %s, %s)
+    """,(uuid.uuid4(), wife_article_id, husband_article_id, date_proposed, husband_id))
+
+    cursor.close()
+    connection.commit()
+    close_db_omsa(connection)
 
 
 def save_interest_to_db(transaction_id):
