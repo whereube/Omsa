@@ -2,7 +2,7 @@
     --primary: #F6D55C;
     --light: #FEFAEC;
     --dark: #625772;
-    --background: #ed553b;
+    --background: #379954;
 }
 
 #nav-logo{
@@ -32,7 +32,7 @@ body{
     padding: 20px;
     display: flex;
     flex-direction: column;
-    background-color: var(--light);
+    background-color: white;
 }
 
 .card{
@@ -91,4 +91,10 @@ max-width: 200px;
 .error-field > h1{
     margin: auto;
     color: var(--light);
+}
+
+
+#submit-btn{
+    background-color: var(--background);
+    border: 1px solid var(--light);
 }
