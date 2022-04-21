@@ -53,6 +53,18 @@
                                 <p>Telefon: {{trade[63]}}</p>
                                 <p>Email: {{trade[57]}}</p>
                             </div>
+                            <div>
+                                <h4>Byte genomfört?</h4>
+                                <form action="/confirm_trade" method="POST">
+                                    <input type="radio" id="Yes" name="comfirm_trade" value=1>
+                                    <label for="Yes">Bytet har genomförts</label><br>
+                                    <input type="radio" id="No" name="confirm_trade" value="0">
+                                    <label for="No">Bytet kommer inte genomföras</label><br>
+                                    <input type="hidden" id="transaction_id" name="transaction_id" value={{trade[0]}}>
+                                    <input type="hidden" id="husband_or_wife" name="husband_or_wife" value="0">
+                                    <input type="submit" value="Skicka">
+                                </form>
+                            </div>
                         </div>
                     {% endif %}
                 </div>

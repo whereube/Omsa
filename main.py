@@ -199,3 +199,20 @@ def register_interest():
     husband_article_id = request.form.get("husband_article_id")
     show_interest(wife_article_id, husband_article_id)
     return redirect("/")
+
+'''Anmäl att ett byte har genomförts ellerinte'''
+@app.route("/confirm_trade", methods=["GET", "POST"])
+def confirm_trade():
+    husband_or_wife = request.form.get("husband_or_wife")
+    transaction_id = request.form.get("transaction_id")
+    interest = int(request.form.get("interest"))
+    if husband_or_wife == 0:
+        wife_confirmed(transaction_id)
+    elif husband_or_wife == 1:
+        husband_confirmed = husband_or_wife
+    if interest == 1:
+        save_interest_to_db(transaction_id)
+    elif interest == 0:
+        remove_interest_from_db(transaction_id)
+
+    return redirect("/show_profile_page")
