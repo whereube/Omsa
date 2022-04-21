@@ -104,8 +104,6 @@ def create_file_path_in_db(article_id, filename):
     connection.commit()
     close_db_omsa(connection)
 
-
-
 def get_tier():
     '''
     Hämtar alla tiers
@@ -135,7 +133,6 @@ def get_city():
     cursor.close()
     close_db_omsa(connection)
     return records
-
 
 def get_main_category():
     '''
@@ -188,8 +185,6 @@ def get_article_images():
     close_db_omsa(connection)
     return records
 
-
-
 def get_user_articles(user_id):
     '''
     Hämtar alla artiklar som har användarens user_id
@@ -212,7 +207,6 @@ def get_user_articles(user_id):
     cursor.close()
     close_db_omsa(connection)
     return records
-
 
 def get_article_by_id(article_id):
     '''

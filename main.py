@@ -8,16 +8,10 @@ from datetime import datetime
 
 UPLOAD_FOLDER = 'static/article_images'
 
-
 app = Flask(__name__, static_url_path='/static')
-
 app.run(debug=True)
 app.config['SECRET_KEY'] = 'thisissecret'
-
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
-#if __name__ == '__main__':
-    #app.run(debug=True)
 
 @app.route("/")
 def start():
@@ -26,7 +20,7 @@ def start():
 @app.context_processor
 def context_processor():
     current_user_id = session.get('USER_ID')
-    return dict(current_user_id=current_user_id)
+    return dict(current_user_id = current_user_id)
 
 '''Error pages'''
 @app.errorhandler(404)
@@ -126,13 +120,13 @@ def show_user_profile():
     trades = trade_proposals(user_id)
     images = get_article_images()
 
-    return render_template("profile_page.html", user_name=user_name, trades=trades, user_id=user_id, images=images)
+    return render_template("profile_page.html", user_name = user_name, trades = trades, user_id = user_id, images = images)
 
 '''Create user function'''
-@app.route("/create_profil", methods=["GET", "POST"])
-def create_profil():
+@app.route("/create_profile", methods=["GET", "POST"])
+def create_profile_form():
     city = get_city()
-    return render_template("create_profil.html", city = city)
+    return render_template("create_profile.html", city = city)
 
 @app.route("/create_user", methods=["GET", "POST"])
 def create_user():
@@ -152,7 +146,6 @@ def create_user():
     else:
         return redirect("/create_profil")
 
-
 '''Visa eget förråd'''
 @app.route("/show_own_storage")
 def show_current_user_storage():
@@ -160,15 +153,7 @@ def show_current_user_storage():
     articles = get_user_articles(user_id)
     images = get_article_images()
     
-    return render_template("/user_storage.html", articles=articles, images=images)
-
-'''Visa vald artikel'''
-'''
-@app.route("/show_article/<article_id>")
-def show_selected_article():
-    records = get_article_by_id(article_id)
-    return render_template("/show_article", article=article)
-'''
+    return render_template("/user_storage.html", articles = articles, images = images)
 
 '''Anmäl intresse för en produkt'''
 @app.route("/submit_interest", methods=["GET", "POST"])

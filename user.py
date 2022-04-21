@@ -21,8 +21,7 @@ def open_db_omsa():
 def close_db_omsa(connection):
     connection.close()
 
-def db_to_login(user_email, user_password):
-    
+def db_to_login(user_email, user_password): 
     connection = open_db_omsa()
 
     cursor = connection.cursor()

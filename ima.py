@@ -20,8 +20,7 @@ def open_db_omsa():
 def close_db_omsa(connection):
     connection.close()
 
-
-def trade_proposals (user_id):
+def trade_proposals(user_id):
     '''
     Hämtar alla bytesförslag där användaren där antingen husband eller wife article_id är kopplat till användaren
     '''
@@ -52,7 +51,6 @@ def trade_proposals (user_id):
     cursor.close()
     close_db_omsa(connection)
     return records
-
 
 def show_interest(wife_article_id, husband_article_id):
     '''
