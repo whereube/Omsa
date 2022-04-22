@@ -184,3 +184,10 @@ def register_interest():
     husband_article_id = request.form.get("husband_article_id")
     show_interest(wife_article_id, husband_article_id)
     return redirect("/")
+
+
+@app.route("/article_search", methods=['GET', 'POST'])
+def article_search():
+    search_term = request.form.get("free_text")
+    articles = get_article_by_title(search_term)
+    return render_template("/search_results.html", articles = articles)

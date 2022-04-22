@@ -150,6 +150,22 @@ def get_main_category():
     close_db_omsa(connection)
     return records
 
+def get_sub_category_1():
+    '''
+    Hämtar alla kategorier
+    '''
+    connection = open_db_omsa()
+
+    cursor = connection.cursor()
+    cursor.execute("""
+    select * from category
+    where level = '2'
+    """)
+    records = cursor.fetchall()
+    cursor.close()
+    close_db_omsa(connection)
+    return records
+
 def get_articles():
     '''
     Hämtar alla artiklar
@@ -226,6 +242,29 @@ def get_article_by_id(article_id):
     left outer join category on article_category.category_id = category.id
     where article.id = %s
     """, (article_id,))
+    records = cursor.fetchall()
+    cursor.close()
+    close_db_omsa(connection)
+    return records
+
+
+def get_article_by_title(search_term):
+    '''
+    Hämtar alla artiklar vars titel innehåller en term
+    args:
+        search_term: Artiklar som visas innehåller termen
+    '''
+    connection = open_db_omsa()
+    cursor = connection.cursor()
+    cursor.execute("""
+    select * from article
+    left outer join profile on article.user_id = profile.id
+    left outer join city on article.city_id = city.id
+    left outer join tier on article.tier_id = tier.id
+    left outer join article_category on article.id = article_category.article_id
+    left outer join category on article_category.category_id = category.id
+    where (title like %s)
+    """, (search_term,))
     records = cursor.fetchall()
     cursor.close()
     close_db_omsa(connection)

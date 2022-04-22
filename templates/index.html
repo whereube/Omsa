@@ -1,8 +1,22 @@
-{% extends "base.html" %} {% block title %}Start{% endblock %} {% block content
-    %}
+{% extends "base.html" %} {% block title %}Start{% endblock %} {% block content%}
 <h1>Startsidan</h1>
 
-
+<form action="/article_search" method="POST">
+  <div class="mb-3">
+    <label for="free_text" class="form-label">Skriv sökord</label>
+    <input type="text" class="form-control" id="free_text" name="free_text" aria-describedby="free_text_search">
+    <div id="free_text_search" class="form-text">Sök på vad du vill</div>
+  </div>
+  <div class="mb-3">
+    <label for="main_category" class="form-label">Huvudkategori</label>
+    <select id="main_category" class="form-control" id="main_category">
+        {%for category in main_categories%}
+        <option value={{category[0]}}>{{category[1]}}</option>
+        {%endfor%}
+    </select>
+  </div>
+  <input type="submit" class="btn btn-primary" value="Sök">
+</form>
 
 
 <script>
