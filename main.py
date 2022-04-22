@@ -200,19 +200,32 @@ def register_interest():
     show_interest(wife_article_id, husband_article_id)
     return redirect("/")
 
-'''Anmäl att ett byte har genomförts ellerinte'''
-@app.route("/confirm_trade", methods=["GET", "POST"])
-def confirm_trade():
-    husband_or_wife = request.form.get("husband_or_wife")
+'''Anmäl att ett byte har genomförts eller inte och lägger in det i wife_confirmed'''
+@app.route("/wife_confirm_trade", methods=["GET", "POST"])
+def wife_confirm_trade():
     transaction_id = request.form.get("transaction_id")
-    interest = int(request.form.get("interest"))
-    if husband_or_wife == 0:
-        wife_confirmed(transaction_id)
-    elif husband_or_wife == 1:
-        husband_confirmed = husband_or_wife
-    if interest == 1:
-        save_interest_to_db(transaction_id)
-    elif interest == 0:
+    print(request.form.get("wife_confirm"))
+    confirmed = int(request.form.get("wife_confirm"))
+    if confirmed == 1:
+        save_wife_confirmed_to_db(transaction_id)
+    '''Funktion för att hantera ifall en användare vill neka att ett byte genomförts
+    elif confirmed == 0:
         remove_interest_from_db(transaction_id)
+    '''
+
+    return redirect("/show_profile_page")
+
+'''Anmäl att ett byte har genomförts eller inte och lägger in det i husband_confirmed'''
+@app.route("/husband_confirm_trade", methods=["GET", "POST"])
+def husband_confirm_trade():
+    transaction_id = request.form.get("transaction_id")
+    print(request.form.get("husband_confirm"))
+    confirmed = int(request.form.get("husband_confirm"))
+    if confirmed == 1:
+        husband_wife_confirmed_to_db(transaction_id)
+    '''Funktion för att hantera ifall en användare vill neka att ett byte genomförts
+    elif confirmed == 0:
+        remove_interest_from_db(transaction_id)
+    '''
 
     return redirect("/show_profile_page")

@@ -44,7 +44,7 @@ def trade_proposals (user_id):
     left outer join profile as husband_handshake on transaction.husband_id = husband_handshake.id
     left outer join city as wife_city on wife_article.city_id = wife_city.id
     left outer join city as husband_city on husband_article.city_id = husband_city.id
-    where (transaction.wife_complete is null or transaction.wife_complete = FALSE)
+    where (transaction.wife_complete is null or transaction.husband_complete is null)
     and (transaction.denied is null or transaction.denied = FALSE)
     and (wife.id = %s or husband.id = %s or husband_handshake.id = %s)
     """, (user_id, user_id, user_id,)) 
@@ -104,6 +104,46 @@ def remove_interest_from_db(transaction_id):
 
     cursor.execute("""
     delete from transaction
+    where transaction.id = %s
+    """,(transaction_id,))
+
+    cursor.close()
+    connection.commit()
+    close_db_omsa(connection)
+
+def save_wife_confirmed_to_db(transaction_id):
+    '''
+    Uppdaterar transactions.denied med värdet false
+    args:
+        transaction_id: ID till transactionsposten
+    '''
+
+    connection = open_db_omsa()
+
+    cursor = connection.cursor()
+    cursor.execute("""
+    update transaction
+    set wife_complete = True
+    where transaction.id = %s
+    """,(transaction_id,))
+
+    cursor.close()
+    connection.commit()
+    close_db_omsa(connection)
+
+def husband_wife_confirmed_to_db(transaction_id):
+    '''
+    Uppdaterar transactions.denied med värdet false
+    args:
+        transaction_id: ID till transactionsposten
+    '''
+
+    connection = open_db_omsa()
+
+    cursor = connection.cursor()
+    cursor.execute("""
+    update transaction
+    set husband_complete = True
     where transaction.id = %s
     """,(transaction_id,))
 
