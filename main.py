@@ -1,3 +1,5 @@
+from fileinput import filename
+from turtle import title
 from flask import Flask, redirect, render_template, request, flash, session, g
 from article import *
 from user import *
@@ -21,6 +23,7 @@ def start():
 def context_processor():
     current_user_id = session.get('USER_ID')
     return dict(current_user_id = current_user_id)
+
 
 '''Error pages'''
 @app.errorhandler(404)
@@ -184,3 +187,27 @@ def register_interest():
     husband_article_id = request.form.get("husband_article_id")
     show_interest(wife_article_id, husband_article_id)
     return redirect("/")
+
+@app.route("/edit_article", methods=["POST"])
+def edit_article():
+    article_id = request.form.get("article_id") 
+    tiers = get_tier()
+    citys = get_city()
+    images = get_article_images()
+    categories = get_main_category()
+    article = get_article_by_id(article_id)
+    return render_template("/edit_article.html", article = article, citys = citys, tiers = tiers, categories = categories, images = images)
+
+@app.route("/edit_complete", methods=["POST"])
+def change_artical():
+    title = request.form.get("title")
+    description = request.form.get("description")
+    category = request.form.get("category")
+    city = request.form.get("city")
+    zip_code = request.form.get("zip_code")
+    file = request.form.get("file")
+    tier = request.form.get("tier")
+
+    edit_to_article(title, description, category, city, zip_code, file, tier )
+    return redirect("/")
+

@@ -1,0 +1,63 @@
+{% extends "base.html" %} {% block title %}Skapa artikel{% endblock %} {% block content%}
+    <h2>Redigera artikel</h2>
+    {%for row in article%}
+    <form class="was-validated" method="POST" action="/edit_complete" enctype=multipart/form-data >
+    
+        <div class="form-region">
+            <h2 class="art-headers">Generell information</h2>
+            <div class="col-md-4">
+                <label for="validationServer01" class="form-label">Titel</label>
+                <textarea name="title">{{row[2]}}</textarea>
+            </div>
+
+            <div class="mb-3">
+            <label for="validationTextarea" class="form-label">Beskrivning</label>
+            <textarea class="form-control is-invalid" id="validationTextarea" name="description" placeholder="Ju mer detaljer desto bättre!" required>{{row[3]}}</textarea>
+            </div>
+
+            <div class="mb-3">
+                <select class="form-select" required aria-label="select example" name="category">
+                <option value="">Kategori</option>
+                    <option value="{{row[0]}}">{{row[1]}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-region">
+            <h2 class="art-headers">Plats</h2>
+            <div class="mb-3">
+                <select class="form-select" required aria-label="select example" name="city">
+                    
+                <option value="{{row[0]}}">{{row[4]}}</option>
+                
+                </select>
+            </div>
+            <div class="col-md-3 position-relative">
+                <label for="validationTooltip05" class="form-label">Postnummer</label>
+                <textarea pattern="[0-9]{5}" name="zip_code">{{row[8]}}</textarea>
+            </div>
+        </div>
+        
+        
+        <div class="form-region">
+            <h2 class="art-headers">Bild</h2>
+            <div class="mb-3">
+            <input type="file" class="form-control" aria-label="file example" name="file" required>
+            </div>
+        </div>
+
+        <div class="form-region">
+            <h2 class="art-headers">Pris-tier</h2>
+            {%for row in tiers%}
+            <div class="form-check"> 
+                <input type="radio" class="form-check-input" id="validationFormCheck2" name="tier" value="{{row[0]}}" required>
+                <label class="form-check-label" for="validationFormCheck2">{{row[1]}}</label>
+            </div>
+            {%endfor%}
+        </div>
+
+        <div class="mb-3">
+        <input class="btn btn-primary" type="submit" >
+        </div>
+    </form>
+    {%endfor%}
+{% endblock %}

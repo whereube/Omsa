@@ -10,6 +10,10 @@
         <div class="card-body">
             <h5 class="card-title">{{row[2]}}</h5>
             <a href="" class="btn btn-primary">Se artikel</a>
+            <form action="/edit_article" method="post">
+                <input type="hidden" name="article_id" id="article_id" value={{row[0]}}>
+                <button type="submit">Redigera</button>
+            </form>
         </div>
     </div>
 {%endfor%}

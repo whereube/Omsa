@@ -1,3 +1,6 @@
+from multiprocessing import connection
+from tkinter import INSERT
+from colorama import Cursor
 import psycopg2
 import psycopg2.extras
 from datetime import date, datetime
@@ -230,3 +233,16 @@ def get_article_by_id(article_id):
     cursor.close()
     close_db_omsa(connection)
     return records
+
+def edit_to_article(title, description, zip_code, edit_date, tier, city, picture):
+    connection = open_db_omsa()
+
+    cursor = connection.cursor()
+    cursor.execute("""
+    INSERT into article (title, description, zip_code, edit_date, tier_id, city_id, picture)
+    values(%s,%s,%s,%s,%s,%s,%s)
+    """,(title, description, zip_code, edit_date,  tier, city, picture ))
+    
+    cursor.close()
+    connection.commit()
+    close_db_omsa(connection)
