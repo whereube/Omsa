@@ -1,3 +1,4 @@
+from re import search
 import psycopg2
 import psycopg2.extras
 from datetime import date, datetime
@@ -180,6 +181,7 @@ def get_articles():
     left outer join tier on article.tier_id = tier.id
     left outer join article_category on article.id = article_category.article_id
     left outer join category on article_category.category_id = category.id
+    order by article.create_date desc
     """)
     records = cursor.fetchall()
     cursor.close()
@@ -218,6 +220,7 @@ def get_user_articles(user_id):
     left outer join article_category on article.id = article_category.article_id
     left outer join category on article_category.category_id = category.id
     where article.user_id = %s
+    order by article.create_date desc
     """, (user_id,))
     records = cursor.fetchall()
     cursor.close()
@@ -256,15 +259,70 @@ def get_article_by_title(search_term):
     '''
     connection = open_db_omsa()
     cursor = connection.cursor()
-    cursor.execute("""
+    search_term_like1 = (search_term + '%')
+    search_term_like2 = ('%' + search_term)
+    search_term_like3 = ('%' + search_term + '%')
+    cursor.execute( '''
     select * from article
     left outer join profile on article.user_id = profile.id
     left outer join city on article.city_id = city.id
     left outer join tier on article.tier_id = tier.id
     left outer join article_category on article.id = article_category.article_id
     left outer join category on article_category.category_id = category.id
-    where (title like %s)
-    """, (search_term,))
+    where (LOWER(title) like %s or LOWER(title) like %s or LOWER(title) like %s or LOWER(title) like %s)
+    order by article.create_date desc
+    ''', (search_term.lower(), search_term_like1.lower(), search_term_like2.lower(), search_term_like3.lower(),))
+    records = cursor.fetchall()
+    cursor.close()
+    close_db_omsa(connection)
+    return records
+
+def get_article_by_category(category_id):
+    '''
+    Hämtar alla artiklar vars titel innehåller en term
+    args:
+        search_term: Artiklar som visas innehåller termen
+    '''
+    connection = open_db_omsa()
+    cursor = connection.cursor()
+    cursor.execute( '''
+    select * from article
+    left outer join profile on article.user_id = profile.id
+    left outer join city on article.city_id = city.id
+    left outer join tier on article.tier_id = tier.id
+    left outer join article_category on article.id = article_category.article_id
+    left outer join category on article_category.category_id = category.id
+    where category.id = %s
+    order by article.create_date desc
+    ''', (category_id,))
+    records = cursor.fetchall()
+    cursor.close()
+    close_db_omsa(connection)
+    return records
+
+
+
+def get_article_by_title_and_cateogry(search_term, category_id):
+    '''
+    Hämtar alla artiklar vars titel innehåller en term
+    args:
+        search_term: Artiklar som visas innehåller termen
+    '''
+    connection = open_db_omsa()
+    cursor = connection.cursor()
+    search_term_like1 = (search_term + '%')
+    search_term_like2 = ('%' + search_term)
+    search_term_like3 = ('%' + search_term + '%')
+    cursor.execute( '''
+    select * from article
+    left outer join profile on article.user_id = profile.id
+    left outer join city on article.city_id = city.id
+    left outer join tier on article.tier_id = tier.id
+    left outer join article_category on article.id = article_category.article_id
+    left outer join category on article_category.category_id = category.id
+    where (LOWER(title) like %s or LOWER(title) like %s or LOWER(title) like %s or LOWER(title) like %s) and category.id = %s
+    order by article.create_date desc
+    ''', (search_term.lower(), search_term_like1.lower(), search_term_like2.lower(), search_term_like3.lower(), category_id,))
     records = cursor.fetchall()
     cursor.close()
     close_db_omsa(connection)

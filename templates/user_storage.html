@@ -4,7 +4,7 @@
     <div class="card" style="width: 48rem;">
         {%for image in images%}
             {%if row[0] == image[1]%}
-            <img src="/static/article_images/{{image[2]}}" class="card-img-top" alt="Artikelbild">
+            <img src="/static/article_images/{{image[2]}}" class="card-img-top" alt="Artikelbild" id="temp_pic">
             {%endif%}
         {%endfor%}
         <div class="card-body">

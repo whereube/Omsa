@@ -1,3 +1,4 @@
+from json.tool import main
 from flask import Flask, redirect, render_template, request, flash, session, g
 from article import *
 from user import *
@@ -15,7 +16,10 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route("/")
 def start():
-    return render_template("index.html")
+    main_categories = get_main_category()
+    images = get_article_images()
+    articles = get_articles()
+    return render_template("index.html", main_categories = main_categories, articles = articles, images = images)
 
 @app.context_processor
 def context_processor():
@@ -188,6 +192,18 @@ def register_interest():
 
 @app.route("/article_search", methods=['GET', 'POST'])
 def article_search():
+
+    main_categories = get_main_category()
+    images = get_article_images()
     search_term = request.form.get("free_text")
-    articles = get_article_by_title(search_term)
-    return render_template("/search_results.html", articles = articles)
+    category = request.form.get("main_category")
+    if search_term == '' and category != None and category != '':
+        articles = get_article_by_category(category)
+    elif search_term != '' and (category == None or category == ''):
+        articles = get_article_by_title(search_term)
+    elif search_term != '' and category != None and category != '':
+        articles = get_article_by_title_and_cateogry(search_term, category)
+    elif search_term == '' and (category == None or category == ''):
+        articles = get_articles()
+
+    return render_template("/search_results.html", articles = articles, images = images, main_categories = main_categories)

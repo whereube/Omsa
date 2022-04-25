@@ -2,40 +2,44 @@
     %}
 <h1>Sökresultat</h1>
 
-<form>
-  <div class="mb-3" action="/article_search">
+<form action="/article_search" method="POST">
+  <div class="mb-3">
     <label for="free_text" class="form-label">Skriv sökord</label>
     <input type="text" class="form-control" id="free_text" name="free_text" aria-describedby="free_text_search">
     <div id="free_text_search" class="form-text">Sök på vad du vill</div>
   </div>
   <div class="mb-3">
     <label for="main_category" class="form-label">Huvudkategori</label>
-    <select id="main_category" class="form-control" id="main_category">
+    <select id="main_category" name="main_category" class="form-control" id="main_category">
+        <option value=None selected="true" disabled>Välj kategori</option>
+        <option value="">Ingen</option>
         {%for category in main_categories%}
         <option value={{category[0]}}>{{category[1]}}</option>
         {%endfor%}
     </select>
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <input type="submit" class="btn btn-primary" value="Sök">
 </form>
 
 {%for row in articles%}
-    <h3>Rubrik: {{row[2]}}</h3>
-    <h3>Bild</h3>
-    <h3>Stad: {{row[23]}}</h3>
-    <h3>Prisnivå: {{row[26]}}</h3>
-    <h3>Skapad: {{row[6]}}</h3>
-    <h3>Kategori: {{row[31]}}</h3>
+  <div class="card" style="width: 48rem;">
     {%for image in images%}
         {%if row[0] == image[1]%}
-        <img src="/static/article_images/{{image[2]}}">
+        <img src="/static/article_images/{{image[2]}}" id="temp_pic" class="card-img-top" alt="Artikelbild">
         {%endif%}
     {%endfor%}
-    <form action="/wife_article_id" method="POST">
-        <input type="hidden" id="wife_article_id" name="wife_article_id" value={{row[0]}}>
-        <button  class="btn btn-primary" type="submit">Visa intresse</button>
-    </form>
-    </br>
+    <div class="card-body">
+      <h4 class="card-title">Rubrik: {{row[2]}}</h4>
+      <p>Stad: {{row[23]}}</p>
+      <p>Prisnivå: {{row[26]}}</p>
+      <p>Skapad: {{row[6]}}</p>
+      <p>Kategori: {{row[31]}}</p>
+      <form action="/wife_article_id" method="POST">
+          <input type="hidden" id="wife_article_id" name="wife_article_id" value={{row[0]}}>
+          <button  class="btn btn-primary" type="submit">Visa intresse</button>
+      </form>
+    </div>
+  </div>
 {%endfor%}
 
 {% endblock %}
