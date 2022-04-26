@@ -196,18 +196,20 @@ def edit_article():
     images = get_article_images()
     categories = get_main_category()
     article = get_article_by_id(article_id)
-    return render_template("/edit_article.html", article = article, citys = citys, tiers = tiers, categories = categories, images = images)
+    return render_template("/edit_article.html", article = article, citys = citys, tiers = tiers, categories = categories, images = images, article_id = article_id)
 
 @app.route("/edit_complete", methods=["POST"])
 def change_artical():
+    article_id = request.form.get("article_id")
     title = request.form.get("title")
     description = request.form.get("description")
-    category = request.form.get("category")
     city = request.form.get("city")
     zip_code = request.form.get("zip_code")
-    file = request.form.get("file")
     tier = request.form.get("tier")
+    date_now = datetime.now()
+    category_id = request.form.get("category")
 
-    edit_to_article(title, description, category, city, zip_code, file, tier )
+    edit_to_article(title, description, zip_code, tier, date_now, city, article_id )
+    edit_article_catergory(category_id, article_id)
     return redirect("/")
 

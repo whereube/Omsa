@@ -2,12 +2,12 @@
     <h2>Redigera artikel</h2>
     {%for row in article%}
     <form class="was-validated" method="POST" action="/edit_complete" enctype=multipart/form-data >
-    
+        <input type="hidden" name="article_id" id="article_id" value={{article_id}}>
         <div class="form-region">
             <h2 class="art-headers">Generell information</h2>
             <div class="col-md-4">
                 <label for="validationServer01" class="form-label">Titel</label>
-                <textarea name="title">{{row[2]}}</textarea>
+                <textarea rows="1" name="title" required>{{row[2]}}</textarea>
             </div>
 
             <div class="mb-3">
@@ -15,43 +15,57 @@
             <textarea class="form-control is-invalid" id="validationTextarea" name="description" placeholder="Ju mer detaljer desto bättre!" required>{{row[3]}}</textarea>
             </div>
 
-            <div class="mb-3">
+           <div class="mb-3">
                 <select class="form-select" required aria-label="select example" name="category">
                 <option value="">Kategori</option>
-                    <option value="{{row[0]}}">{{row[1]}}</option>
+                {%for category in categories%}:
+                    {%if category[0] == row[29]%}
+                        <option value="{{row[0]}}" selected>{{category[1]}}</option>
+                    {%else%}
+                        <option value="{{row[0]}}">{{category[1]}}</option>
+                    {%endif%}
+                {%endfor%}  
                 </select>
             </div>
-        </div>
+        </div> 
         <div class="form-region">
             <h2 class="art-headers">Plats</h2>
             <div class="mb-3">
                 <select class="form-select" required aria-label="select example" name="city">
-                    
-                <option value="{{row[0]}}">{{row[4]}}</option>
-                
+                {%for city in citys%}:
+                    {%if city[0] == row[4]%}
+                        <option value="{{row[0]}}" selected>{{city[1]}}</option>
+                    {%else%} 
+                        <option value="{{row[0]}}">{{city[1]}}</option>
+                    {%endif%}
+                {%endfor%}
                 </select>
             </div>
             <div class="col-md-3 position-relative">
                 <label for="validationTooltip05" class="form-label">Postnummer</label>
-                <textarea pattern="[0-9]{5}" name="zip_code">{{row[8]}}</textarea>
+                <textarea rows="1" maxlength="5" name="zip_code" required>{{row[8]}}</textarea>
             </div>
         </div>
         
-        
+        <!--
         <div class="form-region">
             <h2 class="art-headers">Bild</h2>
             <div class="mb-3">
             <input type="file" class="form-control" aria-label="file example" name="file" required>
             </div>
-        </div>
-
+        </div>-->
         <div class="form-region">
             <h2 class="art-headers">Pris-tier</h2>
-            {%for row in tiers%}
-            <div class="form-check"> 
-                <input type="radio" class="form-check-input" id="validationFormCheck2" name="tier" value="{{row[0]}}" required>
-                <label class="form-check-label" for="validationFormCheck2">{{row[1]}}</label>
-            </div>
+            {%for tier in tiers%}
+                <div class="form-check"> 
+                {%if tier[0] == row[5]%}
+                    <input type="radio" class="form-check-input" id="validationFormCheck2" name="tier" required checked value="{{row[0]}}">
+                    <label class="form-check-label" for="validationFormCheck2" >{{tier[1]}}</label>
+                {%else%} 
+                    <input type="radio" class="form-check-input" id="validationFormCheck2" name="tier" required  value="{{row[0]}}">
+                    <label class="form-check-label" for="validationFormCheck2" >{{tier[1]}}</label>
+                {%endif%}
+                </div>
             {%endfor%}
         </div>
 

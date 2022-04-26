@@ -1,5 +1,6 @@
 from multiprocessing import connection
 from tkinter import INSERT
+from unicodedata import category
 from colorama import Cursor
 import psycopg2
 import psycopg2.extras
@@ -234,15 +235,30 @@ def get_article_by_id(article_id):
     close_db_omsa(connection)
     return records
 
-def edit_to_article(title, description, zip_code, edit_date, tier, city, picture):
+def edit_to_article(title, description, zip_code, tier, edit, city, article_id):
     connection = open_db_omsa()
 
     cursor = connection.cursor()
     cursor.execute("""
-    INSERT into article (title, description, zip_code, edit_date, tier_id, city_id, picture)
-    values(%s,%s,%s,%s,%s,%s,%s)
-    """,(title, description, zip_code, edit_date,  tier, city, picture ))
+    UPDATE article 
+    set title = %s, description = %s, city_id = %s, tier_id = %s, edit_date = %s, zip_code = %s
+    where article.id = %s
+    """,(title, description, city, tier, edit, zip_code, article_id,))
     
+    cursor.close()
+    connection.commit()
+    close_db_omsa(connection)
+
+def edit_article_catergory(category_id, article_id):
+    connection = open_db_omsa()
+
+    cursor = connection.cursor()
+    cursor.execute("""
+    Update article_category
+    set category_id = %s
+    where article_id = %s
+    """,(category_id, article_id, ))
+
     cursor.close()
     connection.commit()
     close_db_omsa(connection)
