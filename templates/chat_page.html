@@ -1,0 +1,27 @@
+{% extends "base.html" %} {% block title %}Alla artiklar{% endblock %} {% block content
+    %}
+<h1>Meddelanden</h1>
+
+<table class="table">
+    <thead>
+        Lista
+    </thead>
+
+    <tbody>
+        <tr class="table-active">
+            
+        </tr>
+        <tr>
+        ...
+        </tr>
+        <tr>
+        {% for user in linked_users %}
+        <th scope="row">3</th>
+        <td colspan="2" class="table-active">{user}</td>
+        {% endfor %}
+        <td>@twitter</td>
+        </tr>
+    </tbody>
+</table>
+
+{% endblock %}
