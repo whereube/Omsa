@@ -1,4 +1,6 @@
 from json.tool import main
+from fileinput import filename
+from turtle import title
 from flask import Flask, redirect, render_template, request, flash, session, g
 from article import *
 from user import *
@@ -25,6 +27,7 @@ def start():
 def context_processor():
     current_user_id = session.get('USER_ID')
     return dict(current_user_id = current_user_id)
+
 
 '''Error pages'''
 @app.errorhandler(404)
@@ -236,3 +239,28 @@ def article_search():
         articles = get_articles()
 
     return render_template("/search_results.html", articles = articles, images = images, main_categories = main_categories)
+@app.route("/edit_article", methods=["POST"])
+def edit_article():
+    article_id = request.form.get("article_id") 
+    tiers = get_tier()
+    citys = get_city()
+    images = get_article_images()
+    categories = get_main_category()
+    article = get_article_by_id(article_id)
+    return render_template("/edit_article.html", article = article, citys = citys, tiers = tiers, categories = categories, images = images, article_id = article_id)
+
+@app.route("/edit_complete", methods=["POST"])
+def change_artical():
+    article_id = request.form.get("article_id")
+    title = request.form.get("title")
+    description = request.form.get("description")
+    city = request.form.get("city")
+    zip_code = request.form.get("zip_code")
+    tier = request.form.get("tier")
+    date_now = datetime.now()
+    category_id = request.form.get("category")
+
+    edit_to_article(title, description, zip_code, tier, date_now, city, article_id )
+    edit_article_catergory(category_id, article_id)
+    return redirect("/")
+
