@@ -16,9 +16,14 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route("/render_chat_list")
 def chat_list():
+
     user_id = session['USER_ID']
-    linked_users = show_linked_users(user_id)
-    return render_template("/chat_page.html", linked_users=linked_users)
+    linked_user = show_linked_users(user_id)
+    
+    for row in linked_user:
+        user_name = (row[43])
+
+    return render_template("/chat_page.html", linked_user = linked_user)
 
 
 

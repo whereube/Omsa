@@ -77,7 +77,5 @@ def show_linked_users(user_id):
     """, (user_id, user_id, user_id,)) 
     records = cursor.fetchall()
     cursor.close()
-    for row in records:
-        print(row)
     close_db_omsa(connection)
     return records
