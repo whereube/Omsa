@@ -16,17 +16,21 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route("/render_chat_list")
 def chat_list():
+    user_name = session.get('USER_NAME')
+    user_id = session.get('USER_ID')
+    linked_user = get_linked_user(user_id)
 
-    user_id = session['USER_ID']
-    linked_user = show_linked_users(user_id)
+    return render_template("/chat_page.html", linked_user = linked_user, user_name = user_name, user_id = user_id)
+
+
+@app.route("/send_message/<transaction_id>", methods=['GET', 'POST'])
+def handle_messages(transaction_id):
+    user_name = session.get('USER_NAME')
+    user_id = session.get('USER_ID')
+    linked_user = get_linked_user(user_id)
     
-    for row in linked_user:
-        user_name = (row[43])
-
-    return render_template("/chat_page.html", linked_user = linked_user)
-
-
-
+    
+    return render_template("/message_page.html", user_id = user_id, user_name = user_name, linked_user = linked_user)
 
 
 

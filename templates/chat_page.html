@@ -2,27 +2,16 @@
     %}
 <h1>Meddelanden</h1>
 
-<table class="table">
-    <thead>
-        Lista
-    </thead>
-
-    <tbody>
-        <tr class="table-active">
-            
-        </tr>
-        <tr>
-        ...
-        </tr>
-        <tr>
-        
-        <th scope="row"></th>
-
-        <td colspan="1" class="table-active">{linked_user}</td>
-
-        <td></td>
-        </tr>
-    </tbody>
-</table>
+<div class="list-group" id="chat-list">
+    {%for user in linked_user%}
+        {%if user[11] == user_id%}
+            {% if user[34] != user_name%}
+                <button type="button" class="list-group-item list-group-item-action"><a href="/send_message/{{user[0]}}" class="list-btn">{{user[34]}}</a></button>
+            {%elif user[46] != user_name%}
+                <button type="button" class="list-group-item list-group-item-action"><a href="/send_message/{{user[0]}}" class="list-btn">{{user[46]}}</a></button>
+            {%endif%}
+        {%endif%}
+    {%endfor%} 
+</div>
 
 {% endblock %}

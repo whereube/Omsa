@@ -1,0 +1,18 @@
+{% extends "base.html" %} {% block title %}Alla artiklar{% endblock %} {% block content
+    %}
+<div class="message-box">
+
+    <form action="/send_message">
+        <div>
+            <label for="#">Meddelande</label>
+            <input type="text" name="user_message">
+        </div>
+        <input class="btn btn-primary" type="submit" value="Submit">
+    </form>
+</div>
+
+<div class="message-box">
+    <p></p>
+</div>
+
+{% endblock %}
