@@ -95,6 +95,11 @@ def show_interest(wife_article_id, husband_article_id):
     values(%s, %s, %s, %s, %s)
     """,(uuid.uuid4(), wife_article_id, husband_article_id, date_proposed, husband_id))
 
+    cursor.execute("""
+    insert into transaction (id, wife_article_id, husband_article_id, date_proposed, husband_id)
+    values(%s, %s, %s, %s, %s)
+    """,(uuid.uuid4(), wife_article_id, husband_article_id, date_proposed, husband_id))
+
     cursor.close()
     connection.commit()
     close_db_omsa(connection)
@@ -179,4 +184,14 @@ def husband_wife_confirmed_to_db(transaction_id):
 
 
 def send_messages_to_db():
-    
+    connection = open_db_omsa()
+
+    cursor = connection.cursor()
+    cursor.execute("""
+    insert into chat message (user_id, text, time_sent)
+    value
+    """
+
+    cursor.close()
+    connection.commit()
+    close_db_omsa(connection)
