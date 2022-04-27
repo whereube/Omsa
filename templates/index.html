@@ -19,27 +19,32 @@
   </div>
   <input type="submit" class="btn btn-primary" value="Sök">
 </form>
-
-{%for row in articles%}
-  <div class="card" style="width: 48rem;">
-    {%for image in images%}
-        {%if row[0] == image[1]%}
-        <img src="/static/article_images/{{image[2]}}" id="temp_pic" class="card-img-top" alt="Artikelbild">
-        {%endif%}
-    {%endfor%}
-    <div class="card-body">
-      <h4 class="card-title">Rubrik: {{row[2]}}</h4>
-      <p>Stad: {{row[23]}}</p>
-      <p>Prisnivå: {{row[26]}}</p>
-      <p>Skapad: {{row[6]}}</p>
-      <p>Kategori: {{row[31]}}</p>
-      <form action="/wife_article_id" method="POST">
-          <input type="hidden" id="wife_article_id" name="wife_article_id" value={{row[0]}}>
-          <button  class="btn btn-primary" type="submit">Visa intresse</button>
-      </form>
-    </div>
+  <div class="conatiner">
+    <div class="row justify-content-md-center">
+  {%for row in articles%}
+      <div class="card w-25 col-sm-4" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample{{row[0]}}" aria-expanded="false" aria-controls="collapseWidthExample">
+        {%for image in images%}
+            {%if row[0] == image[1]%}
+            <img src="/static/article_images/{{image[2]}}" id="temp_pic" class="card-img-top" alt="Artikelbild">
+            {%endif%}
+        {%endfor%}
+        <div class="card-body">
+          <h4 class="card-title">Rubrik: {{row[2]}}</h4>
+          <p>Stad: {{row[23]}}</p>
+          <p>Prisnivå: {{row[26]}}</p>
+          <p>Skapad: {{row[6]}}</p>
+          <p>Kategori: {{row[31]}}</p>
+          <div class="collapse collapse-horizontal" id="collapseWidthExample{{row[0]}}">
+            <form action="/wife_article_id" method="POST">
+              <input type="hidden" id="wife_article_id" name="wife_article_id" value={{row[0]}}>
+              <button  class="btn btn-primary" type="submit">Visa intresse</button>
+            </form>
+          </div>
+        </div>
+      </div>
+  {%endfor%}
   </div>
-{%endfor%}
+</div>
 
 <script>
     localStorage.clear();
