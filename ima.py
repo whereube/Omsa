@@ -181,17 +181,3 @@ def husband_wife_confirmed_to_db(transaction_id):
     cursor.close()
     connection.commit()
     close_db_omsa(connection)
-
-
-def send_messages_to_db():
-    connection = open_db_omsa()
-
-    cursor = connection.cursor()
-    cursor.execute("""
-    insert into chat message (user_id, text, time_sent)
-    value
-    """
-
-    cursor.close()
-    connection.commit()
-    close_db_omsa(connection)
