@@ -1,8 +1,8 @@
 :root{
-    --primary: #F6D55C;
+    --primary: #f3dc73;
     --light: #FEFAEC;
-    --dark: #625772;
-    --background: #379954;
+    --dark: #F38181;
+    --background: rgb(37, 37, 37);
 }
 
 #nav-logo{
@@ -52,6 +52,9 @@ max-width: 200px;
 
 #profile-btn{
     background-color: var(--primary);
+    width: 100px;
+    border-radius: 25px;
+    border-color: var(--primary);
 }
 
 #danger-alert{
@@ -101,7 +104,7 @@ max-width: 200px;
 
 
 #submit-btn{
-    background-color: var(--background);
+    background-color: var(--dark);
     border: 1px solid var(--light);
 }
 
