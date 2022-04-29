@@ -1,8 +1,20 @@
 :root{
-    --primary: #f3dc73;
+    --primary: #79bda3;
     --light: #FEFAEC;
-    --dark: #F38181;
-    --background: rgb(37, 37, 37);
+    --dark: rgb(37, 37, 37);
+    --background: #f3e6aa;
+    --grey: #BEBEBE;
+}
+
+body{
+    background-color: #f3e6aa;
+    font-family: 'Montserrat', sans-serif;
+}
+
+nav{
+    box-shadow: 1px 1px 1px var(--grey);
+    max-width: 1200px;
+    margin: auto;
 }
 
 #nav-logo{
@@ -10,8 +22,10 @@
     font-family: 'Devonshire', cursive;
     color: var(--primary);
     text-shadow: 2px 2px 1px var(--dark);
-    font-size: 30px;
+    font-size: 40px;
     margin-left: 20px;
+    padding-right: 30px;
+    border-right: 1px solid var(--primary);
 }
 
 #box{
@@ -24,10 +38,8 @@
     background-color: var(--primary);
 }
 
-body{
-    background-color: var(--primary);
-}
 .container {
+    max-width: 1000px;
     margin-top: 50px;
     padding: 20px;
     display: flex;
@@ -55,6 +67,11 @@ max-width: 200px;
     width: 100px;
     border-radius: 25px;
     border-color: var(--primary);
+    border: 1px solid rgb(216, 216, 216);
+}
+
+#profile-btn:hover{
+    background-color: var(--dark);
 }
 
 #danger-alert{
@@ -102,9 +119,8 @@ max-width: 200px;
     color: var(--light);
 }
 
-
 #submit-btn{
-    background-color: var(--dark);
+    background-color: var(--background);
     border: 1px solid var(--light);
 }
 
@@ -121,4 +137,10 @@ max-width: 200px;
 .message-box{
     max-height: 500px;
     overflow: scroll;
+}
+
+#navbar-links:hover{
+    background-color: rgb(221, 221, 221);
+    transition: 0.5s;
+    border-radius: 5px;
 }
