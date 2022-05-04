@@ -3,13 +3,11 @@
 <h1>Meddelanden</h1>
 
 <div class="list-group" id="chat-list">
-    {%for user in linked_user%}
-        {%if user[11] == user_id%}
-            {% if user[34] != user_name%}
-                <button type="button" class="list-group-item list-group-item-action"><a href="/send_message/{{user[0]}}" class="list-btn">{{user[34]}}</a></button>
-            {%elif user[46] != user_name%}
-                <button type="button" class="list-group-item list-group-item-action"><a href="/send_message/{{user[0]}}" class="list-btn">{{user[46]}}</a></button>
-            {%endif%}
+    {%for row in linked_user%}
+        {%if row[5] != user_id%}
+            <button type="button" class="list-group-item list-group-item-action"><a href="/send_message/{{row[0]}}" class="list-btn">{{row[6]}}</a></button>
+        {%elif row[5] == user_id%}
+        <button type="button" class="list-group-item list-group-item-action"><a href="/send_message/{{row[0]}}" class="list-btn">{{row[18]}}</a></button>
         {%endif%}
     {%endfor%} 
 </div>
