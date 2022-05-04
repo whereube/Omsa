@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% block title %}Login{% endblock %} {% block content
   %}
 
-<form action="/login", method="POST" id="box">
+<form action="/login" method="POST" id="box">
   <div class="mb-3" >
     {% with messages = get_flashed_messages() %}
     {% for message in messages %}
@@ -21,7 +21,7 @@
     <label for="exampleInputPassword1" class="form-label">Lösenord</label>
     <input type="password" class="form-control" id="xxx" name="user_password">
   </div>
-  <input type="submit" class="btn btn-primary" id="submit-btn"></input>
+  <input type="submit" class="btn btn-primary" id="submit-btn" value="Logga in">
 </form>
 {% endblock %}
   
