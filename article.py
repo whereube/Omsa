@@ -19,7 +19,7 @@ def open_db_omsa():
 def close_db_omsa(connection):
     connection.close()
 
-def create_article_in_db(title, description, zip_code, tier, city, category, user_id, filename):
+def create_article_in_db(title, description, zip_code, tier, city, category, user_id, filename, sub_category):
     '''
     Skapar en post i databasen med artikelinformationen
     '''
@@ -39,6 +39,7 @@ def create_article_in_db(title, description, zip_code, tier, city, category, use
     close_db_omsa(connection)
 
     create_article_category_in_db(article_id, category)
+    create_article_category_in_db(article_id, sub_category)
     if filename != '':
         create_file_path_in_db(article_id, filename)
 

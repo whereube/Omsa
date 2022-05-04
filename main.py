@@ -68,7 +68,8 @@ def create_article():
     zip_code = request.form.get("zip_code")
     tier = request.form.get("tier")
     city = request.form.get("city")
-    category = request.form.get("category")
+    category = request.form.get("main_category")
+    sub_category = request.form.get("sub_category")
     user_id = session["USER_ID"]
 
     file = request.files['file']
@@ -76,7 +77,7 @@ def create_article():
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
-    create_article_in_db(title, description, zip_code, tier, city, category, user_id, file.filename)
+    create_article_in_db(title, description, zip_code, tier, city, category, user_id, file.filename, sub_category)
     return redirect("/")
 
 @app.route("/remove")

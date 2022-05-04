@@ -34,7 +34,7 @@
         <h4 class="card-title">Rubrik: {{row[2]}}</h4>
         <p>Stad: {{row[23]}}</p>
         <p>Prisnivå: {{row[26]}}</p>
-        <p>Skapad: {{row[6]}}</p>
+        <p>Skapad: {{row[6].strftime('%Y-%m-%d')}}</p>
         <p>Kategori: {{row[31]}}</p>
         <form action="/wife_article_id" method="POST">
             <input type="hidden" id="wife_article_id" name="wife_article_id" value={{row[0]}}>

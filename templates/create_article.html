@@ -17,12 +17,13 @@
         </div>
 
         <div class="mb-3">
-            <select class="form-select border-secondary" required aria-label="select example" name="category">
+            <select class="form-select border-secondary" required aria-label="select example" name="main_category" id="search_category_id">
             <option value="">Kategori</option>
             {%for row in categories%}:
             <option value="{{row[0]}}">{{row[1]}}</option>
             {%endfor%}
             </select>
+            <div id="show_sub_categories"></div>
         </div>
     </div>
     <div class="form-region">
@@ -63,4 +64,18 @@
     <button class="btn btn-primary" type="submit" id="submit-btn">Lägg upp</button>
     </div>
 </form>
+
+<script type="text/javascript">
+$(document).ready(function() {
+ $('#search_category_id').change(function(){
+    $.post("/get_child_categories", {
+     parent_id: $('#search_category_id').val(),
+    }, function(response){ 
+        $('#show_sub_categories').html(response);
+        $('#show_sub_categories').append(response.htmlresponse);
+    });
+    return false;
+  });
+}); 
+</script>
 {% endblock %}
