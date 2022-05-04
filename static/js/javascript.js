@@ -24,3 +24,16 @@ function getSavedValue  (v){
     }
 
 
+/* Funktion för att hämta subkategori baserat på val av huvudkategori*/
+$(document).ready(function() {
+ $('#search_category_id').change(function(){
+    $.post("/get_child_categories", {
+     parent_id: $('#search_category_id').val(),
+    }, function(response){ 
+        $('#show_sub_categories').html(response);
+        $('#show_sub_categories').append(response.htmlresponse);
+    });
+    return false;
+  });
+}); 
+

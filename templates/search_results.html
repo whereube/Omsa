@@ -10,36 +10,55 @@
   </div>
   <div class="mb-3">
     <label for="main_category" class="form-label">Huvudkategori</label>
-    <select id="main_category" name="main_category" class="form-control" id="main_category">
-        <option value=None selected="true" disabled>Välj kategori</option>
-        <option value="">Ingen</option>
-        {%for category in main_categories%}
+    <select id="search_category_id" name="main_category" class="form-control">
+      <option value=None selected="true" disabled>Välj kategori</option>
+      <option value="">Ingen</option>
+      {%for category in main_categories%}
         <option value={{category[0]}}>{{category[1]}}</option>
-        {%endfor%}
+      {%endfor%}
     </select>
+    <div id="show_sub_categories"></div>
   </div>
   <input type="submit" class="btn btn-primary" value="Sök">
 </form>
 
-{%for row in articles%}
-  <div class="card" style="width: 48rem;">
-    {%for image in images%}
-        {%if row[0] == image[1]%}
-        <img src="/static/article_images/{{image[2]}}" id="temp_pic" class="card-img-top" alt="Artikelbild">
-        {%endif%}
-    {%endfor%}
-    <div class="card-body">
-      <h4 class="card-title">Rubrik: {{row[2]}}</h4>
-      <p>Stad: {{row[23]}}</p>
-      <p>Prisnivå: {{row[26]}}</p>
-      <p>Skapad: {{row[6]}}</p>
-      <p>Kategori: {{row[31]}}</p>
-      <form action="/wife_article_id" method="POST">
-          <input type="hidden" id="wife_article_id" name="wife_article_id" value={{row[0]}}>
-          <button  class="btn btn-primary" type="submit">Visa intresse</button>
-      </form>
+{%if articles != None%}
+  {%for row in articles%}
+    <div class="card" style="width: 48rem;">
+      {%for image in images%}
+          {%if row[0] == image[1]%}
+          <img src="/static/article_images/{{image[2]}}" id="temp_pic" class="card-img-top" alt="Artikelbild">
+          {%endif%}
+      {%endfor%}
+      <div class="card-body">
+        <h4 class="card-title">Rubrik: {{row[2]}}</h4>
+        <p>Stad: {{row[23]}}</p>
+        <p>Prisnivå: {{row[26]}}</p>
+        <p>Skapad: {{row[6]}}</p>
+        <p>Kategori: {{row[31]}}</p>
+        <form action="/wife_article_id" method="POST">
+            <input type="hidden" id="wife_article_id" name="wife_article_id" value={{row[0]}}>
+            <button  class="btn btn-primary" type="submit">Visa intresse</button>
+        </form>
+      </div>
     </div>
-  </div>
-{%endfor%}
+  {%endfor%}
+{%else%}
+  <p>Inga resultat</p>
+{%endif%}
+
+<script type="text/javascript">
+$(document).ready(function() {
+ $('#search_category_id').change(function(){
+    $.post("/get_child_categories", {
+     parent_id: $('#search_category_id').val(),
+    }, function(response){ 
+        $('#show_sub_categories').html(response);
+        $('#show_sub_categories').append(response.htmlresponse);
+    });
+    return false;
+  });
+}); 
+</script>
 
 {% endblock %}
