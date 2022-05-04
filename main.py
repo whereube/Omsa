@@ -1,6 +1,3 @@
-from json.tool import main
-from fileinput import filename
-from turtle import title
 from flask import Flask, redirect, render_template, request, flash, session, g
 from article import *
 from user import *

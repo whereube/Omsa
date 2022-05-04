@@ -1,7 +1,3 @@
-from re import search
-from multiprocessing import connection
-from tkinter import INSERT
-from unicodedata import category
 import psycopg2
 import psycopg2.extras
 from datetime import date, datetime
