@@ -53,18 +53,36 @@ def get_chat_id(user_id):
     close_db_omsa(connection)
     return records
 
-def get_chat_messages():
-    print("hej")
-
-
-def send_chat_messages():
+def get_chat_messages(chat_id):
     connection = open_db_omsa()
-
     cursor = connection.cursor()
     cursor.execute("""
-    insert into (id, husband_id, wife_id)
-    values (%s, %s, %s)
-    """,())
+    select * from message 
+    where chat_id = %s 
+    """,(chat_id,))
+
+    records = cursor.fetchall()
+    cursor.close()
+    close_db_omsa(connection)
+    return records
+
+
+def chat_message_to_db(user_message):
+    psycopg2.extras.register_uuid()
+    user_id = session.get('USER_ID')
+
+    get_chat_id_from_db = get_chat_id(user_id)
+    for row in get_chat_id_from_db:
+        chat_id = row[0]
+
+    message_id = uuid.uuid4()
+    connection = open_db_omsa()
+    
+    cursor = connection.cursor()
+    cursor.execute("""
+    insert into message (id, chat_id, user_id, text)
+    values (%s, %s, %s, %s)
+    """,(message_id, chat_id, user_id, user_message))
 
     cursor.close()
     connection.commit()

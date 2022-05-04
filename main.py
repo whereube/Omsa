@@ -21,15 +21,24 @@ def chat_list():
     user_name = session.get('USER_NAME')
     user_id = session.get('USER_ID')
     linked_user = get_chat_id(user_id)
-    print(linked_user)
+
     return render_template("/chat_page.html", linked_user = linked_user, user_name = user_name, user_id = user_id)
 
-@app.route("/send_message/<chat_id>", methods=['GET', 'POST'])
-def handle_messages(chat_id):
+@app.route("/message_page/<chat_id>", methods=['GET', 'POST'])
+def show_chat_room(chat_id):
     user_id = session.get('USER_ID')
     linked_user = get_chat_id(user_id)
-    
-    return render_template("/message_page.html", user_id = user_id, chat_id = chat_id, linked_user = linked_user)
+    chat_messages = get_chat_messages(chat_id)
+    return render_template("/message_page.html", user_id = user_id, chat_id = chat_id, linked_user = linked_user, chat_messages = chat_messages)
+
+
+@app.route("/send_message", methods=["GET", "POST"])
+def handle_messages():
+    user_message = request.form.get("user_message")
+    chat_message_to_db(user_message)
+    return redirect ("/message_page/<chat_id>")
+
+
 
 
 

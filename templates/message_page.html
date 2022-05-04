@@ -1,18 +1,33 @@
-{% extends "base.html" %} {% block title %}Alla artiklar{% endblock %} {% block content
+{% extends "base.html" %} {% block title %}Meddelanden{% endblock %} {% block content
     %}
 <div class="message-box">
+    
+    <div class="conversation-box">
+        <p>Message: {{chat_messages}}</p>
+    </div>
 
-    <form action="/send_message">
-        <div>
+    <div class="send-form">
+        <form action="/send_message" id="message_form" method="POST">
+
             <label for="#">Meddelande</label>
-            <input type="text" name="user_message">
-        </div>
-        <input class="btn btn-primary" type="submit" value="Submit">
-    </form>
+            <input type="text" name="message" id="message_id">
+
+            <input class="btn btn-primary" type="submit" value="Submit" id="message_submit">
+        </form>
+    </div>
 </div>
 
-<div class="message-box">
-    <p></p>
-</div>
+<script type="text/javascript">
+    $(document).ready(function() {
+     $('#message_form').submit(function(){
+        $.post("/send_message", {
+         user_message: $('#message_id').val(),
+        }, function(response){
+            location.reload(true);
+        });
+        return false;
+      });
+    }); 
+</script>
 
 {% endblock %}

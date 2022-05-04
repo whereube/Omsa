@@ -5,9 +5,9 @@
 <div class="list-group" id="chat-list">
     {%for row in linked_user%}
         {%if row[5] != user_id%}
-            <button type="button" class="list-group-item list-group-item-action"><a href="/send_message/{{row[0]}}" class="list-btn">{{row[6]}}</a></button>
+            <button type="button" class="list-group-item list-group-item-action"><a href="/message_page/{{row[0]}}" class="list-btn">{{row[6]}}</a></button>
         {%elif row[5] == user_id%}
-        <button type="button" class="list-group-item list-group-item-action"><a href="/send_message/{{row[0]}}" class="list-btn">{{row[18]}}</a></button>
+        <button type="button" class="list-group-item list-group-item-action"><a href="/message_page/{{row[0]}}" class="list-btn">{{row[18]}}</a></button>
         {%endif%}
     {%endfor%} 
 </div>
