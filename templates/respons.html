@@ -1,0 +1,9 @@
+<div class="form-group">
+      <label>Select Sub Category</label>
+      <select name="sub_category"  id="sub_category_id" class="form-control">
+         <option value="" selected="selected"></option>
+          {% for row in sub_categories %} 
+            <option value="{{row[0]}}">{{row[1]}}</option>
+          {% endfor %}
+      </select> 
+</div>

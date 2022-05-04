@@ -1,5 +1,4 @@
-from json.tool import main
-from flask import Flask, redirect, render_template, request, flash, session, g
+from flask import Flask, redirect, render_template, request, flash, session, g, jsonify
 from article import *
 from user import *
 from ima import *
@@ -225,14 +224,27 @@ def article_search():
     main_categories = get_main_category()
     images = get_article_images()
     search_term = request.form.get("free_text")
-    category = request.form.get("main_category")
-    if search_term == '' and category != None and category != '':
-        articles = get_article_by_category(category)
-    elif search_term != '' and (category == None or category == ''):
+    main_category = request.form.get("main_category")
+    sub_category_1 = request.form.get("sub_category")
+    if search_term == '' and main_category != None and main_category != '':
+        articles = get_article_by_category(main_category, sub_category_1)
+    elif search_term != '' and ( main_category == None or main_category == ''):
         articles = get_article_by_title(search_term)
-    elif search_term != '' and category != None and category != '':
-        articles = get_article_by_title_and_cateogry(search_term, category)
-    elif search_term == '' and (category == None or category == ''):
+    elif search_term != '' and main_category != None and main_category != '':
+        articles = get_article_by_title_and_cateogry(search_term, main_category, sub_category_1)
+    elif search_term == '' and (main_category == None or main_category == ''):
         articles = get_articles()
 
     return render_template("/search_results.html", articles = articles, images = images, main_categories = main_categories)
+
+
+'''TEST JS'''
+@app.route("/get_child_categories",methods=["GET", "POST"])
+def get_child_categories():
+    if request.method == "POST":
+        parent_id = request.form.get('parent_id')
+        category_types = get_main_category_type(parent_id)
+        for category in category_types:
+            category_type = category
+        sub_categories = get_sub_category_1_by_main(category_type)
+        return jsonify({'htmlresponse': render_template('respons.html', sub_categories = sub_categories)})

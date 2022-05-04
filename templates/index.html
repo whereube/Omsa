@@ -9,13 +9,14 @@
   </div>
   <div class="mb-3">
     <label for="main_category" class="form-label">Huvudkategori</label>
-    <select id="main_category" name="main_category" class="form-control" id="main_category">
+    <select id="search_category_id" name="main_category" class="form-control">
         <option value=None selected="true" disabled>Välj kategori</option>
         <option value="">Ingen</option>
         {%for category in main_categories%}
         <option value={{category[0]}}>{{category[1]}}</option>
         {%endfor%}
     </select>
+    <div id="show_sub_categories"></div>
   </div>
   <input type="submit" class="btn btn-primary" value="Sök">
 </form>
@@ -44,5 +45,20 @@
 <script>
     localStorage.clear();
 </script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+ $('#search_category_id').change(function(){
+    $.post("/get_child_categories", {
+     parent_id: $('#search_category_id').val(),
+    }, function(response){ 
+        $('#show_sub_categories').html(response);
+        $('#show_sub_categories').append(response.htmlresponse);
+    });
+    return false;
+  });
+}); 
+</script>
+
 
 {% endblock %}

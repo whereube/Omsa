@@ -1,4 +1,3 @@
-from re import search
 import psycopg2
 import psycopg2.extras
 from datetime import date, datetime
@@ -181,6 +180,10 @@ def get_articles():
     left outer join tier on article.tier_id = tier.id
     left outer join article_category on article.id = article_category.article_id
     left outer join category on article_category.category_id = category.id
+    where (category.level = 1 or 
+    not exists
+        (select * from article_category
+        where article_category.article_id = article_id))
     order by article.create_date desc
     """)
     records = cursor.fetchall()
@@ -220,6 +223,10 @@ def get_user_articles(user_id):
     left outer join article_category on article.id = article_category.article_id
     left outer join category on article_category.category_id = category.id
     where article.user_id = %s
+    and (category.level = 1 or
+    not exists
+    (select * from article_category
+    where article_category.article_id = article_id))
     order by article.create_date desc
     """, (user_id,))
     records = cursor.fetchall()
@@ -244,6 +251,10 @@ def get_article_by_id(article_id):
     left outer join article_category on article.id = article_category.article_id
     left outer join category on article_category.category_id = category.id
     where article.id = %s
+    and (category.level = 1 or
+    not exists
+    (select * from article_category
+    where article_category.article_id = article_id))
     """, (article_id,))
     records = cursor.fetchall()
     cursor.close()
@@ -270,6 +281,10 @@ def get_article_by_title(search_term):
     left outer join article_category on article.id = article_category.article_id
     left outer join category on article_category.category_id = category.id
     where (LOWER(title) like %s or LOWER(title) like %s or LOWER(title) like %s or LOWER(title) like %s)
+    and (category.level = 1 or
+    not exists
+    (select * from article_category
+    where article_category.article_id = article_id))
     order by article.create_date desc
     ''', (search_term.lower(), search_term_like1.lower(), search_term_like2.lower(), search_term_like3.lower(),))
     records = cursor.fetchall()
@@ -277,32 +292,64 @@ def get_article_by_title(search_term):
     close_db_omsa(connection)
     return records
 
-def get_article_by_category(category_id):
+def get_article_by_category(main_category_id, sub_category_1_id):
     '''
     Hämtar alla artiklar vars titel innehåller en term
     args:
-        search_term: Artiklar som visas innehåller termen
+        main_category_id: Artiklar som visas har kateogori_idt
     '''
     connection = open_db_omsa()
     cursor = connection.cursor()
-    cursor.execute( '''
-    select * from article
-    left outer join profile on article.user_id = profile.id
-    left outer join city on article.city_id = city.id
-    left outer join tier on article.tier_id = tier.id
-    left outer join article_category on article.id = article_category.article_id
-    left outer join category on article_category.category_id = category.id
-    where category.id = %s
-    order by article.create_date desc
-    ''', (category_id,))
-    records = cursor.fetchall()
-    cursor.close()
-    close_db_omsa(connection)
-    return records
+
+    if sub_category_1_id == None or sub_category_1_id == '':
+        cursor.execute( '''
+        select * from article
+        left outer join profile on article.user_id = profile.id
+        left outer join city on article.city_id = city.id
+        left outer join tier on article.tier_id = tier.id
+        left outer join article_category on article.id = article_category.article_id
+        left outer join category on article_category.category_id = category.id
+        where category.id = %s
+        and (category.level = 1 or 
+        not exists
+        (select * from article_category
+        where article_category.article_id = article_id))
+        order by article.create_date desc
+        ''', (main_category_id,))
+        records = cursor.fetchall()
+        cursor.close()
+        close_db_omsa(connection)
+        return records
+    elif sub_category_1_id != None and sub_category_1_id != '':
+        cursor.execute( '''
+        select * from article
+        left outer join profile on article.user_id = profile.id
+        left outer join city on article.city_id = city.id
+        left outer join tier on article.tier_id = tier.id
+        left outer join article_category on article.id = article_category.article_id
+        left outer join category on article_category.category_id = category.id
+        where exists 
+        (select * from article_category
+        where category_id = %s
+        and article_category.article_id = article.id)
+        and exists 
+        (select * from article_category
+        where category_id = %s
+        and article_category.article_id = article.id)
+        and (category.level = 1 or 
+        not exists
+        (select * from article_category
+        where article_category.article_id = article_id))
+        order by article.create_date desc
+        ''', (main_category_id, sub_category_1_id,))
+        records = cursor.fetchall()
+        cursor.close()
+        close_db_omsa(connection)
+        return records
 
 
 
-def get_article_by_title_and_cateogry(search_term, category_id):
+def get_article_by_title_and_cateogry(search_term, category_id, sub_category_1_id):
     '''
     Hämtar alla artiklar vars titel innehåller en term
     args:
@@ -313,16 +360,78 @@ def get_article_by_title_and_cateogry(search_term, category_id):
     search_term_like1 = (search_term + '%')
     search_term_like2 = ('%' + search_term)
     search_term_like3 = ('%' + search_term + '%')
-    cursor.execute( '''
-    select * from article
-    left outer join profile on article.user_id = profile.id
-    left outer join city on article.city_id = city.id
-    left outer join tier on article.tier_id = tier.id
-    left outer join article_category on article.id = article_category.article_id
-    left outer join category on article_category.category_id = category.id
-    where (LOWER(title) like %s or LOWER(title) like %s or LOWER(title) like %s or LOWER(title) like %s) and category.id = %s
-    order by article.create_date desc
-    ''', (search_term.lower(), search_term_like1.lower(), search_term_like2.lower(), search_term_like3.lower(), category_id,))
+
+    if sub_category_1_id == None or sub_category_1_id == '':
+        cursor.execute( '''
+        select * from article
+        left outer join profile on article.user_id = profile.id
+        left outer join city on article.city_id = city.id
+        left outer join tier on article.tier_id = tier.id
+        left outer join article_category on article.id = article_category.article_id
+        left outer join category on article_category.category_id = category.id
+        where (LOWER(title) like %s or LOWER(title) like %s or LOWER(title) like %s or LOWER(title) like %s) and category.id = %s
+        and (category.level = 1 or
+        not exists
+        (select * from article_category
+        where article_category.article_id = article_id))
+        order by article.create_date desc
+        ''', (search_term.lower(), search_term_like1.lower(), search_term_like2.lower(), search_term_like3.lower(), category_id,))
+        records = cursor.fetchall()
+        cursor.close()
+        close_db_omsa(connection)
+        return records
+    elif sub_category_1_id != None and sub_category_1_id != '':
+        cursor.execute( '''
+        select * from article
+        left outer join profile on article.user_id = profile.id
+        left outer join city on article.city_id = city.id
+        left outer join tier on article.tier_id = tier.id
+        left outer join article_category on article.id = article_category.article_id
+        left outer join category on article_category.category_id = category.id
+        where (LOWER(title) like %s or LOWER(title) like %s or LOWER(title) like %s or LOWER(title) like %s)
+        and exists 
+        (select * from article_category
+        where category_id = %s
+        and article_category.article_id = article.id)
+        and exists 
+        (select * from article_category
+        where category_id = %s
+        and article_category.article_id = article.id)
+        and (category.level = 1 or
+        not exists
+        (select * from article_category
+        where article_category.article_id = article_id))
+        order by article.create_date desc
+        ''', (search_term.lower(), search_term_like1.lower(), search_term_like2.lower(), search_term_like3.lower(), category_id, sub_category_1_id,))
+        records = cursor.fetchall()
+        cursor.close()
+        close_db_omsa(connection)
+        return records
+
+def get_sub_category_1_by_main(main_category_type):
+    '''
+    Hämtar alla kategorier
+    '''
+    connection = open_db_omsa()
+
+    cursor = connection.cursor()
+    cursor.execute("""
+    select * from category
+    where level = '2' and category.category_type = %s
+    """, (main_category_type,))
+    records = cursor.fetchall()
+    cursor.close()
+    close_db_omsa(connection)
+    return records
+
+def get_main_category_type(cateogry_id):
+    connection = open_db_omsa()
+
+    cursor = connection.cursor()
+    cursor.execute("""
+    select category_type from category
+    where category.id = %s
+    """, (cateogry_id,))
     records = cursor.fetchall()
     cursor.close()
     close_db_omsa(connection)
