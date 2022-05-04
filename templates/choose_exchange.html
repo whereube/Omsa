@@ -1,20 +1,32 @@
 {% extends "base.html" %} {% block title %}visa intresse{% endblock %} {% block content
     %}
-<form action="/show_interest" method="POST">
+<body>
     
-    <input type="hidden" id="wife_article" name="wife_article" value="{{wife_article_id}}">
-    
-
     <form action="/show_interest" method="POST">
-        <label for="husband_article_id">Välj vilken av dina artiklar du vill byta med</label>
-        <select id="husband_article_id" name="husband_article_id">
-            <option value="Handshake">Handslag</option>
-            {%for row in articles%}:
-            <option value={{row[0]}}>{{row[2]}}</option>
-            {%endfor%}
-        </select>
+            
+        <input type="hidden" id="wife_article" name="wife_article" value="{{wife_article_id}}">
+            
+
+        <form action="/show_interest" method="POST">
+            <label for="husband_article_id">Välj vilken av dina artiklar du vill byta med</label>
+            <select id="husband_article_id" name="husband_article_id">
+                <option value="Handshake">Handslag</option>
+                    {%for row in articles%}:
+                    <option value={{row[0]}}>{{row[2]}}</option>
+                    {%endfor%}
+            </select>
         <input type="submit" class="btn btn-primary" value="Välj">
     </form>
 
-    <h3 id="hoover">Vad innebär Handslag?<span>some text here ?</span></h3>
+    <div>
+        <div class="tooltip">
+            <span id="handshake_tooltip">Handslag? </span>            
+            <span class="tooltiptext">Att byta mot ett handslag innebär att din produkt hittar ett annat hem utan att du får något för den, mer än ett handslag vill säga...</span>
+        </div>
+    </div>
+
+</body>
+
+
+
 {% endblock %}

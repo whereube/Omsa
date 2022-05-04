@@ -23,4 +23,3 @@ function getSavedValue  (v){
     return localStorage.getItem(v);
     }
 
-
