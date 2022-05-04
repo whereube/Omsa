@@ -2,6 +2,7 @@ from flask import Flask, redirect, render_template, request, flash, session, g
 from article import *
 from user import *
 from ima import *
+from chat import *
 from werkzeug.utils import secure_filename
 import os
 from datetime import datetime
@@ -13,21 +14,27 @@ app.run(debug=True)
 app.config['SECRET_KEY'] = 'thisissecret'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+
+
 @app.route("/render_chat_list")
 def chat_list():
     user_name = session.get('USER_NAME')
     user_id = session.get('USER_ID')
-    linked_user = get_linked_user(user_id)
-
+    linked_user = get_chat_id(user_id)
+    print(linked_user)
     return render_template("/chat_page.html", linked_user = linked_user, user_name = user_name, user_id = user_id)
 
-@app.route("/send_message/<transaction_id>", methods=['GET', 'POST'])
-def handle_messages(transaction_id):
-    user_name = session.get('USER_NAME')
+@app.route("/send_message/<chat_id>", methods=['GET', 'POST'])
+def handle_messages(chat_id):
     user_id = session.get('USER_ID')
-    linked_user = get_linked_user(user_id)
+    linked_user = get_chat_id(user_id)
     
-    return render_template("/message_page.html", user_id = user_id, user_name = user_name, linked_user = linked_user)
+    return render_template("/message_page.html", user_id = user_id, chat_id = chat_id, linked_user = linked_user)
+
+
+
+
+
 
 @app.route("/")
 def start():
@@ -180,8 +187,11 @@ def show_current_user_storage():
 def submit_interest():
     transaction_id = request.form.get("transaction_id")
     interest = int(request.form.get("interest"))
+    wife_id = request.form.get("wife_id")
+    husband_id = request.form.get("husband_id")
     if interest == 1:
         save_interest_to_db(transaction_id)
+        create_chat_id(wife_id, husband_id)
     elif interest == 0:
         remove_interest_from_db(transaction_id)
 

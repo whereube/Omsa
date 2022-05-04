@@ -42,6 +42,8 @@
                                 <label for="No">Jag är inte intresserad</label><br>
                                 <input type="hidden" id="transaction_id" name="transaction_id" value={{trade[0]}}>
                                 <input type="submit" value="Skicka">
+                                <input type="hidden" value="{{trade[21]}}" name="husband_id">
+                                <input type="hidden" value="{{trade[11]}}" name="wife_id">
                             </form>
                     </div>
                     {% elif trade[8] == False %}
