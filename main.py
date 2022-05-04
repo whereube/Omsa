@@ -295,7 +295,7 @@ def change_artical():
 
 
 
-'''TEST JS'''
+'''Visa subkategorier'''
 @app.route("/get_child_categories",methods=["GET", "POST"])
 def get_child_categories():
     if request.method == "POST":
@@ -305,3 +305,11 @@ def get_child_categories():
             category_type = category
         sub_categories = get_sub_category_1_by_main(category_type)
         return jsonify({'htmlresponse': render_template('respons.html', sub_categories = sub_categories)})
+
+
+@app.route("/transaction_history")
+def show_completed_transactions():
+    user_id = session.get("USER_ID")
+    trades = get_completed_transactions(user_id)
+    images = get_article_images()
+    return render_template("/transaction_history.html", trades = trades, images = images)
