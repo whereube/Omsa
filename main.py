@@ -194,7 +194,7 @@ def submit_interest():
 @app.route("/wife_article_id", methods=['GET', 'POST'])
 def get_wife_article_id():
 
-    user_id = session["USER_ID"]
+    user_id = session.get("USER_ID")
     articles = get_user_articles(user_id)  
 
     wife_article_id = request.form.get("wife_article_id")
