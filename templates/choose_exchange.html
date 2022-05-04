@@ -8,10 +8,13 @@
     <form action="/show_interest" method="POST">
         <label for="husband_article_id">Välj vilken av dina artiklar du vill byta med</label>
         <select id="husband_article_id" name="husband_article_id">
+            <option value="Handshake">Handslag</option>
             {%for row in articles%}:
             <option value={{row[0]}}>{{row[2]}}</option>
             {%endfor%}
         </select>
         <input type="submit" class="btn btn-primary" value="Välj">
     </form>
+
+    <h3 id="hoover">Vad innebär Handslag?<span>some text here ?</span></h3>
 {% endblock %}

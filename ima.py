@@ -95,11 +95,25 @@ def show_interest(wife_article_id, husband_article_id):
     values(%s, %s, %s, %s, %s)
     """,(uuid.uuid4(), wife_article_id, husband_article_id, date_proposed, husband_id))
 
-    cursor.execute("""
-    insert into transaction (id, wife_article_id, husband_article_id, date_proposed, husband_id)
-    values(%s, %s, %s, %s, %s)
-    """,(uuid.uuid4(), wife_article_id, husband_article_id, date_proposed, husband_id))
+    cursor.close()
+    connection.commit()
+    close_db_omsa(connection)
 
+def show_interest_handshake(wife_article_id):
+    '''
+    lägger till wife_article_id date_proposed och husband_id i database vid visat intresse
+    '''
+    psycopg2.extras.register_uuid()
+    connection = open_db_omsa()
+    cursor = connection.cursor()
+    date_proposed = datetime.now()
+    husband_id = session.get("USER_ID")
+
+    cursor.execute("""
+    insert into transaction (id, wife_article_id, date_proposed, handshake_proposed, husband_id)
+    values(%s, %s, %s, True, %s)
+    """,(uuid.uuid4(), wife_article_id, date_proposed, husband_id))
+    
     cursor.close()
     connection.commit()
     close_db_omsa(connection)

@@ -195,7 +195,7 @@ def submit_interest():
 def get_wife_article_id():
 
     user_id = session.get("USER_ID")
-    articles = get_user_articles(user_id)  
+    articles = get_user_articles(user_id) 
 
     wife_article_id = request.form.get("wife_article_id")
     return render_template("/choose_exchange.html", articles = articles, wife_article_id = wife_article_id)
@@ -205,7 +205,10 @@ def get_wife_article_id():
 def register_interest():
     wife_article_id = request.form.get("wife_article")    
     husband_article_id = request.form.get("husband_article_id")
-    show_interest(wife_article_id, husband_article_id)
+    if husband_article_id != "Handshake":
+        show_interest(wife_article_id, husband_article_id)
+    else:
+        show_interest_handshake(wife_article_id)
     return redirect("/")
 
 '''Anmäl att ett byte har genomförts eller inte och lägger in det i wife_confirmed'''
