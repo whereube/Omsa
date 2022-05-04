@@ -464,3 +464,31 @@ def edit_article_catergory(category_id, article_id):
     cursor.close()
     connection.commit()
     close_db_omsa(connection)
+
+
+def get_completed_transactions(user_id):
+    '''
+    Hämtar alla artiklar som har användarens user_id och som är del av en genomförd transaktion
+    args:
+        user_id: Användarens id
+    '''
+    connection = open_db_omsa()
+
+    cursor = connection.cursor()
+    cursor.execute("""
+    select * from transaction
+    left outer join article as wife_article on transaction.wife_article_id = wife_article.id
+    left outer join article as husband_article on transaction.husband_article_id = husband_article.id
+    left outer join profile as wife on wife_article.user_id = wife.id
+    left outer join profile as husband on husband_article.user_id = husband.id
+    left outer join profile as husband_handshake on transaction.husband_id = husband_handshake.id
+    where wife_complete = True 
+    and husband_complete = true
+    and (wife_article.user_id = %s
+    or husband_article.user_id = %s)
+    order by transaction.date_completed desc
+    """, (user_id, user_id,))
+    records = cursor.fetchall()
+    cursor.close()
+    close_db_omsa(connection)
+    return records

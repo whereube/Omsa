@@ -1,0 +1,65 @@
+{% extends "base.html" %} {% block title %}Transaktionshistorik{% endblock %} {% block content
+    %}
+<div>
+    <h1>Transaktionshistorik</h1>
+    {% for trade in trades: %}
+        {% if trade[1] == user_id %}
+            <div class="trade_card">
+                <div class="card" style="width: 24rem;">
+                    {%for image in images%}
+                        {%if trade[1] == image[1]%}
+                            <img id="temp_pic" src="/static/article_images/{{image[2]}}" class="card-img-top" alt="Artikelbild">
+                        {%endif%}
+                    {%endfor%}
+                    <div class="card-body">
+                        <h4 class="card-title">{{trade[12]}}</h4>
+                        <p>{{trade[13]}}</p>
+                    </div>
+                </div>
+
+                <div class="card" style="width: 24rem;">
+                    {%for image in images%}
+                        {%if trade[2] == image[1]%}
+                            <img id="temp_pic" src="/static/article_images/{{image[2]}}" class="card-img-top" alt="Artikelbild">
+                        {%endif%}
+                    {%endfor%}
+                    <div class="card-body">
+                        <h4 class="card-title">{{trade[22]}}</h4>
+                        <p>{{trade[23]}}</p>
+                    </div>
+                </div>
+            </div>
+        {% elif trade[1] != user_id %}
+            <div class="trade_card">
+                <div class="card" style="width: 24rem;">
+                    {%for image in images%}
+                        {%if trade[2] == image[1]%}
+                            <img id="temp_pic" src="/static/article_images/{{image[2]}}" class="card-img-top" alt="Artikelbild">
+                        {%endif%}
+                    {%endfor%}
+                    <div class="card-body">
+                        <h4 class="card-title">{{trade[22]}}</h4>
+                        <p>{{trade[23]}}</p>
+                    </div>
+                </div>
+                <div class="arrow_box">
+                    <div class="arrow">⇆</div>
+                        <p>Genomfört: {{trade[5].strftime('%Y-%m-%d')}}</p>
+                </div>
+
+                <div class="card" style="width: 24rem;">
+                    {%for image in images%}
+                        {%if trade[1] == image[1]%}
+                            <img id="temp_pic" src="/static/article_images/{{image[2]}}" class="card-img-top" alt="Artikelbild">
+                        {%endif%}
+                    {%endfor%}
+                    <div class="card-body">
+                        <h4 class="card-title">{{trade[12]}}</h4>
+                        <p>{{trade[13]}}</p>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>
+{% endblock %}

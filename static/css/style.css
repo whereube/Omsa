@@ -59,7 +59,8 @@ nav{
 }
 
 #temp_pic{
-max-width: 200px;
+width: 200px;
+height: 200px;
 }
 
 #profile-btn{
@@ -143,4 +144,22 @@ max-width: 200px;
     background-color: rgb(221, 221, 221);
     transition: 0.5s;
     border-radius: 5px;
+}
+
+.trade_card{
+display: flex;
+align-items: center;
+box-shadow: 3px 3px 3px 3px #d8d8d8;
+border-radius: 15px 15px 15px 15px;
+margin-bottom: 30px;
+}
+
+.arrow_box{
+display: flex;
+flex-direction: column;
+text-align: center;
+}
+
+.arrow{
+font-size: 128px;
 }
