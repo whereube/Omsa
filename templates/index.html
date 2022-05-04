@@ -37,7 +37,9 @@
           <p>Kategori: {{row[31]}}</p>
           <div class="collapse collapse-horizontal" id="collapseWidthExample{{row[0]}}">
             <form action="/wife_article_id" method="POST">
-              <input type="hidden" id="wife_article_id" name="wife_article_id" value={{row[0]}}>
+              {% if current_user_id != None %}
+                <input type="hidden" id="wife_article_id" name="wife_article_id" value={{row[0]}}>
+              {%endif%}
               <button  class="btn btn-primary" type="submit">Visa intresse</button>
             </form>
           </div>
