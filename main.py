@@ -203,10 +203,14 @@ def submit_interest():
 def get_wife_article_id():
 
     user_id = session.get("USER_ID")
-    articles = get_user_articles(user_id)  
+    if user_id == None:
+        return redirect("/login")
+    elif user_id != None:
+        articles = get_user_articles(user_id)  
 
-    wife_article_id = request.form.get("wife_article_id")
-    return render_template("/choose_exchange.html", articles = articles, wife_article_id = wife_article_id)
+        wife_article_id = request.form.get("wife_article_id")
+        return render_template("/choose_exchange.html", articles = articles, wife_article_id = wife_article_id)
+
 
 '''Funktionen för att registrera intresse i databasen'''
 @app.route("/show_interest", methods=['GET', 'POST'])
