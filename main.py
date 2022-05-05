@@ -28,13 +28,15 @@ def chat_list():
 def show_chat_room(chat_id):
     user_id = session.get('USER_ID')
     linked_user = get_chat_id(user_id)
-    chat_messages = get_chat_messages(chat_id)
-    return render_template("/message_page.html", user_id = user_id, chat_id = chat_id, linked_user = linked_user, chat_messages = chat_messages)
+    chat_info = get_chat_messages(chat_id)
+    print(chat_info)
+    return render_template("/message_page.html", user_id = user_id, chat_id = chat_id, linked_user = linked_user, chat_info = chat_info)
 
 
 @app.route("/send_message", methods=["GET", "POST"])
 def handle_messages():
     user_message = request.form.get("user_message")
+
     chat_message_to_db(user_message)
     return redirect ("/message_page/<chat_id>")
 
