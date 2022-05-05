@@ -48,14 +48,12 @@ nav{
 }
 
 .card{
-    margin: 30px;
+    margin: 2px;
     padding: 20px;
-    box-shadow: 0px 0px 11px 0px rgba(0,0,0,0.75);
-    -webkit-box-shadow: 0px 0px 11px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 0px 11px 0px rgba(0,0,0,0.75);
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
+    max-width: 900px;
 }
 
 #temp_pic{
@@ -162,4 +160,26 @@ text-align: center;
 
 .arrow{
 font-size: 128px;
+}
+
+#show_sub_categories{
+    max-width: 900px;
+    margin:auto;
+}
+
+#search_category_id{
+    max-width: 900px;
+    margin:auto;
+}
+
+.search_button{
+    float:right;
+    margin-right:30px;
+    margin-top:10px;
+    margin-bottom:10px;
+}
+
+.search_by_title{
+    max-width:900px;
+    margin:auto;
 }
