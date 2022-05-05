@@ -1,20 +1,23 @@
 {% extends "base.html" %} {% block title %}Meddelanden{% endblock %} {% block content
     %}
 <div class="message-box">
-    
-    <div class="conversation-box">
-        <p>Message: {{chat_messages}}</p>
+    {%for row in chat_info%}
+    <div class="message-container">
+        <p class="message-sent-from">{{row[6]}}</p>
+        <p class="message-bubble">{{row[3]}}</p>
+        <p class="message-time-stamp">{{row[4]}}</p>
     </div>
+    {%endfor%}
+</div>
 
-    <div class="send-form">
-        <form action="/send_message" id="message_form" method="POST">
+<div class="send-form">
+    <form action="/send_message" id="message_form" method="POST">
 
-            <label for="#">Meddelande</label>
-            <input type="text" name="message" id="message_id">
+        <label for="#">Meddelande</label>
+        <input type="text" name="message" id="message_id">
 
-            <input class="btn btn-primary" type="submit" value="Submit" id="message_submit">
-        </form>
-    </div>
+        <input class="btn btn-primary" type="submit" value="Submit" id="message_submit">
+    </form>
 </div>
 
 <script type="text/javascript">

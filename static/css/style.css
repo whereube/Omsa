@@ -3,7 +3,7 @@
     --light: #FEFAEC;
     --dark: rgb(37, 37, 37);
     --background: #f3e6aa;
-    --grey: #BEBEBE;
+    --grey: #e7e6e6;
 }
 
 body{
@@ -134,13 +134,44 @@ max-width: 200px;
     color: var(--dark);
 }
 
-.message-box{
-    max-height: 500px;
-    overflow: scroll;
-}
-
 #navbar-links:hover{
     background-color: rgb(221, 221, 221);
     transition: 0.5s;
     border-radius: 5px;
+}
+
+.message-box{
+    max-height: 300px;
+    overflow: scroll;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.message-bubble{
+    padding: 5px;
+    background-color: var(--grey);
+    border-radius: 5px;
+    box-shadow: 1px 1px var(--dark);
+    margin-bottom: 0px;
+}
+
+.message-container{
+    width: 150px;
+    margin: 10px 0px 0px 20px;
+
+}
+
+.send-form{
+    padding: 10px;
+}
+.message-sent-from{
+    font-size: 10px;
+    color: var(--dark);
+    margin-bottom: 0px;
+}
+.message-time-stamp{
+    font-size: 10px;
+    color: var(--dark);
+    margin-top: 0px;
 }
