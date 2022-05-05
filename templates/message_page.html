@@ -21,7 +21,20 @@
 </div>
 
 <script type="text/javascript">
-    $(document).ready(function() {
+    $.post("/send_message",
+    {
+        user_message: $("#message_id").val()
+    }
+    ).done(function (data) {
+        location.reload(); // Detta körs när man får svar från servern (t.ex. att sparningen lyckades).
+    }).fail(function (error) {
+        // Logga eventuella fel
+        console.log(error);
+    });
+</script>
+
+<!--
+$(document).ready(function() {
      $('#message_form').submit(function(){
         $.post("/send_message", {
          user_message: $('#message_id').val(),
@@ -31,6 +44,7 @@
         return false;
       });
     }); 
-</script>
+
+-->
 
 {% endblock %}
