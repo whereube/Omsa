@@ -143,7 +143,6 @@ max-width: 200px;
 .message-box{
     max-height: 300px;
     overflow: scroll;
-    border: 1px solid black;
     display: flex;
     flex-direction: column-reverse;
 }

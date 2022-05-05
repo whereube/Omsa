@@ -57,7 +57,7 @@ def get_chat_messages(chat_id):
     connection = open_db_omsa()
     cursor = connection.cursor()
     cursor.execute("""
-    select message.id, message.chat_id, message.user_id, message.text, message.time_sent, profile.user_name 
+    select * from message
     inner join profile on message.user_id = profile.id
     where chat_id = %s 
     order by time_sent desc
