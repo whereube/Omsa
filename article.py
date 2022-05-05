@@ -330,9 +330,10 @@ def get_article_by_title_and_cateogry(search_term, category_id):
     cursor.close()
     close_db_omsa(connection)
     return records
+
 def edit_to_article(title, description, zip_code, tier, edit, city, article_id):
     connection = open_db_omsa()
-
+    print(city)
     cursor = connection.cursor()
     cursor.execute("""
     UPDATE article 
