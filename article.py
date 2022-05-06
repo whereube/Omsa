@@ -2,6 +2,7 @@ import psycopg2
 import psycopg2.extras
 from datetime import date, datetime
 import uuid
+psycopg2.extras.register_uuid()
 
 def open_db_omsa():
     try:
@@ -213,6 +214,7 @@ def get_user_articles(user_id):
     args:
         user_id: Användarens id
     '''
+
     connection = open_db_omsa()
 
     cursor = connection.cursor()
