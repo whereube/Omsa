@@ -141,13 +141,42 @@ height: 200px;
 
 .message-box{
     max-height: 300px;
-    overflow: scroll;
+    overflow-y: scroll;
     display: flex;
     flex-direction: column-reverse;
 }
 
+#message_form{
+    border-top: 1px solid var(--dark);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 20px 40px;
+
+}
+
+#message_id{
+    height: 100px;
+}
+
+#message_submit{
+    background-color: var(--primary);
+    border: 1px solid var(--dark);
+    margin-top: 20px;
+}
+
+#chat-container{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: 15%;
+    margin-right: 15%;
+    border: 3px solid var(--dark);
+    border-radius: 7px;
+}
+
 .message-bubble{
-    padding: 5px;
+    padding: 8px;
     background-color: var(--grey);
     border-radius: 5px;
     box-shadow: 1px 1px var(--dark);
@@ -194,9 +223,15 @@ font-size: 128px;
     margin:auto;
 }
 
-.message-container{
+.message-container-left{
     width: 150px;
     margin: 10px 0px 0px 20px;
+}
+
+.message-container-right{
+    width: 150px;
+    margin-top: 10px;
+    margin-left: 74%;
 }
 
 .send-form{
