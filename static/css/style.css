@@ -152,11 +152,12 @@ max-width: 200px;
 
 
 
+/* CSS - popup till förklaring av handslag*/
 .tooltip {
     font-family: sans-serif;
     position: relative;
     display: inline-block;
-    border-bottom: 1px black;
+    border-bottom: 1px black dotted;
     opacity: 1;
     width : auto
   }
@@ -170,7 +171,7 @@ max-width: 200px;
     border-radius: 6px;
     padding: 8px;
      
-  /* Position the tooltip */
+  /* Position för tooltip */
      position: absolute;
      z-index: 0.5;
      top: -10px;
