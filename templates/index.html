@@ -1,6 +1,5 @@
 {% extends "base.html" %} {% block title %}Start{% endblock %} {% block content%}
 <h1>Startsidan</h1>
-
 <form action="/article_search" method="POST">
   <div class="mb-3">
     <label for="free_text" class="form-label">Skriv sökord</label>
@@ -10,16 +9,16 @@
   <div class="mb-3">
     <label for="main_category" class="form-label">Huvudkategori</label>
     <select id="search_category_id" name="main_category" class="form-control">
-        <option value=None selected="true" disabled>Välj kategori</option>
-        <option value="">Ingen</option>
-        {%for category in main_categories%}
-        <option value={{category[0]}}>{{category[1]}}</option>
-        {%endfor%}
+      <option value=None selected="true" disabled>Välj kategori</option>
+      <option value="">Ingen</option>
+      {%for category in main_categories%}
+      <option value={{category[0]}}>{{category[1]}}</option>
+      {%endfor%}
     </select>
-    <div id="show_sub_categories"></div>
-    <input type="submit" class="btn btn-primary search_button" value="Sök">
-  </div>
+  <div id="show_sub_categories"></div>
+  <input type="submit" class="btn btn-primary search_button" value="Sök">
 </form>
+</div>
   <div class="conatiner-articles">
     <div class="row justify-content-md-center">
   {%for row in articles%}
@@ -34,7 +33,7 @@
           {%endfor%}
           <div class="col-md-8">
             <div class="card-body">
-              <h4 class="card-title">Rubrik: {{row[2]}}</h4>
+              <h4 class="card-title">{{row[2]}}</h4>
               <p>Stad: {{row[23]}}</p>
               <p>Prisnivå: {{row[26]}}</p>
               <p>Kategori: {{row[31]}}</p>
@@ -69,7 +68,7 @@ $(document).ready(function() {
     });
     return false;
   });
-}); 
+});
 </script>
 
 
