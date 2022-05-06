@@ -32,7 +32,7 @@ def show_chat_room(chat_id):
 
     return render_template("/message_page.html", user_id = user_id, chat_id = chat_id, linked_user = linked_user, chat_info = chat_info)
 
-
+    
 @app.route("/send_message", methods=["GET", "POST"])
 def handle_messages():
     
