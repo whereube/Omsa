@@ -1,48 +1,33 @@
 {% extends "base.html" %} {% block title %}Meddelanden{% endblock %} {% block content
     %}
-<div class="message-box">
-    {%for row in chat_info%}
-    <div class="message-container">
-        <p class="message-sent-from">{{row[6]}}</p>
-        <p class="message-bubble">{{row[3]}}</p>
-        <p class="message-time-stamp">{{row[4].strftime('%Y-%m-%d %-H:%-M')}}</p>
+<div id="chat-container">
+    <div class="message-box">
+        {%for row in chat_info%}
+            {%if row[2] == user_id%}
+            <div class="message-container-left">
+                <p class="message-sent-from">{{row[6]}}</p>
+                <p class="message-bubble">{{row[3]}}</p>
+                <p class="message-time-stamp">{{row[4].strftime('%Y-%m-%d %-H:%-M')}}</p>
+            </div>
+            {%else%}
+            <div class="message-container-right">
+                <p class="message-sent-from">{{row[6]}}</p>
+                <p class="message-bubble">{{row[3]}}</p>
+                <p class="message-time-stamp">{{row[4].strftime('%Y-%m-%d %-H:%-M')}}</p>
+            </div>
+            {%endif%}
+        {%endfor%}
     </div>
-    {%endfor%}
+
+    <div class="send-form">
+        <form action="/send_message" id="message_form" method="POST">
+            <label for="#">Meddelande</label>
+            <textarea type="text" name="message" id="message_id"></textarea>
+            {%for row in chat_info[:1]%}
+            <input type="hidden" value="{{row[1]}}" name="chat_id" id="chat_id">
+            {%endfor%}
+            <input class="btn btn-primary" type="submit" value="Skicka" id="message_submit">
+        </form>
+    </div>
 </div>
-
-<div class="send-form">
-    <form action="/send_message" id="message_form" method="POST">
-        <label for="#">Meddelande</label>
-        <input type="text" name="message" id="message_id">
-        <input class="btn btn-primary" type="submit" value="Submit" id="message_submit">
-    </form>
-</div>
-
-<script type="text/javascript">
-    $.post("/send_message",
-    {
-        user_message: $("#message_id").val()
-    }
-    ).done(function (data) {
-        location.reload(); // Detta körs när man får svar från servern (t.ex. att sparningen lyckades).
-    }).fail(function (error) {
-        // Logga eventuella fel
-        console.log(error);
-    });
-</script>
-
-<!--
-$(document).ready(function() {
-     $('#message_form').submit(function(){
-        $.post("/send_message", {
-         user_message: $('#message_id').val(),
-        }, function(response){
-            location.reload(true);
-        });
-        return false;
-      });
-    }); 
-
--->
-
 {% endblock %}

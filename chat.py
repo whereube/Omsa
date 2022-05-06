@@ -58,7 +58,7 @@ def get_chat_messages(chat_id):
     cursor = connection.cursor()
     cursor.execute("""
     select * from message
-    inner join profile on message.user_id = profile.id
+    left outer join profile on message.user_id = profile.id
     where chat_id = %s 
     order by time_sent desc
     """,(chat_id,))
@@ -69,13 +69,11 @@ def get_chat_messages(chat_id):
     return records
 
 
-def chat_message_to_db(user_message):
+def chat_message_to_db(user_message, chat_id):
     psycopg2.extras.register_uuid()
     user_id = session.get('USER_ID')
 
-    get_chat_id_from_db = get_chat_id(user_id)
-    for row in get_chat_id_from_db:
-        chat_id = row[0]
+    
     time_now = datetime.now()
     message_id = uuid.uuid4()
     connection = open_db_omsa()
