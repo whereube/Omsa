@@ -5,17 +5,15 @@
     <div class="message-container">
         <p class="message-sent-from">{{row[6]}}</p>
         <p class="message-bubble">{{row[3]}}</p>
-        <p class="message-time-stamp">{{row[4]}}</p>
+        <p class="message-time-stamp">{{row[4].strftime('%Y-%m-%d %-H:%-M')}}</p>
     </div>
     {%endfor%}
 </div>
 
 <div class="send-form">
     <form action="/send_message" id="message_form" method="POST">
-
         <label for="#">Meddelande</label>
         <input type="text" name="message" id="message_id">
-
         <input class="btn btn-primary" type="submit" value="Submit" id="message_submit">
     </form>
 </div>
