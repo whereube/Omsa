@@ -213,7 +213,7 @@ def submit_interest():
 @app.route("/wife_article_id", methods=['GET', 'POST'])
 def get_wife_article_id():
 
-    user_id = session.get('user_id')
+    user_id = session.get("USER_ID")
     if user_id == None:
         return redirect("/login")
     elif user_id != None:
