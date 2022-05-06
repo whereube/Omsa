@@ -14,26 +14,30 @@
     <form action="/send_message" id="message_form" method="POST">
         <label for="#">Meddelande</label>
         <input type="text" name="message" id="message_id">
+        <input type="hidden" value="{{chat_info[0,1]}}" id="chat_id">
         <input class="btn btn-primary" type="submit" value="Submit" id="message_submit">
     </form>
 </div>
 
 <script type="text/javascript">
-    $.post("/send_message",
-    {
-        user_message: $("#message_id").val()
-    }
-    ).done(function (data) {
-        location.reload(); // Detta körs när man får svar från servern (t.ex. att sparningen lyckades).
-    }).fail(function (error) {
-        // Logga eventuella fel
-        console.log(error);
+    $('#message_form').submit(function(){
+        $.post("/send_message",
+            {
+                user_message: $("#message_id").val(),
+                chat_id: $("#chat_id").val()
+            }
+        ).done(function (data) {
+            location.reload(); // Detta körs när man får svar från servern (t.ex. att sparningen lyckades).
+        }).fail(function (error) {
+            // Logga eventuella fel
+            console.log(error);
+        }); 
     });
 </script>
 
 <!--
 $(document).ready(function() {
-     $('#message_form').submit(function(){
+    $('#message_form').submit(function(){
         $.post("/send_message", {
          user_message: $('#message_id').val(),
         }, function(response){
@@ -42,7 +46,6 @@ $(document).ready(function() {
         return false;
       });
     }); 
-
 -->
 
 {% endblock %}
