@@ -493,3 +493,16 @@ def get_completed_transactions(user_id):
     cursor.close()
     close_db_omsa(connection)
     return records
+
+def transaction_delete(transaction_id):
+    connection = open_db_omsa()
+
+    cursor = connection.cursor()
+    cursor.execute("""
+    delete from transaction
+    where transaction.id = %s
+    """,(transaction_id,))
+
+    cursor.close()
+    connection.commit()
+    close_db_omsa(connection)
