@@ -26,16 +26,18 @@ def create_chat_id(husband_id, wife_id):
     '''
     psycopg2.extras.register_uuid()
     connection = open_db_omsa()
+    chat_id = uuid.uuid4()
 
     cursor = connection.cursor()
     cursor.execute("""
     insert into chat (id, husband_id, wife_id)
     values (%s, %s, %s)
-    """,(uuid.uuid4(), husband_id, wife_id))
+    """,(chat_id, husband_id, wife_id))
 
     cursor.close()
     connection.commit()
     close_db_omsa(connection)
+    return chat_id
 
 def get_chat_id(user_id):
     user_id = session.get('USER_ID')
@@ -87,3 +89,36 @@ def chat_message_to_db(user_message, chat_id):
     cursor.close()
     connection.commit()
     close_db_omsa(connection)
+
+def create_standard_message(chat_id, user_id, user_message):
+    psycopg2.extras.register_uuid()
+    
+    time_now = datetime.now()
+    message_id = uuid.uuid4()
+    connection = open_db_omsa()
+    
+    cursor = connection.cursor()
+    cursor.execute("""
+    insert into message (id, chat_id, user_id, text, time_sent)
+    values (%s, %s, %s, %s, %s)
+    """,(message_id, chat_id, user_id, user_message, time_now,))
+
+    cursor.close()
+    connection.commit()
+    close_db_omsa(connection)
+
+def check_if_chat_exists(husband_id, wife_id):
+    connection = open_db_omsa()
+    cursor = connection.cursor()
+
+    cursor.execute("""
+    select id from chat
+    where (husband_id = %s or wife_id = %s)
+    and (husband_id = %s or wife_id = %s)
+    """,(husband_id, husband_id, wife_id, wife_id,))
+
+    records = cursor.fetchall()
+    cursor.close()
+    connection.commit()
+    close_db_omsa(connection)
+    return records

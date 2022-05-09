@@ -200,8 +200,16 @@ def submit_interest():
     wife_id = request.form.get("wife_id")
     husband_id = request.form.get("husband_id")
     if interest == 1:
+        chat_exists = check_if_chat_exists(husband_id, wife_id)
+        print(chat_exists)
         save_interest_to_db(transaction_id)
-        create_chat_id(wife_id, husband_id)
+        if chat_exists == []:
+            chat_id = create_chat_id(wife_id, husband_id)
+            create_standard_message(chat_id, wife_id, 'Hej, jag är också intresserad av ett byte')
+        else:
+            for chat in chat_exists:
+                create_standard_message(chat, wife_id, 'Hej, jag är också intresserad av ett byte')
+
     elif interest == 0:
         remove_interest_from_db(transaction_id)
 
