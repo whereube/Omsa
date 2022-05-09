@@ -7,13 +7,13 @@
             <div class="message-container-left">
                 <p class="message-sent-from">{{row[6]}}</p>
                 <p class="message-bubble">{{row[3]}}</p>
-                <p class="message-time-stamp">{{row[4].strftime('%Y-%m-%d %-H:%-M')}}</p>
+                <p class="message-time-stamp">{{row[4].strftime('%Y-%m-%d')}}</p>
             </div>
             {%else%}
             <div class="message-container-right">
                 <p class="message-sent-from">{{row[6]}}</p>
                 <p class="message-bubble">{{row[3]}}</p>
-                <p class="message-time-stamp">{{row[4].strftime('%Y-%m-%d %-H:%-M')}}</p>
+                <p class="message-time-stamp">{{row[4].strftime('%Y-%m-%d')}}</p>
             </div>
             {%endif%}
         {%endfor%}
