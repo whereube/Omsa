@@ -61,6 +61,11 @@ nav{
     background-color: #F3F3F3;
 }
 
+.small_pic{
+height: 150px;
+width: 150px;
+}
+
 #profile-btn{
     background-color: var(--primary);
     width: 100px;
@@ -188,8 +193,11 @@ nav{
 .trade_card{
 display: flex;
 align-items: center;
-box-shadow: 3px 3px 3px 3px #d8d8d8;
-border-radius: 15px 15px 15px 15px;
+margin-bottom: 30px;
+}
+
+.large_trade_card{
+border: rgb(136, 133, 133) solid 2px;
 margin-bottom: 30px;
 }
 
@@ -299,4 +307,13 @@ max-height: 100%;
 max-width:100%;
 display: block;
 margin:auto;
+}
+
+
+.card_form{
+ margin: 10px;
+}
+
+.contact_info{
+margin: 10px;
 }
