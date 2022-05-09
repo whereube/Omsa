@@ -37,7 +37,7 @@
               <p>Stad: {{row[23]}}</p>
               <p>Prisnivå: {{row[26]}}</p>
               <p>Kategori: {{row[31]}}</p>
-              <p class="card-text"><small class="text-muted">Skapad: {{row[6]}}</small></p>
+              <p class="card-text"><small class="text-muted">Skapad: {{row[6].strftime('%Y-%m-%d')}}</small></p>
               <div class="collapse" id="collapseWidthExample{{row[0]}}">
                 <p>{{row[3]}}</p>
                 <form action="/wife_article_id" method="POST">
