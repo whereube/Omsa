@@ -3,7 +3,7 @@
 <div id="chat-container">
     <div class="message-box">
         {%for row in chat_info%}
-            {%if row[2] == user_id%}
+            {%if row[2] != user_id%}
             <div class="message-container-left">
                 <p class="message-sent-from">{{row[6]}}</p>
                 <p class="message-bubble">{{row[3]}}</p>
