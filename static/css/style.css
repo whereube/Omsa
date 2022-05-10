@@ -197,9 +197,9 @@ margin-bottom: 30px;
 }
 
 .large_trade_card{
-border: rgb(136, 133, 133) solid 2px;
 margin-bottom: 30px;
 background-color: #F3F3F3;
+border-radius: 5px;
 }
 
 .arrow_box{
@@ -209,7 +209,7 @@ text-align: center;
 }
 
 .arrow{
-font-size: 128px;
+font-size: 100px;
 }
 
 #show_sub_categories{
