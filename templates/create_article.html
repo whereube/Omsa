@@ -1,22 +1,18 @@
 {% extends "base.html" %} {% block title %}Skapa artikel{% endblock %} {% block content
     %}
-<h2>Skapa en artikel</h2>
+<h1 class="center_h1">Skapa en artikel</h1>
 
 <form class="was-validated" method="POST" action="/article_created" enctype=multipart/form-data id="create-art-form">
     
-    <div class="form-region">
+    <div class="mb-3">
         <h2 class="art-headers">Generell information</h2>
-        <div class="col-md-4">
+        <div class="col-md-12">
             <label for="validationServer01" class="form-label">Titel</label>
             <input type="text" class="form-control is-valid border-secondary" id="validationServer01" name="title" required>
         </div>
 
         <div class="mb-3">
-        <label for="validationTextarea" class="form-label">Beskrivning</label>
-        <textarea class="form-control is-invalid border-secondary" id="validationTextarea" name="description" placeholder="Ju mer detaljer desto bättre!" required></textarea>
-        </div>
-
-        <div class="mb-3">
+            <label for="search_category_id" class="form-label">Välj kategori</label>
             <select class="form-select border-secondary" required aria-label="select example" name="main_category" id="search_category_id">
             <option value="">Kategori</option>
             {%for row in categories%}:
@@ -26,7 +22,7 @@
             <div id="show_sub_categories"></div>
         </div>
     </div>
-    <div class="form-region">
+    <div class="mb-3">
         <h2 class="art-headers">Plats</h2>
         <div class="mb-3">
             <select class="form-select border-secondary" required aria-label="select example" name="city">
@@ -36,21 +32,14 @@
             {%endfor%}
             </select>
         </div>
-        <div class="col-md-3 position-relative">
+        <div class="col-md-12 position-relative">
             <label for="validationTooltip05" class="form-label">Postnummer</label>
             <input type="text" class="form-control border-secondary" id="validationTooltip05" name="zip_code" pattern="[0-9]{5}" required>
         </div>
     </div>
     
-    
-    <div class="form-region">
-        <h2 class="art-headers">Bild</h2>
-        <div class="mb-3">
-        <input type="file" class="form-control border-secondary" aria-label="file example" name=file required>
-        </div>
-    </div>
 
-    <div class="form-region">
+    <div class="mb-3">
         <h2 class="art-headers">Pris-tier</h2>
         {%for row in tiers%}
         <div class="form-check"> 
@@ -58,6 +47,18 @@
             <label class="form-check-label" for="validationFormCheck2">{{row[1]}}</label>
         </div>
         {%endfor%}
+    </div>
+
+    <div class="mb-3">
+        <label for="validationTextarea" class="form-label">Beskrivning</label>
+        <textarea class="form-control is-invalid border-secondary" id="validationTextarea" name="description" placeholder="Ju mer detaljer desto bättre!" required></textarea>
+    </div>
+
+    <div class="mb-3">
+        <h2 class="art-headers">Bild</h2>
+        <div class="mb-3">
+        <input type="file" class="form-control border-secondary" aria-label="file example" name=file required>
+        </div>
     </div>
 
     <div class="mb-3">

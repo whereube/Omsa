@@ -123,7 +123,7 @@ width: 150px;
 }
 
 #submit-btn{
-    background-color: var(--background);
+    background-color: var(--primary);
     border: 1px solid var(--light);
 }
 
@@ -316,4 +316,8 @@ margin:auto;
 
 .contact_info{
 margin: 10px;
+}
+
+.center_h1{
+text-align: center;
 }
