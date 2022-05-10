@@ -46,6 +46,7 @@ def trade_proposals(user_id):
     where (transaction.wife_complete is null or transaction.husband_complete is null)
     and (transaction.denied is null or transaction.denied = FALSE)
     and (wife.id = %s or husband.id = %s or husband_handshake.id = %s)
+    order by transaction.date_proposed desc
     """, (user_id, user_id, user_id,)) 
     records = cursor.fetchall()
     cursor.close()
