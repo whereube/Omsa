@@ -180,7 +180,7 @@
 
     <h2>Väntar på svar:</h2>
     {% for trade in trades: %}
-        {% if trade[11] == user_id and trade[8] == None %}
+        {% if trade[21] == user_id and trade[8] == None %}
             <div class="large_trade_card">
                 <div class="trade_card" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample{{trade[0]}}" aria-expanded="false" aria-controls="collapseWidthExample">
                     <div class="card mb-3" style="width: 48rem;">
