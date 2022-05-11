@@ -41,7 +41,7 @@ nav{
 .container {
     max-width: 1000px;
     margin-top: 50px;
-    padding: 20px;
+    padding: 50px;
     display: flex;
     flex-direction: column;
     background-color: white;
@@ -223,9 +223,10 @@ margin:auto;
 
 .search_button{
 float:right;
-margin-right:30px;
 margin-top:10px;
 margin-bottom:10px;
+background-color: var(--primary);
+border: 1px solid var(--light);
 }
 
 .search_by_title{
