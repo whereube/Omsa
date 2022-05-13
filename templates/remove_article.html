@@ -1,5 +1,7 @@
 {% extends "base.html" %} {% block title %}Remove{% endblock %} {% block content
     %}
+
+<h1 class="center_h1">Ta bort en artikel</h1>
 <form action="/article_removed" method="POST">
     <select id="article" name="article">
         {%for row in articles%}:
