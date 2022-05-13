@@ -8,12 +8,20 @@
   <div class="mb-3">
     <select id="search_category_id" name="main_category" class="form-control">
       <option value=None selected="true" disabled>Välj kategori</option>
-      <option value="">Ingen</option>
+      <option value="">Alla</option>
       {%for category in main_categories%}
       <option value={{category[0]}}>{{category[1]}}</option>
       {%endfor%}
     </select>
   <div id="show_sub_categories"></div>
+    <select id="city_id" name="city_id" class="form-control">
+      <option value=None selected="true" disabled>Välj stad</option>
+      <option value="">Alla</option>
+      {%for city in cities%}
+      <option value={{city[0]}}>{{city[1]}}</option>
+      {%endfor%}
+    </select>
+  <input id="reset_search" type="reset" class="form-control" value="Rensa" aria-label="Username" aria-describedby="basic-addon1">
   <input type="submit" class="btn btn-primary search_button" value="Sök">
 </form>
 </div>
