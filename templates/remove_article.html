@@ -1,13 +1,17 @@
 {% extends "base.html" %} {% block title %}Remove{% endblock %} {% block content
     %}
 
-<h1 class="center_h1">Ta bort en artikel</h1>
-<form action="/article_removed" method="POST">
-    <select id="article" name="article">
-        {%for row in articles%}:
-        <option value={{row[0]}}>{{row[2]}}</option>
-        {%endfor%}
-    </select>
-    <input type="submit" value="Ta bort">
-</form>
+<h1 class="center_h1" >Ta bort en artikel</h1>
+<div id="remove_article">
+<p>Vill du verkligen ta bort artikeln: {{article_title}}</p>
+    <div id="remove_article_forms">
+        <form action="/article_removed" method="POST">
+            <input type="hidden" name="article_id" id="article_id" value={{article_id}}>
+            <input type="submit" value="Ja" class="form-control" id="remove_btn">
+        </form>
+        <form action="/show_own_storage">
+            <input type="submit" value="Nej" class="form-control" id="remove_btn">
+        </form>
+    </div>
+</div>
 {% endblock %}

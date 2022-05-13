@@ -16,6 +16,11 @@
                 <input type="hidden" name="article_id" id="article_id" value={{row[0]}}>
                 <button type="submit">Redigera</button>
             </form>
+            <form action="/remove" method="post">
+                <input type="hidden" name="article_id" id="article_id" value={{row[0]}}>
+                <input type="hidden" name="article_title" id="article_title" value={{row[2]}}>
+                <button type="submit">Ta bort artikel</button>
+            </form>
         </div>
     </div>
 {%endfor%}
