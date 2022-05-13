@@ -346,7 +346,7 @@ font-weight: bold;
 color: var(--primary);
 }
 
-.card-body{
+.article_body{
 flex-direction: column;
 display:flex;
 flex-direction: row;
@@ -354,7 +354,7 @@ flex-wrap: wrap;
 }
 
 .article_h2{
-margin-left:15%;
+margin-top:5%;
 }
 
 .article_p{

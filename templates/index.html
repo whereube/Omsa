@@ -30,12 +30,12 @@
               {%endif%}
           {%endfor%}
           <div class="col-md-8">
-            <div class="card-body">
-              <h2 class="card-title col-md-12 article_h2">{{row[2]}}</h2>
+            <div class="card-body article_body">
+              <h2 class="card-title col-md-6 article_h2">{{row[2]}}</h2>
               <p class="col-md-6 article_p">Stad: {{row[23]}}</p>
               <p class="col-md-6 article_p">Prisnivå: {{row[26]}}</p>
               <p class="col-md-6 article_p">Kategori: {{row[31]}}</p>
-              <p class="card-text col-md-6 article_p"><small class="text-muted">Skapad: {{row[6].strftime('%Y-%m-%d')}}</small></p>
+              <p class="card-text col-md-12 article_p"><small class="text-muted">Skapad: {{row[6].strftime('%Y-%m-%d')}}</small></p>
               <div class="collapse" id="collapseWidthExample{{row[0]}}">
                 <p>{{row[3]}}</p>
                 {%if row[1] != user_id%}
