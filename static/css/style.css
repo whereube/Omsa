@@ -324,7 +324,7 @@ margin: 10px;
 text-align: center;
 }
 
-#reset_search{
+#remove_btn {
 width:80px;
 margin-top:16px;
 background-color: var(--primary);
@@ -360,4 +360,13 @@ margin-left:15%;
 .article_p{
 margin-top:5%;
 font-size:18px;
+}
+
+#remove_article{
+margin-top: 50px;
+}
+
+#remove_article_forms{
+display: flex;
+flex-direction: row;
 }

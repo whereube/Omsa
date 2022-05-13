@@ -50,7 +50,8 @@ def start():
     main_categories = get_main_category()
     images = get_article_images()
     articles = get_articles()
-    return render_template("index.html", main_categories = main_categories, articles = articles, images = images)
+    user_id = session.get('USER_ID')
+    return render_template("index.html", main_categories = main_categories, articles = articles, images = images, user_id = user_id)
 
 @app.context_processor
 def context_processor():
@@ -96,18 +97,18 @@ def create_article():
     create_article_in_db(title, description, zip_code, tier, city, category, user_id, file.filename, sub_category)
     return redirect("/")
 
-@app.route("/remove")
+@app.route("/remove", methods=['GET', 'POST'])
 def remove_article_form():
     ''' 
     Hämtar in formuläret för att ta bort en artikel och skickar vidare detta för att ta bort en post i databasen
     '''
-    user_id = session["USER_ID"]
-    articles = get_user_articles(user_id)
-    return render_template("remove_article.html", articles = articles)
+    article_id = request.form.get("article_id")
+    article_title = request.form.get("article_title")
+    return render_template("remove_article.html", article_id = article_id, article_title = article_title)
 
 @app.route("/article_removed", methods=['GET', 'POST'])
 def remove_article():
-    article = request.form.get("article")
+    article = request.form.get("article_id")
     remove_article_from_db(article)
     return redirect("/")
 
@@ -140,7 +141,7 @@ def login_template():
                 user_name = item[3]
                 session["USER_ID"] = user_id
                 session['USER_NAME'] = user_name
-                return redirect("/show_profile_page")
+                return redirect("/")
     else:                
         return render_template("login.html")
 
