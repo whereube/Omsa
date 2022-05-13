@@ -141,7 +141,7 @@ def login_template():
                 user_name = item[3]
                 session["USER_ID"] = user_id
                 session['USER_NAME'] = user_name
-                return redirect("/show_profile_page")
+                return redirect("/")
     else:                
         return render_template("login.html")
 
