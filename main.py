@@ -50,8 +50,9 @@ def start():
     main_categories = get_main_category()
     images = get_article_images()
     articles = get_articles()
+    cities = get_city()
     user_id = session.get('USER_ID')
-    return render_template("index.html", main_categories = main_categories, articles = articles, images = images, user_id = user_id)
+    return render_template("index.html", main_categories = main_categories, articles = articles, images = images, user_id = user_id, cities = cities)
 
 @app.context_processor
 def context_processor():
@@ -279,6 +280,7 @@ def article_search():
     search_term = request.form.get("free_text")
     main_category = request.form.get("main_category")
     sub_category_1 = request.form.get("sub_category")
+    city = request.form.get("city_id")
     if search_term == '' and main_category != None and main_category != '':
         articles = get_article_by_category(main_category, sub_category_1)
     elif search_term != '' and ( main_category == None or main_category == ''):
@@ -288,7 +290,7 @@ def article_search():
     elif search_term == '' and (main_category == None or main_category == ''):
         articles = get_articles()
 
-    return render_template("/search_results.html", articles = articles, images = images, main_categories = main_categories)
+    return render_template("/search_results.html", articles = articles, images = images, main_categories = main_categories, city = city)
 @app.route("/edit_article", methods=["POST"])
 def edit_article():
     article_id = request.form.get("article_id") 
