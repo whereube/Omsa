@@ -36,14 +36,16 @@
                 {% if current_user_id == None %}
                 <a class="nav-link active" aria-current="page" href="/about">Vad är Ömsa?</a>
                 {% else %}
+                <li class="nav-item" id="navbar-links">
+                    <a class="nav-link active" arie-current="page" href="/show_profile_page">Bytesförslag</a>
+                </li>
                 <li class="nav-item active" id="navbar-links">
                     <a class="nav-link active" aria-current="page" href="/create">Skapa artikel</a>
                 </li>
                 <li class="nav-item" id="navbar-links">
-                    <a class="nav-link active" aria-current="page" href="/show_profile_page">Bytesförslag</a>
+                    <a class="nav-link active" aria-current="page" href="/remove">Ta bort artikel</a>
                 </li>
                 {% endif %}
-                </li>
             </ul>
             </div>
             <div class="btn-group dropstart">
@@ -61,14 +63,10 @@
                   <li><a class="dropdown-item" href="/login">Logga in</a></li>
                   <li><a class="dropdown-item" href="/create_profile">Bli medlem</a></li>
                   {% else %}
-                  <li><a class="dropdown-item" href="/show_profile_page">Min profil</a></li>
                   <li><a class="dropdown-item" href="/show_own_storage">Mitt förråd</a></li>
-                  <li><a class="dropdown-item" href="/create">Skapa artikel</a></li>
                   <li><a class="dropdown-item" href="/render_chat_list">Meddelande</a></li>
                   <li><a class="dropdown-item" href="/transaction_history">Historik</a></li>
-                  <li><a class="dropdown-item" href="/remove">Ta bort artikel</a></li>
                   <li><a class="dropdown-item" href="/logout_user">Logga ut</a></li>
-                  
                   {% endif %}
                 </ul>
             </div>
