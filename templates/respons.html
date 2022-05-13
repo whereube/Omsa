@@ -1,9 +1,10 @@
 <div class="form-group">
-      <label>Select Sub Category</label>
       <select name="sub_category"  id="sub_category_id" class="form-control">
          <option value="" selected="selected"></option>
+         <option value=None selected="true" disabled>Välj subkategori</option>
           {% for row in sub_categories %} 
             <option value="{{row[0]}}">{{row[1]}}</option>
           {% endfor %}
+          <input id="reset_search" type="reset" class="form-control" value="Rensa" aria-label="Username" aria-describedby="basic-addon1">
       </select> 
 </div>

@@ -3,11 +3,9 @@
 <form action="/article_search" method="POST">
   <div class="mb-3">
     <label for="free_text" class="form-label">Skriv sökord</label>
-    <input type="text" class="form-control search_by_title" id="free_text" name="free_text" aria-describedby="free_text_search">
-    <div id="free_text_search" class="form-text">Sök på vad du vill</div>
+    <input type="text" class="form-control search_by_title" id="free_text" name="free_text" aria-describedby="free_text_search" placeholder="Sök på vad du vill...">
   </div>
   <div class="mb-3">
-    <label for="main_category" class="form-label">Huvudkategori</label>
     <select id="search_category_id" name="main_category" class="form-control">
       <option value=None selected="true" disabled>Välj kategori</option>
       <option value="">Ingen</option>
@@ -33,16 +31,16 @@
           {%endfor%}
           <div class="col-md-8">
             <div class="card-body">
-              <h4 class="card-title">{{row[2]}}</h4>
-              <p>Stad: {{row[23]}}</p>
-              <p>Prisnivå: {{row[26]}}</p>
-              <p>Kategori: {{row[31]}}</p>
-              <p class="card-text"><small class="text-muted">Skapad: {{row[6].strftime('%Y-%m-%d')}}</small></p>
+              <h2 class="card-title col-md-12 article_h2">{{row[2]}}</h2>
+              <p class="col-md-6 article_p">Stad: {{row[23]}}</p>
+              <p class="col-md-6 article_p">Prisnivå: {{row[26]}}</p>
+              <p class="col-md-6 article_p">Kategori: {{row[31]}}</p>
+              <p class="card-text col-md-6 article_p"><small class="text-muted">Skapad: {{row[6].strftime('%Y-%m-%d')}}</small></p>
               <div class="collapse" id="collapseWidthExample{{row[0]}}">
                 <p>{{row[3]}}</p>
                 <form action="/wife_article_id" method="POST">
                   <input type="hidden" id="wife_article_id" name="wife_article_id" value={{row[0]}}>
-                  <button  class="btn btn-primary" type="submit">Visa intresse</button>
+                  <button  class="btn btn-primary show_intrest_button" type="submit">Visa intresse</button>
                 </form>
               </div>
             </div>

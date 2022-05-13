@@ -219,6 +219,7 @@ margin:auto;
 #search_category_id{
 max-width: 900px;
 margin:auto;
+margin-bottom: 16px;
 }
 
 .search_button{
@@ -321,4 +322,42 @@ margin: 10px;
 
 .center_h1{
 text-align: center;
+}
+
+#reset_search{
+width:80px;
+margin-top:16px;
+background-color: var(--primary);
+color:white;
+}
+
+.show_intrest_button{
+background-color: var(--primary);
+border: 1px solid var(--light);
+}
+
+.nav-link{
+color: var(--primary);
+font-size: 20px;
+font-weight: bold;
+}
+
+.nav-link:hover{
+color: var(--primary);
+}
+
+.card-body{
+flex-direction: column;
+display:flex;
+flex-direction: row;
+flex-wrap: wrap;
+}
+
+.article_h2{
+margin-left:15%;
+}
+
+.article_p{
+margin-top:5%;
+font-size:18px;
 }
