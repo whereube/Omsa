@@ -1,5 +1,10 @@
 {% extends "base.html" %} {% block title %}Meddelanden{% endblock %} {% block content
     %}
+{%for row in chat_info%}
+    {%if row[2] != user_id%}
+        <h2 id="contact-name">{{row[6]}}</h2>
+    {%endif%}
+{%endfor%}
 <div id="chat-container">
     <div class="message-box">
         {%for row in chat_info%}

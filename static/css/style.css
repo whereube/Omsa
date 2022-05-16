@@ -2,8 +2,8 @@
     --primary: #f28283;
     --light: #FEFAEC;
     --dark: rgb(37, 37, 37);
-    --background: #abeee6;
-    --grey: #BEBEBE;
+    --background: #c7ddcc;
+    --grey: #d8d8d8;
 }
 
 body{
@@ -171,14 +171,23 @@ width: 150px;
     margin-top: 20px;
 }
 
+#contact-name{
+    margin: auto;
+    margin-bottom: 5px;
+    padding: 5px 25px;
+    color: var(--light);
+    background-color: var(--primary);
+    border-radius: 5px;
+}
+
 #chat-container{
     display: flex;
     justify-content: center;
     flex-direction: column;
     margin-left: 15%;
     margin-right: 15%;
-    border: 3px solid var(--dark);
-    border-radius: 7px;
+    border: 1px solid var(--dark);
+    border-radius: 6px;
 }
 
 .message-bubble{
@@ -236,19 +245,57 @@ border: 1px solid var(--light);
 }
 
 .message-container-left{
-    width: 150px;
+    width: 200px;
     margin: 10px 0px 0px 20px;
 }
 
 .message-container-right{
-    width: 150px;
+    width: 200px;
     margin-top: 10px;
-    margin-left: 74%;
+    margin-left: 64%;
 }
 
 .send-form{
     padding: 10px;
 }
+
+.form-check{
+    padding: 20px 10px;
+}
+
+#tier-big-box{
+    display: flex;
+    justify-content: space-between;
+    border-radius: 5px;
+    border: 1px solid black;
+    padding: 20px 20px 20px 40px;
+    margin-top: 30px;
+}
+
+#tier-big-box > input{
+    padding: 40px 0px 0px 5px;
+}
+
+.tier-info-box{
+    border: 1px solid var(--dark);
+    padding: 10px;
+    border-radius: 5px;
+    background-color: var(--primary);
+    color: var(--light);
+    max-width: 500px;
+}
+
+.tier-box{
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 20px;
+    border-bottom: 1px solid var(--light);
+}
+
+.tier-box > p{
+    margin-left: 20px;
+}
+
 
 .message-sent-from{
     font-size: 10px;
