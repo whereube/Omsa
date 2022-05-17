@@ -249,6 +249,10 @@
                     {% elif trade[8] == None %}
                         <div class="card_form" style="width: 48rem;">
                             <p>Status: Väntar på svar</p>
+                            <form action="/transaction_undo" method="post">
+                                <input type="hidden" name="transaction_id" value="{{trade[0]}}">
+                                <input type="submit" value="Ångra">
+                            </form>
                         </div>
                     {% endif %}
                 </div>
