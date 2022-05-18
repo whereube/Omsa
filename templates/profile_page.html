@@ -11,6 +11,13 @@
                     <div class="card mb-3" style="width: 48rem;">
                         <div class="row g-0">
                             {%for image in images%}
+
+                                {% if trade[7] == true %}
+                                    <div class="col-md-4 small_picture">
+                                        <img id="temp_pic" src="/static/article_images/handslag.jpeg" class="img-fluid rounded-start" alt="Artikelbild">
+                                    </div>
+                                {%endif%}
+
                                 {%if trade[10] == image[1]%}
                                     <div class="col-md-4 small_picture">
                                         <img id="temp_pic" src="/static/article_images/{{image[2]}}" class="img-fluid rounded-start" alt="Artikelbild">
