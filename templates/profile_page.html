@@ -11,14 +11,7 @@
                     <div class="card mb-3" style="width: 48rem;">
                         <div class="row g-0">
                             {%for image in images%}
-
-                                {% if trade[7] == true %}
-                                    <div class="col-md-4 small_picture">
-                                        <img id="temp_pic" src="/static/article_images/handslag.jpeg" class="img-fluid rounded-start" alt="Artikelbild">
-                                    </div>
-                                {%endif%}
-
-                                {%if trade[10] == image[1]%}
+                                {% if trade[10] == image[1]%}
                                     <div class="col-md-4 small_picture">
                                         <img id="temp_pic" src="/static/article_images/{{image[2]}}" class="img-fluid rounded-start" alt="Artikelbild">
                                     </div>
@@ -45,10 +38,20 @@
                                     </div>
                                 {%endif%}
                             {%endfor%}
+                                {%if trade[7] == true%}
+                                    <div class="col-md-4 small_picture">
+                                        <img id="temp_pic" src="/static/article_images/handslag.jpeg" class="img-fluid rounded-start" alt="Artikelbild">
+                                    </div>
+                                {%endif%}
                             <div class="col-md-8">
                                 <div class="card-body">
-                                    <h4 class="card-title">{{trade[22]}}</h4>
-                                    <p class="card-text">Stad: {{trade[69]}}</p>
+                                    {%if trade[7] != true%}
+                                        <h4 class="card-title">{{trade[22]}}</h4>
+                                        <p class="card-text">Stad: {{trade[69]}}</p>
+                                    {%endif%}
+                                    {%if trade[7] == true%}
+                                        <h4 class="card-title">Handslag</h4>
+                                    {%endif%}
                                 </div>
                             </div>
                         </div>
@@ -132,10 +135,20 @@
                                     </div>
                                 {%endif%}
                             {%endfor%}
+                                {%if trade[7] == true%}
+                                    <div class="col-md-4 small_picture">
+                                        <img id="temp_pic" src="/static/article_images/handslag.jpeg" class="img-fluid rounded-start" alt="Artikelbild">
+                                    </div>
+                                {%endif%}
                             <div class="col-md-8">
                                 <div class="card-body">
-                                    <h4 class="card-title">{{trade[22]}}</h4>
-                                    <p class="card-text">Stad: {{trade[69]}}</p>
+                                    {%if trade[7] != true%}
+                                        <h4 class="card-title">{{trade[22]}}</h4>
+                                        <p class="card-text">Stad: {{trade[69]}}</p>
+                                    {%endif%}
+                                    {%if trade[7] == true%}
+                                        <h4 class="card-title">Handslag</h4>
+                                    {%endif%}
                                 </div>
                             </div>
                         </div>
@@ -199,11 +212,21 @@
                                     </div>
                                 {%endif%}
                             {%endfor%}
+                            {%if trade[7] == true%}
+                                    <div class="col-md-4 small_picture">
+                                        <img id="temp_pic" src="/static/article_images/handslag.jpeg" class="img-fluid rounded-start" alt="Artikelbild">
+                                    </div>
+                                {%endif%}
                             <div class="col-md-8">
                                 <div class="card-body">
-                                    <h4 class="card-title">{{trade[22]}}</h4>
-                                    <p class="card-text">Stad: {{trade[69]}}</p>
-                                    <p class="card-text">Datum föreslaget: {{trade[6].strftime('%Y-%m-%d')}}</p>
+                                    {%if trade[7] != true%}
+                                        <h4 class="card-title">{{trade[22]}}</h4>
+                                        <p class="card-text">Stad: {{trade[69]}}</p>
+                                        <p class="card-text">Datum föreslaget: {{trade[6].strftime('%Y-%m-%d')}}</p>
+                                    {%endif%}
+                                    {%if trade[7] == true%}
+                                        <h4 class="card-title">Handslag</h4>
+                                    {%endif%}
                                 </div>
                             </div>
                         </div>
