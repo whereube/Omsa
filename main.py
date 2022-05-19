@@ -280,7 +280,8 @@ def article_search():
     search_term = request.form.get("free_text")
     main_category = request.form.get("main_category")
     sub_category_1 = request.form.get("sub_category")
-    city = request.form.get("city_id")
+    choosen_city = request.form.get("city_id")
+    cities = get_city()
     if search_term == '' and main_category != None and main_category != '':
         articles = get_article_by_category(main_category, sub_category_1)
     elif search_term != '' and ( main_category == None or main_category == ''):
@@ -290,7 +291,9 @@ def article_search():
     elif search_term == '' and (main_category == None or main_category == ''):
         articles = get_articles()
 
-    return render_template("/search_results.html", articles = articles, images = images, main_categories = main_categories, city = city)
+    print(choosen_city)
+
+    return render_template("/search_results.html", articles = articles, images = images, main_categories = main_categories, choosen_city = choosen_city, cities = cities)
 @app.route("/edit_article", methods=["POST"])
 def edit_article():
     article_id = request.form.get("article_id") 
