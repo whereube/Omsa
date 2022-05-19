@@ -1,5 +1,5 @@
 
-from flask import redirect, render_template, flash
+from flask import redirect, render_template, flash, session
 import psycopg2 
 import psycopg2.extras
 from datetime import date
@@ -59,7 +59,6 @@ def update_user_in_db(user_name, user_password, user_email, user_f_name, user_l_
     '''
     Skapar en post i databasen med användinformationen 
     '''
-    psycopg2.extras.register_uuid()
     connection = open_db_omsa()
 
     user_id = uuid.uuid4()
@@ -75,15 +74,16 @@ def update_user_in_db(user_name, user_password, user_email, user_f_name, user_l_
     close_db_omsa(connection)
 
 def get_profile_info():
-    psycopg2.extras.register_uuid()
+    user_id = session.get('USER_ID')
     connection = open_db_omsa()
     
-    user_id = uuid.uuid4()
 
     cursor = connection.cursor()
     cursor.execute("""
-    select * from profile 
-    """, user_id)
+    select * from profile
+    left outer join city on profile.city_id = city.id
+    where %s = profile.id
+    """,(user_id,))
 
     records = cursor.fetchall()
     cursor.close()

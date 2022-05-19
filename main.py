@@ -188,8 +188,10 @@ def create_user():
 
 @app.route("/my_profile")
 def show_my_profile():
-    profile = get_profile_info()
-    return render_template("/my_profile.html" , profile = profile)
+    user_name = session.get("USER_NAME")
+    citys = get_city()
+    user_info = get_profile_info()
+    return render_template("/my_profile.html" ,user_name = user_name, user_info = user_info, citys = citys )
 
 '''Visa eget förråd'''
 @app.route("/show_own_storage")

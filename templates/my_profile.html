@@ -1,7 +1,16 @@
 {% extends "base.html" %} {% block title %}Min profil{% endblock %} {% block content%}
-    <h2>Min profil</h2>
-    {%for row in profile%}
-            <p>{{row[4]}}</p>
-            
+    <h1>Min profil</h1>
+    {%for row in user_info%}
+        <h3>{{row[4]}} {{row[5]}}</h3>
+        <p>{{row[3]}}</p>
+        <p>{{row[6]}}</p>
+        <p>{{row[7]}}</p>
+        {%for city in citys%}
+                    {%if city[0] == row[8]%}
+                        <p selected>{{city[1]}}</p>
+                    {%endif%}
+                {%endfor%}
+        <p>{{row[9]}}</p>
+        <p>historik länk </p>
     {%endfor%}
 {% endblock %}
