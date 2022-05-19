@@ -53,4 +53,40 @@ def create_user_in_db(user_name, user_password, user_email, user_f_name, user_l_
     cursor.close()
     connection.commit()
     close_db_omsa(connection)
-          
+
+  
+def update_user_in_db(user_name, user_password, user_email, user_f_name, user_l_name, user_adress, user_zip_code, city, user_phone_number):
+    '''
+    Skapar en post i databasen med användinformationen 
+    '''
+    psycopg2.extras.register_uuid()
+    connection = open_db_omsa()
+
+    user_id = uuid.uuid4()
+
+    cursor = connection.cursor()
+    cursor.execute("""
+    update profile (user_name, password, email, f_name, l_name, adress, zip_code, city_id, phone_number)
+    values(%s, %s, %s, %s, %s, %s, %s, %s, %s)
+    """,(user_id, user_name, user_password, user_email, user_f_name, user_l_name, user_adress, user_zip_code, city, user_phone_number))
+
+    cursor.close()
+    connection.commit()
+    close_db_omsa(connection)
+
+def get_profile_info():
+    psycopg2.extras.register_uuid()
+    connection = open_db_omsa()
+    
+    user_id = uuid.uuid4()
+
+    cursor = connection.cursor()
+    cursor.execute("""
+    select * from profile 
+    """, user_id)
+
+    records = cursor.fetchall()
+    cursor.close()
+    connection.commit()
+    close_db_omsa(connection)
+    return records

@@ -1,3 +1,4 @@
+import profile
 from flask import Flask, redirect, render_template, request, flash, session, g, jsonify
 from article import *
 from user import *
@@ -185,6 +186,11 @@ def create_user():
     else:
         return redirect("/create_profil")
 
+@app.route("/my_profile")
+def show_my_profile():
+    profile = get_profile_info()
+    return render_template("/my_profile.html" , profile = profile)
+
 '''Visa eget förråd'''
 @app.route("/show_own_storage")
 def show_current_user_storage():
@@ -342,3 +348,4 @@ def transacation_undo_now():
     transaction = request.form.get("transaction_id") 
     transaction_delete(transaction)
     return render_template("/transaction_undo_done.html")
+
