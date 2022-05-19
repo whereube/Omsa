@@ -1,16 +1,33 @@
 {% extends "base.html" %} {% block title %}Min profil{% endblock %} {% block content%}
-    <h1>Min profil</h1>
-    {%for row in user_info%}
-        <h3>{{row[4]}} {{row[5]}}</h3>
-        <p>{{row[3]}}</p>
-        <p>{{row[6]}}</p>
-        <p>{{row[7]}}</p>
-        {%for city in citys%}
-                    {%if city[0] == row[8]%}
-                        <p selected>{{city[1]}}</p>
-                    {%endif%}
-                {%endfor%}
-        <p>{{row[9]}}</p>
-        <p>historik länk </p>
-    {%endfor%}
+    <div id="my_profile">
+        <h1>Min profil</h1>
+        {%for row in user_info%}
+            <div id="all_info">
+                <div id="person_info">
+                    <h3>Namn:</h3>
+                    <p>{{row[4]}} {{row[5]}}</p>
+                    <h3>Email:</h3>
+                    <p>{{row[3]}}</p>
+                    <h3>Telefonummer:</h3>
+                    <p>{{row[9]}}</p>
+                </div>
+                <div id="live_info">
+                    <h3>Adress:</h3>
+                    <p>{{row[6]}}</p>
+                    <h3>Stad:</h3>
+                    {%for city in citys%}
+                        {%if city[0] == row[8]%}
+                            <p selected>{{city[1]}}</p>
+                        {%endif%}
+                    {%endfor%}
+                    <h3>Postkod:</h3>
+                    <p>{{row[7]}}</p>
+                </div>
+            </div>
+            <div id="transaction_links">
+                <a href="transaction_history">Transaktions historik</a>
+                <a href="edit_profile">Redigera profil</a>
+            </div>
+        {%endfor%}
+    </div>
 {% endblock %}

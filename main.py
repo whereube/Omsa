@@ -351,3 +351,6 @@ def transacation_undo_now():
     transaction_delete(transaction)
     return render_template("/transaction_undo_done.html")
 
+@app.route("/edit_profile", methods=["POST", "GET"])
+def edit_the_profile():
+    return render_template("/edit_profile.html")

@@ -1,0 +1,61 @@
+{% extends "base.html" %} {% block title %}Skapa artikel{% endblock %} {% block content%}
+    <h2>Redigera profil</h2>
+    {%for row in profile%}
+    <form class="was-validated" method="POST" action="/edit_complete" enctype=multipart/form-data >
+        <input type="hidden" name="article_id" id="article_id" value={{article_id}}>
+        <div class="form-region">
+            <div class="col-md-3">
+                <label for="validationTextarea" class="form-label">Titel</label>
+                <input  class="form-control is-invalid" name="title" id="validationTextarea" required value="{{row[2]}}">
+            </div>
+
+            <div class="mb-3">
+            <label for="validationTextarea" class="form-label">Beskrivning</label>
+            <textarea class="form-control is-invalid" id="validationTextarea" name="description" required>{{row[3]}}</textarea>
+            </div>
+
+           <div class="mb-3">
+                <select class="form-select" required aria-label="select example" name="category">
+                <option value="">Kategori</option>
+                {%for category in categories%}:
+                    {%if category[0] == row[29]%}
+                        <option value="{{category[0]}}" selected>{{category[1]}}</option>
+                    {%else%}
+                        <option value="{{category[0]}}">{{category[1]}}</option>
+                    {%endif%}
+                {%endfor%}  
+                </select>
+            </div>
+        </div> 
+        <div class="form-region">
+            <h2 class="art-headers">Plats</h2>
+            <div class="mb-3">
+                <select class="form-select" required aria-label="select example" name="city">
+                {%for city in citys%}:
+                    {%if city[0] == row[4]%}
+                        <option value="{{city[0]}}" selected>{{city[1]}}</option>
+                    {%else%} 
+                        <option value="{{city[0]}}">{{city[1]}}</option>
+                    {%endif%}
+                {%endfor%}
+                </select>
+            </div>
+            <div class="col-md-3 position-relative">
+                <label for="validationTooltip05" class="form-label">Postnummer</label>
+                <input rows="1"  name="zip_code" class="form-control is-invalid" value="{{row[8]}}" pattern="[0-9]{5}" maxlength="5" required >
+            </div>
+        </div>
+        
+        <!--
+        <div class="form-region">
+            <h2 class="art-headers">Bild</h2>
+            <div class="mb-3">
+            <input type="file" class="form-control" aria-label="file example" name="file" required>
+            </div>
+        </div>-->
+        <div class="mb-3">
+        <input class="btn btn-primary" type="submit" value="Spara ändringar">
+        </div>
+    </form>
+    {%endfor%}
+{% endblock %}

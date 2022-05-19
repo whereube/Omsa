@@ -59,9 +59,9 @@ def update_user_in_db(user_name, user_password, user_email, user_f_name, user_l_
     '''
     Skapar en post i databasen med användinformationen 
     '''
+    user_id = session.get('USER_ID')
     connection = open_db_omsa()
 
-    user_id = uuid.uuid4()
 
     cursor = connection.cursor()
     cursor.execute("""
