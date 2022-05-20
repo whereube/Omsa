@@ -91,7 +91,7 @@ def get_profile_info():
     close_db_omsa(connection)
     return records
 
-def change_password_done(password):
+def change_password_done(main_password):
    
     connection = open_db_omsa()
     user_id = session.get('USER_ID')
@@ -101,7 +101,7 @@ def change_password_done(password):
     update profile
     set password = %s
     where %s = profile.id
-    """,(password, user_id, ))
+    """,(main_password, user_id, ))
 
     cursor.close()
     connection.commit()

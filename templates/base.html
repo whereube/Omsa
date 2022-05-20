@@ -47,6 +47,12 @@
                 <li class="nav-item active" id="navbar-links">
                     <a class="nav-link active" aria-current="page" href="/create">Skapa artikel</a>
                 </li>
+                <li class="nav-item active" id="navbar-links">
+                    <a class="nav-link active" aria-current="page" href="/show_own_storage">Mitt förråd</a>
+                </li>
+                <li class="nav-item active" id="navbar-links">
+                    <a class="nav-link active" aria-current="page" href="/render_chat_list">Skapa artikel</a>
+                </li>
                 {% endif %}
             </ul>
             </div>
@@ -70,8 +76,6 @@
                   <li><a class="dropdown-item" href="/create_profile">Skapa användare</a></li>
                   {% else %}
                   <li><a class="dropdown-item" href="/my_profile">Min profil</a></li>
-                  <li><a class="dropdown-item" href="/show_own_storage">Mitt förråd</a></li>
-                  <li><a class="dropdown-item" href="/render_chat_list">Meddelande</a></li>
                   <li><a class="dropdown-item" href="/transaction_history">Historik</a></li>
                   <li><a class="dropdown-item" href="/logout_user">Logga ut</a></li>
                   {% endif %}

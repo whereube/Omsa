@@ -377,7 +377,7 @@ def edit_password():
     return render_template("/edit_password.html")
 
 @app.route("/change_password", methods=["POST"])
-def change_password_done():
-    password = request.form.get("password")
-    change_password_done( password )
+def change_password():
+    main_password = request.form.get("main_password")
+    change_password_done(main_password)
     return redirect("/my_profile")
