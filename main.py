@@ -1,3 +1,5 @@
+from cProfile import Profile
+import email
 import profile
 from flask import Flask, redirect, render_template, request, flash, session, g, jsonify
 from article import *
@@ -353,4 +355,29 @@ def transacation_undo_now():
 
 @app.route("/edit_profile", methods=["POST", "GET"])
 def edit_the_profile():
-    return render_template("/edit_profile.html")
+    citys = get_city()
+    user_info = get_profile_info()
+    return render_template("/edit_profile.html", user_info = user_info, citys = citys)
+
+@app.route("/edit_profile_complete", methods=["POST"])
+def change_profile():
+    user_name = request.form.get("user_name")
+    email = request.form.get("email")
+    f_name = request.form.get("f_name")
+    l_name = request.form.get("l_name")
+    adress = request.form.get("adress")
+    zip_code = request.form.get("zip_code")
+    city = request.form.get("city")
+    phone_number = request.form.get("phone_number")
+    update_user_in_db( user_name, email, f_name, l_name, adress, zip_code, city, phone_number)
+    return redirect("/my_profile")
+
+@app.route("/edit_password")
+def edit_password():
+    return render_template("/edit_password.html")
+
+@app.route("/change_password", methods=["POST"])
+def change_password_done():
+    password = request.form.get("password")
+    change_password_done( password )
+    return redirect("/my_profile")

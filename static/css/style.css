@@ -467,3 +467,25 @@ flex-direction: row;
     text-decoration: none;
     color: black;
 }
+
+.pure-form > h1 {
+    text-align: center;
+    border-bottom: solid 2px black ;
+}
+.pure-form > #head_passwords > #fix_password {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+}
+.pure-form > #head_passwords> #fix_password > label{
+    font-size: 20px;
+}
+
+.pure-form > #head_passwords> #fix_password > input{
+    margin-bottom: 20px;
+}
+
+.pure-form > #head_passwords > button{
+    margin-left: 22px;
+}

@@ -55,19 +55,19 @@ def create_user_in_db(user_name, user_password, user_email, user_f_name, user_l_
     close_db_omsa(connection)
 
   
-def update_user_in_db(user_name, user_password, user_email, user_f_name, user_l_name, user_adress, user_zip_code, city, user_phone_number):
+def update_user_in_db(user_name, email, f_name, l_name, adress, zip_code, city, phone_number):
     '''
     Skapar en post i databasen med användinformationen 
     '''
-    user_id = session.get('USER_ID')
     connection = open_db_omsa()
-
+    user_id = session.get('USER_ID')
 
     cursor = connection.cursor()
     cursor.execute("""
-    update profile (user_name, password, email, f_name, l_name, adress, zip_code, city_id, phone_number)
-    values(%s, %s, %s, %s, %s, %s, %s, %s, %s)
-    """,(user_id, user_name, user_password, user_email, user_f_name, user_l_name, user_adress, user_zip_code, city, user_phone_number))
+    update profile 
+    set user_name = %s, email = %s, f_name = %s, l_name = %s, adress = %s, zip_code = %s, city_id = %s, phone_number = %s
+    where %s = profile.id
+    """,(user_name, email, f_name, l_name, adress, zip_code, city, phone_number, user_id,))
 
     cursor.close()
     connection.commit()
@@ -90,3 +90,20 @@ def get_profile_info():
     connection.commit()
     close_db_omsa(connection)
     return records
+
+def change_password_done(password):
+   
+    connection = open_db_omsa()
+    user_id = session.get('USER_ID')
+
+    cursor = connection.cursor()
+    cursor.execute("""
+    update profile
+    set password = %s
+    where %s = profile.id
+    """,(password, user_id, ))
+
+    cursor.close()
+    connection.commit()
+    close_db_omsa(connection)
+
