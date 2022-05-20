@@ -1,5 +1,5 @@
 
-from flask import redirect, render_template, flash
+from flask import redirect, render_template, flash, session
 import psycopg2 
 import psycopg2.extras
 from datetime import date
@@ -53,4 +53,57 @@ def create_user_in_db(user_name, user_password, user_email, user_f_name, user_l_
     cursor.close()
     connection.commit()
     close_db_omsa(connection)
-          
+
+  
+def update_user_in_db(user_name, email, f_name, l_name, adress, zip_code, city, phone_number):
+    '''
+    Skapar en post i databasen med användinformationen 
+    '''
+    connection = open_db_omsa()
+    user_id = session.get('USER_ID')
+
+    cursor = connection.cursor()
+    cursor.execute("""
+    update profile 
+    set user_name = %s, email = %s, f_name = %s, l_name = %s, adress = %s, zip_code = %s, city_id = %s, phone_number = %s
+    where %s = profile.id
+    """,(user_name, email, f_name, l_name, adress, zip_code, city, phone_number, user_id,))
+
+    cursor.close()
+    connection.commit()
+    close_db_omsa(connection)
+
+def get_profile_info():
+    user_id = session.get('USER_ID')
+    connection = open_db_omsa()
+    
+
+    cursor = connection.cursor()
+    cursor.execute("""
+    select * from profile
+    left outer join city on profile.city_id = city.id
+    where %s = profile.id
+    """,(user_id,))
+
+    records = cursor.fetchall()
+    cursor.close()
+    connection.commit()
+    close_db_omsa(connection)
+    return records
+
+def change_password_done(main_password):
+   
+    connection = open_db_omsa()
+    user_id = session.get('USER_ID')
+
+    cursor = connection.cursor()
+    cursor.execute("""
+    update profile
+    set password = %s
+    where %s = profile.id
+    """,(main_password, user_id, ))
+
+    cursor.close()
+    connection.commit()
+    close_db_omsa(connection)
+

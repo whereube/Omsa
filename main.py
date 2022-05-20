@@ -1,3 +1,6 @@
+from cProfile import Profile
+import email
+import profile
 from flask import Flask, redirect, render_template, request, flash, session, g, jsonify
 from article import *
 from user import *
@@ -185,6 +188,13 @@ def create_user():
     else:
         return redirect("/create_profil")
 
+@app.route("/my_profile")
+def show_my_profile():
+    user_name = session.get("USER_NAME")
+    citys = get_city()
+    user_info = get_profile_info()
+    return render_template("/my_profile.html" ,user_name = user_name, user_info = user_info, citys = citys )
+
 '''Visa eget förråd'''
 @app.route("/show_own_storage")
 def show_current_user_storage():
@@ -345,3 +355,32 @@ def transacation_undo_now():
     transaction = request.form.get("transaction_id") 
     transaction_delete(transaction)
     return render_template("/transaction_undo_done.html")
+
+@app.route("/edit_profile", methods=["POST", "GET"])
+def edit_the_profile():
+    citys = get_city()
+    user_info = get_profile_info()
+    return render_template("/edit_profile.html", user_info = user_info, citys = citys)
+
+@app.route("/edit_profile_complete", methods=["POST"])
+def change_profile():
+    user_name = request.form.get("user_name")
+    email = request.form.get("email")
+    f_name = request.form.get("f_name")
+    l_name = request.form.get("l_name")
+    adress = request.form.get("adress")
+    zip_code = request.form.get("zip_code")
+    city = request.form.get("city")
+    phone_number = request.form.get("phone_number")
+    update_user_in_db( user_name, email, f_name, l_name, adress, zip_code, city, phone_number)
+    return redirect("/my_profile")
+
+@app.route("/edit_password")
+def edit_password():
+    return render_template("/edit_password.html")
+
+@app.route("/change_password", methods=["POST"])
+def change_password():
+    main_password = request.form.get("main_password")
+    change_password_done(main_password)
+    return redirect("/my_profile")

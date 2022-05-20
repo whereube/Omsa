@@ -1,0 +1,53 @@
+{% extends "base.html" %} {% block title %}Skapa artikel{% endblock %} {% block content
+    %}
+    <h1 class="center_h1">Skapa en användare</h1>
+    {%for row in user_info%}
+      <form action="/edit_profile_complete" class="was-validated" method="POST">
+        <div class="form-row">       
+          <div class="mb-3">
+            <label for="validationTooltipUsername" class="form-label">Användarnamn</label>
+            <input type="text" class="form-control border-secondary" id="validationTooltipUsername" name="user_name" value="{{row[1]}}" required>
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Email</label>
+            <input type="email" class="form-control border-secondary" id="exampleInputPassword1" name="email" value="{{row[3]}}" required>
+          </div>
+          <div class="mb-3">
+            <label for="validationTooltip01" class="form-label">Förnamn</label>
+            <input type="f_name" class="form-control border-secondary" id="validationTooltip01" name="f_name" aria-describedby="emailHelp" value="{{row[4]}}" required>
+          </div>
+          <div class="mb-3">
+            <label for="validationTooltip02" class="form-label">Efternamn</label>
+            <input type="l_name" class="form-control border-secondary" id="validationTooltip02" name="l_name" value="{{row[5]}}" required>
+          </div>
+          <div class="mb-3">
+            <label for="validationTooltip03" class="form-label">Address</label>
+            <input type="adress" class="form-control border-secondary" id="validationTooltip03" name="adress" aria-describedby="emailHelp" value="{{row[6]}}" required >
+          </div>
+          <div class="md-3">
+            <label for="validationTooltip04" class="form-label">Postnummer</label>
+            <input type="text" class="form-control border-secondary" id="validationTooltip04" name="zip_code" value="{{row[7]}}" pattern="[0-9]{5}" maxlength="5" required>
+          </div>
+          <div class="mb-3">
+            <label for="validationTooltip03" class="form-label">Stad</label>
+              <select class="form-select" required aria-label="select example" name="city">
+              {%for city in citys%}:
+                  {%if city[0] == row[8]%}
+                      <option value="{{city[0]}}" selected>{{city[1]}}</option>
+                  {%else%} 
+                      <option value="{{city[0]}}">{{city[1]}}</option>
+                  {%endif%}
+              {%endfor%}
+              </select>
+          </div>
+          <div class="mb-3" >
+            <label for="validationTooltip05" class="form-label">Telefonnummer</label>
+            <input type="user_phone_number" class="form-control border-secondary" id="validationTooltip05" name="phone_number" pattern="[0-9]{10}" maxlength="10" value="{{row[9]}}" required>
+          </div>
+          <div class="mb-3">
+            <button class="btn btn-primary" type="submit" id="submit-btn">Redigera profil</button>
+          </div> 
+      </form>
+    {%endfor%}
+  {% endblock %}
+  

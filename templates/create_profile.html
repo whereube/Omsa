@@ -4,7 +4,7 @@
 
   <form action="/create_user" class="was-validated" method="POST">
     <div class="form-row">       
-      <div class="col-md-4 mb-3">
+      <div class="mb-3">
         <label for="validationTooltipUsername" class="form-label">Användarnamn</label>
         <input type="text" class="form-control border-secondary" id="validationTooltipUsername" name="user_name" onchange='saveValue(this);' required>
       </div>
@@ -30,7 +30,7 @@
       </div>
       <div class="col-md-3 position-relative">
         <label for="validationTooltip04" class="form-label">Postnummer</label>
-        <input type="text" class="form-control border-secondary" id="validationTooltip04" name="user_zip_code"onchange='saveValue(this);' pattern="[0-9]{5}" required>
+        <input type="text" class="form-control border-secondary" id="validationTooltip04" name="user_zip_code"onchange='saveValue(this);' pattern="[0-9]{5}" maxlength="5" required>
       </div>
       <div class="mb-3">
         <label for="validationTooltip04" class="form-label">Stad</label>
@@ -42,7 +42,7 @@
       </div>
       <div class="mb-3" >
         <label for="validationTooltip05" class="form-label">Telefonnummer</label>
-        <input type="user_phone_number" class="form-control border-secondary" id="validationTooltip05" name="user_phone_number" onchange='saveValue(this);'pattern="[0-9]{10}"  required>
+        <input type="user_phone_number" class="form-control border-secondary" id="validationTooltip05" name="user_phone_number" onchange='saveValue(this);'pattern="[0-9]{10}" maxlength="10"  required>
       </div>
       <div class="mb-3">
         <button class="btn btn-primary" type="submit" id="submit-btn">Skapa profil</button>

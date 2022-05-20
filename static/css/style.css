@@ -417,3 +417,75 @@ margin-top: 50px;
 display: flex;
 flex-direction: row;
 }
+
+#my_profile {
+    border: 2px solid black ;
+}
+
+#my_profile > h1{
+    margin-top: 20px;
+    text-align: center;
+    border-bottom: solid 2px black ;
+}
+
+#my_profile > #all_info {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#my_profile > #all_info > #person_info > p {
+    font-size: 20px;
+}
+
+#my_profile > #all_info > #live_info >p {
+    font-size: 20px;
+}
+
+#my_profile > #all_info > #person_info >h3 {
+    border-bottom: solid 1px black ;
+}
+
+#my_profile > #all_info > #live_info >h3 {
+    border-bottom: solid 1px black ;
+}
+
+#my_profile > #transaction_links{
+    display: flex;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    justify-content: space-between;
+}
+
+#my_profile > #transaction_links > a{
+    background-color: lightblue;
+    padding: 10px;
+    border-radius: 25px;
+    text-decoration: none;
+    color: black;
+}
+
+.pure-form > h1 {
+    text-align: center;
+    border-bottom: solid 2px black ;
+}
+.pure-form > #head_passwords > #fix_password {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+}
+.pure-form > #head_passwords> #fix_password > label{
+    font-size: 20px;
+}
+
+.pure-form > #head_passwords> #fix_password > input{
+    margin-bottom: 20px;
+}
+
+.pure-form > #head_passwords > button{
+    margin-left: 22px;
+}
