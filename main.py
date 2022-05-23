@@ -20,6 +20,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route("/render_chat_list")
 def chat_list():
+    '''Lista alla användare som går att chatta med'''
     user_name = session.get('USER_NAME')
     user_id = session.get('USER_ID')
     linked_user = get_chat_id(user_id)
@@ -28,6 +29,7 @@ def chat_list():
 
 @app.route("/message_page/<chat_id>", methods=['GET', 'POST'])
 def show_chat_room(chat_id):
+    '''Sida för att chatta med specifik användare'''
     user_id = session.get('USER_ID')
     other_user = []
     linked_user = get_chat_id(user_id)
@@ -42,18 +44,16 @@ def show_chat_room(chat_id):
     
 @app.route("/send_message", methods=["GET", "POST"])
 def handle_messages():
-    
+    '''Skicka meddelande till databasen'''
     user_message = request.form.get("message")
     chat_id = request.form.get("chat_id")
     chat_message_to_db(user_message, chat_id)
 
     return redirect(f"/message_page/{chat_id}")
 
-
-
-
 @app.route("/")
 def start():
+    '''Index'''
     main_categories = get_main_category()
     images = get_article_images()
     articles = get_articles()
@@ -66,18 +66,19 @@ def context_processor():
     current_user_id = session.get('USER_ID')
     return dict(current_user_id = current_user_id)
 
-
-'''Error pages'''
 @app.errorhandler(404)
 def page_not_found(e):
+    '''Error page'''
     return render_template('404.html'), 404
 
 @app.errorhandler(500)
 def page_not_found(e):
+    '''Error page'''
     return render_template('500.html'), 500
 
 @app.route("/create")
 def create_article_form():
+    '''Skapa artikel'''
     tiers = get_tier()
     citys = get_city()
     categories = get_main_category()
@@ -132,7 +133,6 @@ def view_articles():
 @app.route("/about")
 def about_page():
     return render_template("/about.html")
-
 
 @app.route("/login", methods=["GET", "POST"])
 def login_template():
