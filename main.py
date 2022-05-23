@@ -246,10 +246,14 @@ def register_interest():
 @app.route("/wife_confirm_trade", methods=["GET", "POST"])
 def wife_confirm_trade():
     transaction_id = request.form.get("transaction_id")
-    print(request.form.get("wife_confirm"))
     confirmed = int(request.form.get("wife_confirm"))
+    both_complete = int(request.form.get("both_complete"))
+    date_complete = datetime.now()
     if confirmed == 1:
         save_wife_confirmed_to_db(transaction_id)
+    
+    if both_complete == 1:
+        save_date_completed_to_db(transaction_id, date_complete)
     '''Funktion för att hantera ifall en användare vill neka att ett byte genomförts
     elif confirmed == 0:
         remove_interest_from_db(transaction_id)
@@ -261,10 +265,15 @@ def wife_confirm_trade():
 @app.route("/husband_confirm_trade", methods=["GET", "POST"])
 def husband_confirm_trade():
     transaction_id = request.form.get("transaction_id")
-    print(request.form.get("husband_confirm"))
     confirmed = int(request.form.get("husband_confirm"))
+    both_complete = int(request.form.get("both_complete"))
+    date_complete = datetime.now()
+
     if confirmed == 1:
         husband_wife_confirmed_to_db(transaction_id)
+
+    if both_complete == 1:
+        save_date_completed_to_db(transaction_id, date_complete)
     '''Funktion för att hantera ifall en användare vill neka att ett byte genomförts
     elif confirmed == 0:
         remove_interest_from_db(transaction_id)
