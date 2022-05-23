@@ -1,32 +1,44 @@
 {% extends "base.html" %} {% block title %}visa intresse{% endblock %} {% block content
     %}
-<body>
-    
+<div id="trade-div">
     <form action="/show_interest" method="POST">
-            
         <input type="hidden" id="wife_article" name="wife_article" value="{{wife_article_id}}">
             
-
         <form action="/show_interest" method="POST">
-            <label for="husband_article_id">Välj vilken av dina artiklar du vill byta med</label>
+            <label for="husband_article_id">Nu får du välja en av dina artiklar som du vill byta mot. Det går också bra att föreslå att byta mot ett handslag.</label>
             <select id="husband_article_id" name="husband_article_id">
                 <option value="Handshake">Handslag</option>
                     {%for row in articles%}:
                     <option value={{row[0]}}>{{row[2]}}</option>
                     {%endfor%}
+                <input type="submit" class="btn btn-primary" id="submit-btn" value="Välj">
             </select>
-        <input type="submit" class="btn btn-primary" value="Välj">
+        
     </form>
 
-    <div>
-        <div class="tooltip">
-            <span id="handshake_tooltip">Handslag? </span>            
-            <span class="tooltiptext">Att byta mot ett handslag innebär att din produkt hittar ett annat hem utan att du får något för den, mer än ett handslag vill säga...</span>
+    <div class="tier-info-box">
+        <h3 class="head-info-box">Nivåsystem</h3>
+        <div class="tier-box">
+            <img src="/static/img/bin.png" class="tier-icons-info" alt="Bin">
+            <p>Skräp - En hård beskrivning kanske, men one man's trash is antoher man's treasure!</p>
+        </div>
+
+        <div class="tier-box">
+            <img src="/static/img/pizza.png" class="tier-icons-info" alt="Pizza">
+            <p>Halv pizza - En halv pizza är bättre än ingen pizza alls.</p>
+        </div>
+
+        <div class="tier-box">
+            <img src="/static/img/diamond.png" class="tier-icons-info" alt="Diamond">
+            <p>Diamant - Förklarar nästan sig självt va? Var bara försiktig så du inte skrämmer iväg den snåle!</p>
+        </div>
+
+        <div class="tier-box">
+            <img src="/static/img/handshake.png" class="tier-icons-info" alt="Handshake">
+            <p>Handslag - Att byta bort en vara mot ett handslag innebär att du är villig att bli av med varan utan att få något i utbyte (förutom ett handslag förstås).</p>
         </div>
     </div>
-
-</body>
-
+</div>
 
 
 {% endblock %}
