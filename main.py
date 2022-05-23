@@ -18,7 +18,6 @@ app.config['SECRET_KEY'] = 'thisissecret'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
-
 @app.route("/render_chat_list")
 def chat_list():
     user_name = session.get('USER_NAME')
@@ -134,9 +133,10 @@ def view_articles():
 def about_page():
     return render_template("/about.html")
 
-'''Login function'''
+
 @app.route("/login", methods=["GET", "POST"])
 def login_template():
+    '''Login function'''
     if request.method == 'POST':
         user_email = request.form.get("user_email")
         user_password = request.form.get("user_password")
@@ -154,9 +154,10 @@ def login_template():
     else:                
         return render_template("login.html")
 
-'''Logout function'''
+
 @app.route("/logout_user")
 def logout():
+    '''Logout function'''
     session.clear()
     return render_template("logged_out.html")
 
