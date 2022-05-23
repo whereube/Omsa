@@ -194,6 +194,11 @@
                                     <!--<input type="radio" id="No" name="wife_confirm" value="0">
                                     <label for="No">Bytet kommer inte genomföras</label><br>-->
                                     <input type="hidden" id="transaction_id" name="transaction_id" value={{trade[0]}}>
+                                    {% if trade[4] != None %}
+                                        <input type="hidden" id="both_complete" name="both_complete" value="1">
+                                    {% elif trade[4] == None %}
+                                        <input type="hidden" id="both_complete" name="both_complete" value="0">
+                                    {%endif%}
                                     <input type="submit" value="Skicka">
                                 </form>
                             </div>
@@ -207,6 +212,11 @@
                                     <!--Ger användaren en möjlighet att klicka att bytet inte kommer genomföras <input type="radio" id="No" name="husband_confirm" value="0">
                                     <label for="No">Bytet kommer inte genomföras</label><br>-->
                                     <input type="hidden" id="transaction_id" name="transaction_id" value={{trade[0]}}>
+                                    {% if trade[3] != None %}
+                                        <input type="hidden" id="both_complete" name="both_complete" value="1">
+                                    {% elif trade[3] == None %}
+                                        <input type="hidden" id="both_complete" name="both_complete" value="0">
+                                    {%endif%}
                                     <input type="submit" value="Skicka">
                                 </form>
                             </div>
