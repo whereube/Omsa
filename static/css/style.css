@@ -60,6 +60,10 @@ nav{
     background-color: #F3F3F3;
 }
 
+.card:hover{
+cursor: pointer
+}
+
 .small_pic{
 height: 150px;
 width: 150px;
