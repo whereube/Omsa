@@ -516,3 +516,7 @@ color: white;
 display: flex;
 flex-direction: row;
 }
+
+#tier_image{
+margin-top: 10px;
+}
