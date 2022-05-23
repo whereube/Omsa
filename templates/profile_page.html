@@ -179,14 +179,24 @@
                         <div class="contact_info" style="width: 48rem;">
                             <div class="card-body">
                                 <p>Redo för byte, du kan nu kontakta den andra personen</p>
-                                <p>Namn: {{trade[46]}}</p>
-                                <p>Telefon: {{trade[51]}}</p>
-                                <p>Email: {{trade[45]}}</p>
+                                {% if trade[11] == user_id and trade[7] != True %}
+                                    <p>Namn: {{trade[46]}}</p>
+                                    <p>Telefon: {{trade[51]}}</p>
+                                    <p>Email: {{trade[45]}}</p>
+                                {% elif trade[11] != user_id %}
+                                    <p>Namn: {{trade[34]}}</p>
+                                    <p>Telefon: {{trade[39]}}</p>
+                                    <p>Email: {{trade[33]}}</p>
+                                {% elif trade[7] == True and trade[11] == user_id %}
+                                    <p>Namn: {{trade[58]}}</p>
+                                    <p>Telefon: {{trade[63]}}</p>
+                                    <p>Email: {{trade[57]}}</p>
+                                {%endif%}
                                 {%for chat_id in all_chat_id%}
                                     {%if chat_id[2] == trade[11] and (chat_id[1] == trade[22] or chat_id[1] == trade[9])%}
-                                        <button type="button" class="btn btn-primary article_button"><a href="/message_page/{{chat_id[0]}}" class="list-btn">Chatta med {{chat_id[9]}}!</a></button>
-                                    {%elif (chat_id[1] == trade[22] or chat_id[1] == trade[9]) and chat_id[2] == trade[11] %}
-                                        <button type="button" class="btn btn-primary article_button"><a href="/message_page/{{chat_id[0]}}" class="list-btn">Chatta med {{chat_id[21]}}!</a></button>
+                                        <button type="button" class="btn btn-primary article_button"><a href="/message_page/{{chat_id[0]}}" class="list-btn">Chatta!</a></button>
+                                    {%elif ((chat_id[1] == trade[22] or chat_id[1] == trade[9]) and chat_id[2] == trade[11]  or chat_id[1] == trade[11] and (chat_id[2] == trade[22] or chat_id[2] == trade[9])) %}
+                                        <button type="button" class="btn btn-primary article_button"><a href="/message_page/{{chat_id[0]}}" class="list-btn">Chatta!</a></button>
                                     {%endif%}
                                 {%endfor%}
                             </div>
