@@ -161,8 +161,8 @@ def show_user_profile():
     user_id = session.get('USER_ID')
     trades = trade_proposals(user_id)
     images = get_article_images()
-
-    return render_template("profile_page.html", user_name = user_name, trades = trades, user_id = user_id, images = images)
+    all_chat_id = get_chat_id(user_id)
+    return render_template("profile_page.html", user_name = user_name, trades = trades, user_id = user_id, images = images, all_chat_id = all_chat_id)
 
 '''Create user function'''
 @app.route("/create_profile", methods=["GET", "POST"])
@@ -216,7 +216,7 @@ def submit_interest():
         print(chat_exists)
         save_interest_to_db(transaction_id)
         if chat_exists == []:
-            chat_id = create_chat_id(wife_id, husband_id)
+            chat_id = create_chat_id(husband_id, wife_id)
             create_standard_message(chat_id, wife_id, 'Hej, jag är också intresserad av ett byte')
         else:
             for chat in chat_exists:
