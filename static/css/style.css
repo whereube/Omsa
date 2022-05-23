@@ -520,3 +520,7 @@ flex-direction: row;
 #tier_image{
 margin-top: 10px;
 }
+
+.trade{
+border: none !important;
+}

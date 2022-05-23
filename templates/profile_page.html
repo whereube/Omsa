@@ -8,7 +8,7 @@
         {% if trade[11] == user_id and trade[8] == None %}
             <div class="large_trade_card">
                 <div class="trade_card" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample{{trade[0]}}" aria-expanded="false" aria-controls="collapseWidthExample">
-                    <div class="card mb-3" style="width: 48rem;">
+                    <div class="card mb-3 trade" style="width: 48rem;">
                         <div class="row g-0">
                             {%for image in images%}
                                 {% if trade[10] == image[1]%}
@@ -29,7 +29,7 @@
                         <div class="arrow">⇆</div>
                             <p>Föreslaget: {{trade[6].strftime('%Y-%m-%d')}}</p>
                     </div>
-                    <div class="card mb-3" style="width: 48rem;">
+                    <div class="card mb-3 trade" style="width: 48rem;">
                         <div class="row g-0">
                             {%for image in images%}
                                 {%if trade[20] == image[1]%}
@@ -111,7 +111,7 @@
         {% if trade[8] == False %}
             <div class="large_trade_card">
                 <div class="trade_card" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample{{trade[0]}}" aria-expanded="false" aria-controls="collapseWidthExample">
-                    <div class="card mb-3" style="width: 48rem;">
+                    <div class="card mb-3 trade" style="width: 48rem;">
                         <div class="row g-0">
                             {%for image in images%}
                                 {%if trade[10] == image[1]%}
@@ -132,7 +132,7 @@
                         <div class="arrow">⇆</div>
                             <p>Föreslaget: {{trade[6].strftime('%Y-%m-%d')}}</p>
                     </div>
-                    <div class="card mb-3" style="width: 48rem;">
+                    <div class="card mb-3 trade" style="width: 48rem;">
                         <div class="row g-0">
                             {%for image in images%}
                                 {%if trade[20] == image[1]%}
@@ -238,7 +238,7 @@
         {% if trade[9] == user_id and trade[8] == None %}
             <div class="large_trade_card">
                 <div class="trade_card" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample{{trade[0]}}" aria-expanded="false" aria-controls="collapseWidthExample">
-                    <div class="card mb-3" style="width: 48rem;">
+                    <div class="card mb-3 trade" style="width: 48rem;">
                         <div class="row g-0">
                             {%for image in images%}
                                 {%if trade[20] == image[1]%}
@@ -269,7 +269,7 @@
                             <div class="arrow">⇆</div>
                             <p>Föreslaget: {{trade[6].strftime('%Y-%m-%d')}}</p>
                         </div>
-                    <div class="card mb-3" style="width: 48rem;">
+                    <div class="card mb-3 trade" style="width: 48rem;">
                         <div class="row g-0"></div>
                             {%for image in images%}
                                 {%if trade[10] == image[1]%}
