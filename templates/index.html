@@ -43,13 +43,13 @@
               <h2 class="card-title col-md-6 article_h2">{{row[2]}}</h2>
               <p class="col-md-6 article_p">Stad: {{row[23]}}</p>
               {%if row[25] == 1%}
-                <p><img src="/static/img/bin.png" class="tier-icons" alt="Bin"></p>
+                <p class="col-md-6" id="tier_image"><img src="/static/img/bin.png" class="tier-icons" alt="Bin"></p>
               {%elif row[25] == 2%}
-                <p><img src="/static/img/pizza.png" class="tier-icons" alt="Pizza"></p>
+                <p class="col-md-6" id="tier_image"><img src="/static/img/pizza.png" class="tier-icons" alt="Pizza"></p>
               {%elif row[25] == 3%}
-                <p><img src="/static/img/diamond.png" class="tier-icons" alt="Pizza"></p>
+                <p class="col-md-6" id="tier_image"><img src="/static/img/diamond.png" class="tier-icons" alt="Pizza"></p>
               {%elif row[25] == 4%}
-                <p><img src="/static/img/handshake.png" class="tier-icons" alt="Handshake"></p>
+                <p class="col-md-6" id="tier_image"><img src="/static/img/handshake.png" class="tier-icons" alt="Handshake"></p>
               {%endif%}
               <p class="col-md-6 article_p">Kategori: {{row[31]}}</p>
               <p class="card-text col-md-12 article_p"><small class="text-muted">Skapad: {{row[6].strftime('%Y-%m-%d')}}</small></p>
