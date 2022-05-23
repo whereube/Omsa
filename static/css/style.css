@@ -489,3 +489,9 @@ flex-direction: row;
 .pure-form > #head_passwords > button{
     margin-left: 22px;
 }
+#pop_box{
+    text-align: center;
+    background-color: lightblue;
+    color: black;
+    padding: 20px;
+}

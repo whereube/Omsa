@@ -1,4 +1,9 @@
 {% extends "base.html" %} {% block title %}Min profil{% endblock %} {% block content%}
+    {% with messages = get_flashed_messages() %}
+            {% for message in messages %}
+                <p id="pop_box">{{message}}</p>   
+            {% endfor %}
+        {% endwith %}
     <div id="my_profile">
         <h1>Min profil</h1>
         {%for row in user_info%}
@@ -27,8 +32,9 @@
             <div id="transaction_links">
                 <a href="transaction_history">Transaktions historik</a>
                 <a href="edit_password">Byt lösenord</a>
-                <a href="edit_profile">Redigera profil</a>
+                    <a href="edit_profile">Redigera profil</a>
             </div>
         {%endfor%}
     </div>
+    <script src="/static/js/popup.js"></script>
 {% endblock %}

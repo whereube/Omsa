@@ -383,4 +383,5 @@ def edit_password():
 def change_password():
     main_password = request.form.get("main_password")
     change_password_done(main_password)
+    flash("Lösenordet har bytas")
     return redirect("/my_profile")
