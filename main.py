@@ -359,7 +359,7 @@ def transacation_undo_now():
     transaction = request.form.get("transaction_id") 
     transaction_delete(transaction)
     flash("Du har ångrat transaktionen")
-    return render_template("/show_profile_page.html")
+    return redirect("/show_profile_page")
 
 @app.route("/edit_profile", methods=["POST", "GET"])
 def edit_the_profile():
