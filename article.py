@@ -488,9 +488,10 @@ def get_completed_transactions(user_id):
     where wife_complete = True 
     and husband_complete = true
     and (wife_article.user_id = %s
-    or husband_article.user_id = %s)
+    or husband_article.user_id = %s
+    or husband_id = %s)
     order by transaction.date_completed desc
-    """, (user_id, user_id,))
+    """, (user_id, user_id, user_id,))
     records = cursor.fetchall()
     cursor.close()
     close_db_omsa(connection)

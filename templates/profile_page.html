@@ -11,7 +11,7 @@
                     <div class="card mb-3" style="width: 48rem;">
                         <div class="row g-0">
                             {%for image in images%}
-                                {%if trade[10] == image[1]%}
+                                {% if trade[10] == image[1]%}
                                     <div class="col-md-4 small_picture">
                                         <img id="temp_pic" src="/static/article_images/{{image[2]}}" class="img-fluid rounded-start" alt="Artikelbild">
                                     </div>
@@ -38,10 +38,20 @@
                                     </div>
                                 {%endif%}
                             {%endfor%}
+                                {%if trade[7] == true%}
+                                    <div class="col-md-4 small_picture">
+                                        <img id="temp_pic" src="/static/article_images/handslag.jpeg" class="img-fluid rounded-start" alt="Artikelbild">
+                                    </div>
+                                {%endif%}
                             <div class="col-md-8">
                                 <div class="card-body">
-                                    <h4 class="card-title">{{trade[22]}}</h4>
-                                    <p class="card-text">Stad: {{trade[69]}}</p>
+                                    {%if trade[7] != true%}
+                                        <h4 class="card-title">{{trade[22]}}</h4>
+                                        <p class="card-text">Stad: {{trade[69]}}</p>
+                                    {%endif%}
+                                    {%if trade[7] == true%}
+                                        <h4 class="card-title">Handslag</h4>
+                                    {%endif%}
                                 </div>
                             </div>
                         </div>
@@ -58,8 +68,14 @@
                                 <label for="No_{{trade[0]}}">Jag är inte intresserad</label><br>
                                 <input type="hidden" id="transaction_id" name="transaction_id" value={{trade[0]}}>
                                 <input type="submit" value="Skicka">
-                                <input type="hidden" value="{{trade[21]}}" name="husband_id">
-                                <input type="hidden" value="{{trade[11]}}" name="wife_id">
+                                {%if trade[7] == true%}
+                                    <input type="hidden" value="{{trade[9]}}" name="husband_id">
+                                    <input type="hidden" value="{{trade[11]}}" name="wife_id">
+                                {%endif%}
+                                {%if trade[7] != true%}
+                                    <input type="hidden" value="{{trade[21]}}" name="husband_id">
+                                    <input type="hidden" value="{{trade[11]}}" name="wife_id">
+                                {%endif%}
                             </form>
                         </div>
                     {% elif trade[8] == False %}
@@ -125,10 +141,20 @@
                                     </div>
                                 {%endif%}
                             {%endfor%}
+                                {%if trade[7] == true %}
+                                    <div class="col-md-4 small_picture">
+                                        <img id="temp_pic" src="/static/article_images/handslag.jpeg" class="img-fluid rounded-start" alt="Artikelbild">
+                                    </div>
+                                {%endif%}
                             <div class="col-md-8">
                                 <div class="card-body">
-                                    <h4 class="card-title">{{trade[22]}}</h4>
-                                    <p class="card-text">Stad: {{trade[69]}}</p>
+                                    {%if trade[7] != true %}
+                                        <h4 class="card-title">{{trade[22]}}</h4>
+                                        <p class="card-text">Stad: {{trade[69]}}</p>
+                                    {%endif%}
+                                    {%if trade[7] == true %}
+                                        <h4 class="card-title">Handslag</h4>
+                                    {%endif%}
                                 </div>
                             </div>
                         </div>
@@ -165,7 +191,7 @@
                                 {%endfor%}
                             </div>
                         </div>
-                        {% if trade[3] == None %}
+                        {% if trade[3] == None and trade[11] == user_id %}
                             <div class="card_form">
                                 <h4>Byte genomfört?</h4>
                                 <form action="/wife_confirm_trade" method="POST">
@@ -174,6 +200,29 @@
                                     <!--<input type="radio" id="No" name="wife_confirm" value="0">
                                     <label for="No">Bytet kommer inte genomföras</label><br>-->
                                     <input type="hidden" id="transaction_id" name="transaction_id" value={{trade[0]}}>
+                                    {% if trade[4] != None %}
+                                        <input type="hidden" id="both_complete" name="both_complete" value="1">
+                                    {% elif trade[4] == None %}
+                                        <input type="hidden" id="both_complete" name="both_complete" value="0">
+                                    {%endif%}
+                                    <input type="submit" value="Skicka">
+                                </form>
+                            </div>
+                        {% endif %}
+                        {% if trade[4] == None and trade[9] == user_id %}
+                            <div class="card_form">
+                                <h4>Byte genomfört?</h4>
+                                <form action="/husband_confirm_trade" method="POST">
+                                    <input type="radio" id="Yes" name="husband_confirm" value=1>
+                                    <label for="Yes">Bytet har genomförts</label><br>
+                                    <!--Ger användaren en möjlighet att klicka att bytet inte kommer genomföras <input type="radio" id="No" name="husband_confirm" value="0">
+                                    <label for="No">Bytet kommer inte genomföras</label><br>-->
+                                    <input type="hidden" id="transaction_id" name="transaction_id" value={{trade[0]}}>
+                                    {% if trade[3] != None %}
+                                        <input type="hidden" id="both_complete" name="both_complete" value="1">
+                                    {% elif trade[3] == None %}
+                                        <input type="hidden" id="both_complete" name="both_complete" value="0">
+                                    {%endif%}
                                     <input type="submit" value="Skicka">
                                 </form>
                             </div>
@@ -186,7 +235,7 @@
 
     <h2>Väntar på svar:</h2>
     {% for trade in trades: %}
-        {% if trade[21] == user_id and trade[8] == None %}
+        {% if trade[9] == user_id and trade[8] == None %}
             <div class="large_trade_card">
                 <div class="trade_card" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample{{trade[0]}}" aria-expanded="false" aria-controls="collapseWidthExample">
                     <div class="card mb-3" style="width: 48rem;">
@@ -198,11 +247,20 @@
                                     </div>
                                 {%endif%}
                             {%endfor%}
+                                {%if trade[7] == true%}
+                                    <div class="col-md-4 small_picture">
+                                        <img id="temp_pic" src="/static/article_images/handslag.jpeg" class="img-fluid rounded-start" alt="Artikelbild">
+                                    </div>
+                                {%endif%}
                             <div class="col-md-8">
                                 <div class="card-body">
-                                    <h4 class="card-title">{{trade[22]}}</h4>
-                                    <p class="card-text">Stad: {{trade[69]}}</p>
-                                    <p class="card-text">Datum föreslaget: {{trade[6].strftime('%Y-%m-%d')}}</p>
+                                    {%if trade[7] != true%}
+                                        <h4 class="card-title">{{trade[22]}}</h4>
+                                        <p class="card-text">Stad: {{trade[69]}}</p>
+                                    {%endif%}
+                                    {%if trade[7] == true%}
+                                        <h4 class="card-title">Handslag</h4>
+                                    {%endif%}
                                 </div>
                             </div>
                         </div>
@@ -239,19 +297,6 @@
                                 <p>Email: {{trade[33]}}</p>
                             </div>
                         </div>
-                        {% if trade[4] == None %}
-                            <div class="card_form">
-                                <h4>Byte genomfört?</h4>
-                                <form action="/husband_confirm_trade" method="POST">
-                                    <input type="radio" id="Yes" name="husband_confirm" value=1>
-                                    <label for="Yes">Bytet har genomförts</label><br>
-                                    <!--Ger användaren en möjlighet att klicka att bytet inte kommer genomföras <input type="radio" id="No" name="husband_confirm" value="0">
-                                    <label for="No">Bytet kommer inte genomföras</label><br>-->
-                                    <input type="hidden" id="transaction_id" name="transaction_id" value={{trade[0]}}>
-                                    <input type="submit" value="Skicka">
-                                </form>
-                            </div>
-                        {% endif %}
                     {% elif trade[8] == None %}
                         <div class="card_form" style="width: 48rem;">
                             <p>Status: Väntar på svar</p>

@@ -132,7 +132,7 @@ def remove_interest_from_db(transaction_id):
 
 def save_wife_confirmed_to_db(transaction_id):
     '''
-    Uppdaterar transactions.denied med värdet false
+    Uppdaterar transactions.wife_complete med värdet True
     args:
         transaction_id: ID till transactionsposten
     '''
@@ -152,7 +152,7 @@ def save_wife_confirmed_to_db(transaction_id):
 
 def husband_wife_confirmed_to_db(transaction_id):
     '''
-    Uppdaterar transactions.denied med värdet false
+    Uppdaterar transactions.husband_complete med värdet True
     args:
         transaction_id: ID till transactionsposten
     '''
@@ -165,6 +165,28 @@ def husband_wife_confirmed_to_db(transaction_id):
     set husband_complete = True
     where transaction.id = %s
     """,(transaction_id,))
+
+    cursor.close()
+    connection.commit()
+    close_db_omsa(connection)
+
+
+def save_date_completed_to_db(transaction_id, date_complete):
+    '''
+    Uppdaterar transactions.date_completed
+    args:
+        transaction_id: ID till transactionsposten
+        date_complete: Datum nu
+    '''
+
+    connection = open_db_omsa()
+
+    cursor = connection.cursor()
+    cursor.execute("""
+    update transaction
+    set date_completed = %s
+    where transaction.id = %s
+    """,(date_complete, transaction_id,))
 
     cursor.close()
     connection.commit()
