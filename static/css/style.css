@@ -309,10 +309,6 @@ border: 1px solid var(--light);
     margin-top: 0px;
 }
 
-#handshake_tooltip{
-    font-style: italic;
-}
-
 .tier-icons{
     height: 40px;
     width: 40px;
@@ -323,6 +319,29 @@ border: 1px solid var(--light);
     height: 40px;
     width: 40px;
 }
+
+.head-info-box{
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 2px solid var(--light);
+    padding: 5px;
+}
+
+#trade-div{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+#trade-div select {
+    width: 200px;
+    height: 40px;
+    font-size: 20px;
+    margin-top: 30px;
+    margin-right: 0px;
+    margin-bottom: 30px;
+}
+
 
 /* CSS - popup till förklaring av handslag*/
 .tooltip {
