@@ -25,7 +25,6 @@
                             <div class="card-body">
                                 {%if trade[7] != true %}
                                     <h4 class="card-title">{{trade[22]}}</h4>
-                                    <p class="card_text">{{trade[23]}}</p>
                                 {%endif%}
                                 {%if trade[7] == true %}
                                     <h4 class="card-title">Handslag</h4>
@@ -35,6 +34,7 @@
                     </div>
                     <div class="arrow_box">
                         <div class="arrow">⇆</div>
+                        <p>Föreslaget: {{trade[6].strftime('%Y-%m-%d')}}</p>
                     </div>
                     <div class="card mb-3" style="width: 48rem;">
                         <div class="row g-0">
@@ -49,7 +49,6 @@
                         <div class="col-md-8">
                             <div class="card-body">
                                 <h4 class="card-title">{{trade[12]}}</h4>
-                                <p>{{trade[13]}}</p>
                             </div>
                         </div>
                     </div>
