@@ -489,3 +489,13 @@ flex-direction: row;
 .pure-form > #head_passwords > button{
     margin-left: 22px;
 }
+
+.article_button{
+background-color: var(--primary);
+border: 1px solid var(--light);
+}
+
+.edit_options{
+display: flex;
+flex-direction: row;
+}
