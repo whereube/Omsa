@@ -151,12 +151,18 @@
                         </div>
                     {% elif trade[8] == False %}
                         <div class="contact_info" style="width: 48rem;">
-                            <h4>Kontakt:</h4>
                             <div class="card-body">
                                 <p>Redo för byte, du kan nu kontakta den andra personen</p>
                                 <p>Namn: {{trade[46]}}</p>
                                 <p>Telefon: {{trade[51]}}</p>
                                 <p>Email: {{trade[45]}}</p>
+                                {%for chat_id in all_chat_id%}
+                                    {%if chat_id[2] == trade[11] and (chat_id[1] == trade[22] or chat_id[1] == trade[9])%}
+                                        <button type="button" class="btn btn-primary article_button"><a href="/message_page/{{chat_id[0]}}" class="list-btn">Chatta med {{chat_id[9]}}!</a></button>
+                                    {%elif (chat_id[1] == trade[22] or chat_id[1] == trade[9]) and chat_id[2] == trade[11] %}
+                                        <button type="button" class="btn btn-primary article_button"><a href="/message_page/{{chat_id[0]}}" class="list-btn">Chatta med {{chat_id[21]}}!</a></button>
+                                    {%endif%}
+                                {%endfor%}
                             </div>
                         </div>
                         {% if trade[3] == None %}
