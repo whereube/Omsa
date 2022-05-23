@@ -1,4 +1,9 @@
 {% extends "base.html" %} {% block title %}Start{% endblock %} {% block content%}
+{% with messages = get_flashed_messages() %}
+        {% for message in messages %}
+            <p id="pop_box">{{message}}</p>   
+        {% endfor %}
+    {% endwith %}
 <h1 class="center_h1">Startsidan</h1>
 <form action="/article_search" method="POST">
   <div class="mb-3">
@@ -79,5 +84,5 @@ $(document).ready(function() {
 });
 </script>
 
-
+<script src="/static/js/popup.js"></script>
 {% endblock %}

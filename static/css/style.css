@@ -491,7 +491,10 @@ flex-direction: row;
 }
 #pop_box{
     text-align: center;
-    background-color: lightblue;
+    background-color: rgb(107, 214, 107);
     color: black;
-    padding: 20px;
+    padding: 40px 20px;
+    margin-left:25% ;
+    width: 50%;
+    font-size: 30px;
 }

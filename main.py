@@ -99,6 +99,7 @@ def create_article():
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
     create_article_in_db(title, description, zip_code, tier, city, category, user_id, file.filename, sub_category)
+    flash("Artikel har skapats")
     return redirect("/")
 
 @app.route("/remove", methods=['GET', 'POST'])
@@ -114,6 +115,7 @@ def remove_article_form():
 def remove_article():
     article = request.form.get("article_id")
     remove_article_from_db(article)
+    flash("Artikel har tagits bort")
     return redirect("/")
 
 @app.route("/view_articles")
@@ -184,6 +186,7 @@ def create_user():
     
     if user_zip_code.isdigit() and user_phone_number.isdigit() == True:
         create_user_in_db(user_name, user_password, user_email, user_f_name, user_l_name, user_adress, user_zip_code, city, user_phone_number)
+        flash("Profil har skapats")
         return redirect("/")
     else:
         return redirect("/create_profil")
@@ -327,6 +330,7 @@ def change_artical():
 
     edit_to_article(title, description, zip_code, tier, date_now, city, article_id )
     edit_article_catergory(category_id, article_id)
+    flash("Artikeln har ändrats")
     return redirect("/")
 
 
@@ -354,7 +358,8 @@ def show_completed_transactions():
 def transacation_undo_now():
     transaction = request.form.get("transaction_id") 
     transaction_delete(transaction)
-    return render_template("/transaction_undo_done.html")
+    flash("Du har ångrat transaktionen")
+    return render_template("/show_profile_page.html")
 
 @app.route("/edit_profile", methods=["POST", "GET"])
 def edit_the_profile():
@@ -373,6 +378,7 @@ def change_profile():
     city = request.form.get("city")
     phone_number = request.form.get("phone_number")
     update_user_in_db( user_name, email, f_name, l_name, adress, zip_code, city, phone_number)
+    flash("Profil har ändrats")
     return redirect("/my_profile")
 
 @app.route("/edit_password")
@@ -383,5 +389,5 @@ def edit_password():
 def change_password():
     main_password = request.form.get("main_password")
     change_password_done(main_password)
-    flash("Lösenordet har bytas")
+    flash("Lösenordet har ändrats")
     return redirect("/my_profile")
