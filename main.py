@@ -30,10 +30,15 @@ def chat_list():
 @app.route("/message_page/<chat_id>", methods=['GET', 'POST'])
 def show_chat_room(chat_id):
     user_id = session.get('USER_ID')
+    other_user = []
     linked_user = get_chat_id(user_id)
     chat_info = get_chat_messages(chat_id)
 
-    return render_template("/message_page.html", user_id = user_id, chat_id = chat_id, linked_user = linked_user, chat_info = chat_info)
+    for row in chat_info[:6]:
+        if row[2] != user_id:
+            other_user = row[6]
+
+    return render_template("/message_page.html", user_id = user_id, chat_id = chat_id, linked_user = linked_user, chat_info = chat_info, other_user = other_user)
 
     
 @app.route("/send_message", methods=["GET", "POST"])
