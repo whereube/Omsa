@@ -335,7 +335,7 @@ def show_completed_transactions():
     user_id = session.get("USER_ID")
     trades = get_completed_transactions(user_id)
     images = get_article_images()
-    return render_template("/transaction_history.html", trades = trades, images = images)
+    return render_template("/transaction_history.html", trades = trades, images = images, user_id = user_id)
 
 @app.route("/transaction_undo", methods=["GET", "POST"])
 def transacation_undo_now():

@@ -9,13 +9,13 @@
                     <div class="card mb-3" style="width: 48rem;">
                         <div class="row g-0">
                             {%for image in images%}
-                                {%if trade[2] == image[1]%}
+                                {%if trade[20] == image[1]%}
                                     <div class="col-md-4 small_picture">
                                         <img id="temp_pic" src="/static/article_images/{{image[2]}}" class="card-img-top" alt="Artikelbild">
                                     </div>
                                 {%endif%}
                             {%endfor%}
-                                {%if trade[7] == true%}
+                                {%if trade[7] == true %}
                                     <div class="col-md-4 small_picture">
                                         <img id="temp_pic" src="/static/article_images/handslag.jpeg" class="img-fluid rounded-start" alt="Artikelbild">
                                     </div>
@@ -39,7 +39,7 @@
                     <div class="card mb-3" style="width: 48rem;">
                         <div class="row g-0">
                             {%for image in images%}
-                                {%if trade[1] == image[1]%}
+                                {%if trade[10] == image[1]%}
                                     <div class="col-md-4 small_picture">
                                         <img id="temp_pic" src="/static/article_images/{{image[2]}}" class="card-img-top" alt="Artikelbild">
                                     </div>
