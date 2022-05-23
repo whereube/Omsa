@@ -313,7 +313,16 @@ border: 1px solid var(--light);
     font-style: italic;
 }
 
+.tier-icons{
+    height: 40px;
+    width: 40px;
+}
 
+.tier-icons-info{
+    margin-top: 15px;
+    height: 40px;
+    width: 40px;
+}
 
 /* CSS - popup till förklaring av handslag*/
 .tooltip {
