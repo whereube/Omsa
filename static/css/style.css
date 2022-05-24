@@ -543,3 +543,13 @@ margin-top: 10px;
 .trade{
 border: none !important;
 }
+#pop_box{
+    text-align: center;
+    background-color: rgb(107, 214, 107);
+    color: black;
+    padding: 40px 20px;
+    margin-left:25% ;
+    width: 50%;
+    font-size: 30px;
+    border-radius: 25px;
+}

@@ -1,5 +1,10 @@
 {% extends "base.html" %} {% block title %}Profile page{% endblock %} {% block content
     %}
+    {% with messages = get_flashed_messages() %}
+        {% for message in messages %}
+            <p id="pop_box">{{message}}</p>   
+        {% endfor %}
+    {% endwith %}
 <div>
     <h1>Föreslagna byten</h1>
 
@@ -321,4 +326,5 @@
         {% endif %}
     {% endfor %}
 </div>
+<script src="/static/js/popup.js"></script>
 {% endblock %}
