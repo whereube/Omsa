@@ -312,7 +312,7 @@
                             <p>Status: Väntar på svar</p>
                             <form action="/transaction_undo" method="post">
                                 <input type="hidden" name="transaction_id" value="{{trade[0]}}">
-                                <input type="submit" value="Ångra">
+                                <input type="submit" class="btn btn-primary article_button trade_proposed" value="Ångra">
                             </form>
                         </div>
                     {% endif %}

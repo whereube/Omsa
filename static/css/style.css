@@ -493,7 +493,6 @@ flex-direction: row;
 }
 
 #my_profile > #transaction_links > a{
-    background-color: lightblue;
     padding: 10px;
     border-radius: 25px;
     text-decoration: none;
@@ -560,4 +559,8 @@ margin-left: 15px;
 
 .trade_proposed{
 margin-bottom: 10px;
+}
+
+.btn:hover{
+background-color: rgb(61, 61, 61) !important;
 }
