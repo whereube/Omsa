@@ -60,17 +60,17 @@
                 <div class="form-check"> 
                 {%if tier[0] == row[5]%}
                     <input type="radio" class="form-check-input" id="validationFormCheck2" name="tier" required checked value="{{tier[0]}}">
-                    <label class="form-check-label" for="validationFormCheck2" >{{tier[1]}}</label>
+                    <label class="form-check-label" for="validationFormCheck2">{{tier[1]}}</label>
                 {%else%} 
                     <input type="radio" class="form-check-input" id="validationFormCheck2" name="tier" required  value="{{tier[0]}}">
-                    <label class="form-check-label" for="validationFormCheck2" >{{tier[1]}}</label>
+                    <label class="form-check-label" for="validationFormCheck2">{{tier[1]}}</label>
                 {%endif%}
                 </div>
             {%endfor%}
         </div>
 
         <div class="mb-3">
-        <input class="btn btn-primary" type="submit" value="Spara ändringar">
+        <input class="btn btn-primary" type="submit" value="Spara ändringar" id="submit-btn">
         </div>
     </form>
     {%endfor%}
