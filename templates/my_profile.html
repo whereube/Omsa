@@ -1,9 +1,15 @@
 {% extends "base.html" %} {% block title %}Min profil{% endblock %} {% block content%}
     {% with messages = get_flashed_messages() %}
-            {% for message in messages %}
-                <p id="pop_box">{{message}}</p>   
-            {% endfor %}
-        {% endwith %}
+        {% for message in messages %}
+            <div class="position-fixed top-15 end-0 p-3" style="z-index: 11" id="pop_box">
+                <div class="toast bg-success" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                        <strong class="me-auto">{{message}}</strong>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endwith %}
     <div id="my_profile">
         <h1>Min profil</h1>
         {%for row in user_info%}
