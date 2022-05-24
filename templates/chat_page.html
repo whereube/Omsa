@@ -1,13 +1,13 @@
 {% extends "base.html" %} {% block title %}Alla artiklar{% endblock %} {% block content
     %}
 <h1>Meddelanden</h1>
-
+<p>Nedan finns alla personer som du har öppnat en chat med.</p>
 <div class="list-group" id="chat-list">
     {%for row in linked_user%}
         {%if row[5] != user_id%}
-            <button type="button" class="list-group-item list-group-item-action"><a href="/message_page/{{row[0]}}" class="list-btn">{{row[6]}}</a></button>
+            <a href="/message_page/{{row[0]}}" class="list-btn"><button type="button" class="list-group-item list-group-item-action" class="chat-list-btn">{{row[6]}}</button></a>
         {%elif row[5] == user_id%}
-        <button type="button" class="list-group-item list-group-item-action"><a href="/message_page/{{row[0]}}" class="list-btn">{{row[18]}}</a></button>
+            <a href="/message_page/{{row[0]}}" class="list-btn"><button type="button" class="list-group-item list-group-item-action" class="chat-list-btn">{{row[18]}}</button></a>
         {%endif%}
     {%endfor%} 
 </div>
