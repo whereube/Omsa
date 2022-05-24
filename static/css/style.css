@@ -57,7 +57,7 @@ nav{
 
 #submit-btn:hover{
     background-color: var(--light);
-    color: var(--dark);
+    color: var(--light);
     border: 1px solid var(--dark);
 }
 
@@ -522,6 +522,12 @@ flex-direction: row;
     border-radius: 25px;
     text-decoration: none;
     color: black;
+}
+
+#my_profile > #transaction_links > a:hover{
+    background-color: var(--light);
+    color: var(--light);
+    border: 1px solid var(--dark);
 }
 
 .pure-form > h1 {
