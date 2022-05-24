@@ -600,3 +600,8 @@ margin-bottom: 10px;
 .btn:hover{
 background-color: rgb(61, 61, 61) !important;
 }
+
+#edit-art-tier{
+    display: flex;
+    justify-content: space-around;
+}
