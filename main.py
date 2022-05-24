@@ -31,7 +31,7 @@ def chat_list():
 def show_chat_room(chat_id):
     '''Sida för att chatta med specifik användare'''
     user_id = session.get('USER_ID')
-    other_user = []
+    other_user = ""
     linked_user = get_chat_id(user_id)
     chat_info = get_chat_messages(chat_id)
 
