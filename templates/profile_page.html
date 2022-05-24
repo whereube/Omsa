@@ -67,12 +67,14 @@
                         <div class="card_form">
                             <h4>Intresserad?</h4>
                             <form action="/submit_interest" method="POST">
-                                <input type="radio" id="Yes_{{trade[0]}}" name="interest" value=1>
-                                <label for="Yes_{{trade[0]}}">Jag är intresserad</label><br>
-                                <input type="radio" id="No_{{trade[0]}}" name="interest" value="0">
-                                <label for="No_{{trade[0]}}">Jag är inte intresserad</label><br>
-                                <input type="hidden" id="transaction_id" name="transaction_id" value={{trade[0]}}>
-                                <input type="submit" value="Skicka">
+                                <div class="form-check submit_interest">
+                                    <input type="radio" class="form-check-input" id="Yes_{{trade[0]}}" name="interest" value=1>
+                                    <label for="Yes_{{trade[0]}}">Jag är intresserad</label><br>
+                                    <input type="radio" class="form-check-input" id="No_{{trade[0]}}" name="interest" value="0">
+                                    <label for="No_{{trade[0]}}">Jag är inte intresserad</label><br>
+                                </div>
+                                    <input type="hidden" id="transaction_id" name="transaction_id" value={{trade[0]}}>
+                                    <input type="submit" class="btn btn-primary article_button trade_proposed" value="Skicka">
                                 {%if trade[7] == true%}
                                     <input type="hidden" value="{{trade[9]}}" name="husband_id">
                                     <input type="hidden" value="{{trade[11]}}" name="wife_id">
@@ -207,11 +209,10 @@
                             </div>
                         </div>
                         {% if trade[3] == None and trade[11] == user_id %}
-                            <div class="card_form">
+                            <div class="card_form confirm_trade">
                                 <h4>Byte genomfört?</h4>
                                 <form action="/wife_confirm_trade" method="POST">
-                                    <input type="radio" id="Yes_{{trade[0]}}" name="wife_confirm" value=1>
-                                    <label for="Yes_{{trade[0]}}">Bytet har genomförts</label><br>
+                                    <input type="hidden" id="Yes_{{trade[0]}}" name="wife_confirm" value=1>
                                     <!--<input type="radio" id="No" name="wife_confirm" value="0">
                                     <label for="No">Bytet kommer inte genomföras</label><br>-->
                                     <input type="hidden" id="transaction_id" name="transaction_id" value={{trade[0]}}>
@@ -220,16 +221,15 @@
                                     {% elif trade[4] == None %}
                                         <input type="hidden" id="both_complete" name="both_complete" value="0">
                                     {%endif%}
-                                    <input type="submit" value="Skicka">
+                                    <input class="btn btn-primary article_button trade_complete" type="submit" value="Genomfört">
                                 </form>
                             </div>
                         {% endif %}
                         {% if trade[4] == None and trade[9] == user_id %}
-                            <div class="card_form">
+                            <div class="card_form confirm_trade">
                                 <h4>Byte genomfört?</h4>
                                 <form action="/husband_confirm_trade" method="POST">
-                                    <input type="radio" id="Yes" name="husband_confirm" value=1>
-                                    <label for="Yes">Bytet har genomförts</label><br>
+                                    <input type="hidden" id="Yes" name="husband_confirm" value=1>
                                     <!--Ger användaren en möjlighet att klicka att bytet inte kommer genomföras <input type="radio" id="No" name="husband_confirm" value="0">
                                     <label for="No">Bytet kommer inte genomföras</label><br>-->
                                     <input type="hidden" id="transaction_id" name="transaction_id" value={{trade[0]}}>
@@ -238,7 +238,7 @@
                                     {% elif trade[3] == None %}
                                         <input type="hidden" id="both_complete" name="both_complete" value="0">
                                     {%endif%}
-                                    <input type="submit" value="Skicka">
+                                <input type="submit" class="btn btn-primary article_button trade_complete" value="Genomfört">
                                 </form>
                             </div>
                         {% endif %}
@@ -317,7 +317,7 @@
                             <p>Status: Väntar på svar</p>
                             <form action="/transaction_undo" method="post">
                                 <input type="hidden" name="transaction_id" value="{{trade[0]}}">
-                                <input type="submit" value="Ångra">
+                                <input type="submit" class="btn btn-primary article_button trade_proposed" value="Ångra">
                             </form>
                         </div>
                     {% endif %}
