@@ -569,14 +569,15 @@ border: none !important;
 }
 
 #pop_box{
-    text-align: center;
-    background-color: rgb(107, 214, 107);
-    color: black;
-    padding: 40px 20px;
-    margin-left:25% ;
-    width: 50%;
-    font-size: 30px;
-    border-radius: 25px;
+top: 10%;
+}
+
+.position-fixed{
+top: 10%;
+}
+
+.toast:not(.show){
+display: block !important;
 }
 
 .confirm_trade{

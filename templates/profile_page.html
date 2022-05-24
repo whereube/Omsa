@@ -2,7 +2,13 @@
     %}
     {% with messages = get_flashed_messages() %}
         {% for message in messages %}
-            <p id="pop_box">{{message}}</p>   
+            <div class="position-fixed top-15 end-0 p-3" style="z-index: 11" id="pop_box">
+                <div class="toast bg-success" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                        <strong class="me-auto">{{message}}</strong>
+                    </div>
+                </div>
+            </div>
         {% endfor %}
     {% endwith %}
 <div>
