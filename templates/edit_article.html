@@ -55,12 +55,21 @@
             </div>
         </div>-->
         <div class="form-region">
-            <h2 class="art-headers">Pris-tier</h2>
+            <h2 class="art-headers">Prisnivå</h2>
             {%for tier in tiers%}
                 <div class="form-check"> 
                 {%if tier[0] == row[5]%}
                     <input type="radio" class="form-check-input" id="validationFormCheck2" name="tier" required checked value="{{tier[0]}}">
-                    <label class="form-check-label" for="validationFormCheck2">{{tier[1]}}</label>
+
+                    {%if tier[1] == 1%}
+                        <label class="form-check-label" for="validationFormCheck2"><img src="/static/img/bin.png" class="tier-icons" alt="Bin"></label>
+                    {%elif tier[1] == 2%}
+                        <label class="form-check-label" for="validationFormCheck2"><img src="/static/img/pizza.png" class="tier-icons" alt="Pizza"></label>
+                    {%elif tier[1] == 3%}
+                        <label class="form-check-label" for="validationFormCheck2"><img src="/static/img/diamond.png" class="tier-icons" alt="Diamond"></label>
+                    {%elif tier[1] == 4%}
+                        <label class="form-check-label" for="validationFormCheck2"><img src="/static/img/handshake.png" class="tier-icons" alt="Handshake"></label>
+                    {%endif%}
                 {%else%} 
                     <input type="radio" class="form-check-input" id="validationFormCheck2" name="tier" required  value="{{tier[0]}}">
                     <label class="form-check-label" for="validationFormCheck2">{{tier[1]}}</label>
