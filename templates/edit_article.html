@@ -16,6 +16,7 @@
             </div>
 
            <div class="mb-3">
+                <input type="hidden" name="article_category_id" value="{{row[27]}}">
                 <select class="form-select" required aria-label="select example" name="category">
                 <option value="">Kategori</option>
                 {%for category in categories%}:

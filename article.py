@@ -454,15 +454,15 @@ def edit_to_article(title, description, zip_code, tier, edit, city, article_id):
     connection.commit()
     close_db_omsa(connection)
 
-def edit_article_catergory(category_id, article_id):
+def edit_article_catergory(category_id, article_category_id):
     connection = open_db_omsa()
 
     cursor = connection.cursor()
     cursor.execute("""
     Update article_category
     set category_id = %s
-    where article_id = %s
-    """,(category_id, article_id, ))
+    where id = %s 
+    """,(category_id, article_category_id, ))
 
     cursor.close()
     connection.commit()

@@ -342,9 +342,10 @@ def change_artical():
     tier = request.form.get("tier")
     date_now = datetime.now()
     category_id = request.form.get("category")
+    article_category_id = request.form.get("article_category_id")
 
     edit_to_article(title, description, zip_code, tier, date_now, city, article_id )
-    edit_article_catergory(category_id, article_id)
+    edit_article_catergory(category_id, article_category_id)
     flash("Artikeln har ändrats")
     return redirect("/")
 
