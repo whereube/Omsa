@@ -543,3 +543,21 @@ margin-top: 10px;
 .trade{
 border: none !important;
 }
+
+.confirm_trade{
+margin-bottom: 10px;
+margin-left: 10px;
+}
+
+.trade_complete{
+margin-bottom: 10px;
+margin-left: 10px;
+}
+
+.submit_interest{
+margin-left: 15px;
+}
+
+.trade_proposed{
+margin-bottom: 10px;
+}
