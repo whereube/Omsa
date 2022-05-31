@@ -53,7 +53,6 @@ def trade_proposals(user_id):
     close_db_omsa(connection)
     return records
 
-
 def show_interest(wife_article_id, husband_article_id):
     '''
     lägger till wife_article_id, husband_article_id, date_proposed och husband_id i database vid visat intresse
@@ -92,7 +91,6 @@ def show_interest_handshake(wife_article_id):
     connection.commit()
     close_db_omsa(connection)
 
-
 def save_interest_to_db(transaction_id):
     '''
     Uppdaterar transactions.denied med värdet false
@@ -112,7 +110,6 @@ def save_interest_to_db(transaction_id):
     cursor.close()
     connection.commit()
     close_db_omsa(connection)
-
 
 def remove_interest_from_db(transaction_id):
     '''
@@ -169,7 +166,6 @@ def husband_wife_confirmed_to_db(transaction_id):
     cursor.close()
     connection.commit()
     close_db_omsa(connection)
-
 
 def save_date_completed_to_db(transaction_id, date_complete):
     '''

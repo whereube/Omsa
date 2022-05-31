@@ -77,7 +77,6 @@ def get_profile_info():
     user_id = session.get('USER_ID')
     connection = open_db_omsa()
     
-
     cursor = connection.cursor()
     cursor.execute("""
     select * from profile

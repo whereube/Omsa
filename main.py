@@ -17,7 +17,6 @@ app.run(debug=True)
 app.config['SECRET_KEY'] = 'thisissecret'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-
 @app.route("/render_chat_list")
 def chat_list():
     '''Lista alla användare som går att chatta med'''
@@ -41,7 +40,6 @@ def show_chat_room(chat_id):
 
     return render_template("/message_page.html", user_id = user_id, chat_id = chat_id, linked_user = linked_user, chat_info = chat_info, other_user = other_user)
 
-    
 @app.route("/send_message", methods=["GET", "POST"])
 def handle_messages():
     '''Skicka meddelande till databasen'''
@@ -63,6 +61,7 @@ def start():
 
 @app.context_processor
 def context_processor():
+    '''Funktion för att kunna nå session-variabel i HTML'''
     current_user_id = session.get('USER_ID')
     return dict(current_user_id = current_user_id)
 
@@ -156,7 +155,6 @@ def login_template():
     else:                
         return render_template("login.html")
 
-
 @app.route("/logout_user")
 def logout():
     '''Logout function'''
@@ -172,9 +170,9 @@ def show_user_profile():
     all_chat_id = get_chat_id(user_id)
     return render_template("profile_page.html", user_name = user_name, trades = trades, user_id = user_id, images = images, all_chat_id = all_chat_id)
 
-'''Create user function'''
 @app.route("/create_profile", methods=["GET", "POST"])
 def create_profile_form():
+    '''Create user function'''
     city = get_city()
     return render_template("create_profile.html", city = city)
 
@@ -204,18 +202,18 @@ def show_my_profile():
     user_info = get_profile_info()
     return render_template("/my_profile.html" ,user_name = user_name, user_info = user_info, citys = citys )
 
-'''Visa eget förråd'''
 @app.route("/show_own_storage")
 def show_current_user_storage():
+    '''Visa eget förråd'''
     user_id = session.get("USER_ID")
     articles = get_user_articles(user_id)
     images = get_article_images()
     
     return render_template("/user_storage.html", articles = articles, images = images)
 
-'''Anmäl intresse för en produkt'''
 @app.route("/submit_interest", methods=["GET", "POST"])
 def submit_interest():
+    '''Anmäl intresse för en produkt'''
     transaction_id = request.form.get("transaction_id")
     interest = int(request.form.get("interest"))
     wife_id = request.form.get("wife_id")
@@ -236,9 +234,9 @@ def submit_interest():
 
     return redirect("/show_profile_page")
 
-'''Visar intresse för en produkt och hämtar in wife_article_id beroende på vilken artikel man trycker på, returnar sedan /choose_exchange.html tillsammans med artikel id samt den inloggaes artiklar'''
 @app.route("/wife_article_id", methods=['GET', 'POST'])
 def get_wife_article_id():
+    '''Visar intresse för en produkt och hämtar in wife_article_id beroende på vilken artikel man trycker på, returnar sedan /choose_exchange.html tillsammans med artikel id samt den inloggaes artiklar'''
 
     user_id = session.get("USER_ID")
     if user_id == None:
@@ -249,10 +247,9 @@ def get_wife_article_id():
         wife_article_id = request.form.get("wife_article_id")
         return render_template("/choose_exchange.html", articles = articles, wife_article_id = wife_article_id)
 
-
-'''Funktionen för att registrera intresse i databasen'''
 @app.route("/show_interest", methods=['GET', 'POST'])
 def register_interest():
+    '''Funktionen för att registrera intresse i databasen'''
     wife_article_id = request.form.get("wife_article")    
     husband_article_id = request.form.get("husband_article_id")
     if husband_article_id != "Handshake":
@@ -261,9 +258,9 @@ def register_interest():
         show_interest_handshake(wife_article_id)
     return redirect("/")
 
-'''Anmäl att ett byte har genomförts eller inte och lägger in det i wife_confirmed'''
 @app.route("/wife_confirm_trade", methods=["GET", "POST"])
 def wife_confirm_trade():
+    '''Anmäl att ett byte har genomförts eller inte och lägger in det i wife_confirmed'''
     transaction_id = request.form.get("transaction_id")
     confirmed = int(request.form.get("wife_confirm"))
     both_complete = int(request.form.get("both_complete"))
@@ -280,9 +277,9 @@ def wife_confirm_trade():
 
     return redirect("/show_profile_page")
 
-'''Anmäl att ett byte har genomförts eller inte och lägger in det i husband_confirmed'''
 @app.route("/husband_confirm_trade", methods=["GET", "POST"])
 def husband_confirm_trade():
+    '''Anmäl att ett byte har genomförts eller inte och lägger in det i husband_confirmed'''
     transaction_id = request.form.get("transaction_id")
     confirmed = int(request.form.get("husband_confirm"))
     both_complete = int(request.form.get("both_complete"))
@@ -322,6 +319,7 @@ def article_search():
     print(choosen_city)
 
     return render_template("/search_results.html", articles = articles, images = images, main_categories = main_categories, choosen_city = choosen_city, cities = cities)
+
 @app.route("/edit_article", methods=["POST"])
 def edit_article():
     article_id = request.form.get("article_id") 
@@ -349,11 +347,9 @@ def change_artical():
     flash("Artikeln har ändrats")
     return redirect("/")
 
-
-
-'''Visa subkategorier'''
 @app.route("/get_child_categories",methods=["GET", "POST"])
 def get_child_categories():
+    '''Visa subkategorier'''
     if request.method == "POST":
         parent_id = request.form.get('parent_id')
         category_types = get_main_category_type(parent_id)
@@ -361,7 +357,6 @@ def get_child_categories():
             category_type = category
         sub_categories = get_sub_category_1_by_main(category_type)
         return jsonify({'htmlresponse': render_template('respons.html', sub_categories = sub_categories)})
-
 
 @app.route("/transaction_history")
 def show_completed_transactions():

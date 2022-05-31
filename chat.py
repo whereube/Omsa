@@ -70,12 +70,10 @@ def get_chat_messages(chat_id):
     close_db_omsa(connection)
     return records
 
-
 def chat_message_to_db(user_message, chat_id):
     psycopg2.extras.register_uuid()
     user_id = session.get('USER_ID')
 
-    
     time_now = datetime.now()
     message_id = uuid.uuid4()
     connection = open_db_omsa()

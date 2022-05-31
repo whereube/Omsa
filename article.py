@@ -264,7 +264,6 @@ def get_article_by_id(article_id):
     close_db_omsa(connection)
     return records
 
-
 def get_article_by_title(search_term):
     '''
     Hämtar alla artiklar vars titel innehåller en term
@@ -467,7 +466,6 @@ def edit_article_catergory(category_id, article_category_id):
     cursor.close()
     connection.commit()
     close_db_omsa(connection)
-
 
 def get_completed_transactions(user_id):
     '''
